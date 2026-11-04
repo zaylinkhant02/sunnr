@@ -1,0 +1,365 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Heat safety, local forecasts, early warnings and solar energy for communities across Myanmar." />
+    <meta name="theme-color" content="#102b2a" />
+    <title>Sunnr | Home</title>
+    <link rel="icon" type="image/png" href="assets/images/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body class="home-page">
+    <div class="film-grain" aria-hidden="true"></div>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-xl site-navbar" aria-label="Main navigation">
+        <div class="container">
+          <a class="navbar-brand site-brand" href="index.html"><img src="assets/images/logo-white.png" alt="" /><span class="brand-word">Sunnr</span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="menu-icon"></span></button>
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto align-items-xl-center">
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
+              <li class="nav-item"><a class="nav-link" href="solar-control.html">Solar panel control</a></li>
+              <li class="nav-item"><a class="nav-link" href="monitoring.html">Heat monitoring</a></li>
+              <li class="nav-item"><a class="nav-link" href="risk-map.html">Risk map</a></li>
+              <li class="nav-item"><a class="nav-link" href="safety.html">Safety tips</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="home-main">
+      <section id="story" class="story-viewport" aria-label="Climate stories">
+        <div class="story-track" id="storyTrack">
+          <section class="story-slide heat-slide" data-slide="0" aria-label="The heat">
+            <video class="scene-video" autoplay muted loop playsinline poster="assets/images/hero-slide-1-poster.jpg" aria-hidden="true"><source src="assets/videos/hero-slide-1.mp4" type="video/mp4" /></video>
+            <div class="scene-wash heat-wash"></div>
+            <div class="container-fluid scene-grid heat-grid">
+              <div class="row h-100 align-items-center gx-0">
+                <div class="col-12 col-lg-8 heat-copy-column">
+                  <h1 class="heat-title">The heat<br />is changing.<br /><em>So can we.</em></h1>
+                  <p class="heat-intro">Across Myanmar, longer periods of extreme heat are changing the rhythm of daily life. Local observations help neighbours prepare, find cooler places, and look after one another.</p>
+                </div>
+                <div class="col-12 col-lg-3 offset-lg-1">
+                  <div class="temperature-stamp" aria-live="polite">
+                    <span class="stamp-label" data-location>Yangon</span>
+                    <strong class="temperature-reading"><span class="temperature-value" id="temperatureValue">41</span><span class="temperature-unit"><span class="temperature-degree">°</span><span>C</span></span></strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="story-slide solar-slide" data-slide="1" aria-label="How solar energy can help during extreme heat">
+            <video class="scene-video" autoplay muted loop playsinline poster="assets/images/hero-slide-2-poster.jpg" aria-hidden="true"><source src="assets/videos/hero-slide-2.mp4" type="video/mp4" /></video>
+            <div class="scene-wash solar-wash"></div>
+            <div class="container-fluid scene-grid solar-grid">
+              <div class="row h-100 align-items-center gx-0 solar-content">
+                <div class="col-12 col-lg-5 solar-copy">
+                  <h2 class="solar-title">How solar energy<br />can help during<br /><em>extreme heat</em></h2>
+                  <p class="solar-intro">When grid electricity is interrupted, heat can make access to power especially important. Solar panels generate electricity in daylight, and a battery can store some of it for later.</p>
+                  <p class="solar-caveat">Together, they may support fans, suitable cooling equipment and essential devices. Available power depends on sunlight, system size, battery capacity and what is connected.</p>
+                  <button class="research-trigger" type="button" data-bs-toggle="modal" data-bs-target="#solarResearchModal">Explore the research <i class="bi bi-arrow-up-right" aria-hidden="true"></i></button>
+                </div>
+                <div class="col-12 col-lg-6 offset-lg-1 solar-steps" aria-label="How solar and battery storage can support a home">
+                  <article class="solar-step"><span class="solar-step-number">01</span><div><h3>Sunlight becomes electricity</h3><p>Roof-mounted panels generate power during daylight, including when the grid is unavailable.</p></div><i class="bi bi-sun" aria-hidden="true"></i></article>
+                  <article class="solar-step"><span class="solar-step-number">02</span><div><h3>A battery keeps some for later</h3><p>Stored energy can be used after sunset or during a power interruption.</p></div><i class="bi bi-battery-half" aria-hidden="true"></i></article>
+                  <article class="solar-step"><span class="solar-step-number">03</span><div><h3>Essential devices can stay powered</h3><p>Depending on the system, stored electricity may run a fan or other selected household devices.</p></div><i class="bi bi-house-heart" aria-hidden="true"></i></article>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="story-slide warning-slide" data-slide="2" aria-label="Preparing for extreme heat">
+            <video class="scene-video warning-video" autoplay muted loop playsinline poster="assets/images/hero-slide-3-poster.jpg" aria-hidden="true"><source src="assets/videos/hero-slide-3.mp4" type="video/mp4" /></video>
+            <div class="scene-wash warning-wash"></div>
+            <div class="container-fluid scene-grid warning-grid">
+              <div class="row h-100 align-items-center gx-0">
+                <div class="col-12 col-lg-5 warning-copy">
+                  <h2 class="warning-title">Preparing for<br /><em>extreme<br />heat</em></h2>
+                  <p class="warning-intro">Heat can affect health, especially when people cannot reach a cooler place or must spend long periods outdoors.</p>
+                </div>
+                <div class="col-12 col-lg-6 offset-lg-1 warning-content">
+                  <div class="official-warning">
+                    <span class="official-warning-label"><i class="bi bi-broadcast-pin" aria-hidden="true"></i> Official forecast source</span>
+                    <p>Check Myanmar’s Department of Meteorology and Hydrology for official forecasts and alerts.</p>
+                    <a href="https://moezala.gov.mm/en" target="_blank" rel="noopener noreferrer">Visit the Department of Meteorology and Hydrology <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+                  </div>
+                  <div class="heat-guidance">
+                    <p>Reduce strenuous outdoor activity during the hottest periods where possible. Seek shade or a cooler indoor place, and drink water regularly while following any medical advice.</p>
+                    <p>Check on older adults, young children, people with disabilities, people living alone and outdoor workers, who may need extra support.</p>
+                    <p class="heat-emergency"><strong>Know the danger signs.</strong> Confusion, collapse or seizures can signal heatstroke. Seek emergency medical help immediately and begin cooling while help is arranged.</p>
+                  </div>
+                  <p class="heat-sources">Guidance: <a href="https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health" target="_blank" rel="noopener noreferrer">World Health Organization</a> · <a href="https://www.anticipation-hub.org/Documents/EAPs/sEAP_Myanmar_Heatwave_2024.pdf" target="_blank" rel="noopener noreferrer">Myanmar urban heatwave protocol</a></p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <nav class="story-navigation" aria-label="Story navigation">
+          <div class="story-progress" id="storyProgressControl" role="slider" tabindex="0" aria-label="Choose story slide" aria-valuemin="1" aria-valuemax="3" aria-valuenow="1" aria-valuetext="Slide 1 of 3"><i id="storyProgress" aria-hidden="true"></i></div>
+          <div class="story-controls"><button class="story-control previous-control" id="previousSlide" type="button" aria-label="Previous story"><i class="bi bi-arrow-left" aria-hidden="true"></i></button><button class="story-control next-control" id="nextSlide" type="button" aria-label="Next story"><i class="bi bi-arrow-right" aria-hidden="true"></i></button></div>
+        </nav>
+      </section>
+      <section class="field-report" id="field-report" aria-labelledby="warning-thresholds-title">
+          <div class="field-report-frame">
+            <section class="warning-report" aria-labelledby="warning-thresholds-title">
+              <div class="warning-report-copy">
+                <div class="warning-report-heading" data-reveal>
+                  <h2 class="report-heading" id="warning-thresholds-title">Warning<br />thresholds</h2>
+                </div>
+
+                <p class="report-lead warning-report-lead" data-reveal>Myanmar's heat warnings are based on the heat index, which accounts for humidity alongside air temperature; in Yangon, an alert is triggered when the index remains above the local 90th percentile for more than three consecutive days. Applied to historical conditions, this threshold would have produced warnings in 2012, 2013, 2019 and 2020, while the severe 2010 heatwave, which resulted in 230 fatalities, would not have met the trigger because the heat index remained below the required level despite daily temperatures reaching 47 degrees Celsius.</p>
+              </div>
+
+              <figure class="report-photo report-photo-heat" data-reveal>
+                <div class="report-photo-image">
+                  <img src="assets/images/heat-city.jpg" alt="A city skyline under a strong orange sun" loading="lazy" />
+                </div>
+                <figcaption class="report-micro">Urban heat / <a href="https://unsplash.com/photos/aerial-view-of-city-during-golden-hour-6xh7H5tWj9c" target="_blank" rel="noopener noreferrer">Unsplash</a></figcaption>
+              </figure>
+
+              <div class="accordion report-accordion" id="warningThresholdAccordion" data-reveal>
+                <div class="accordion-item">
+                  <h3 class="accordion-header" id="yangonThresholdHeading">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#yangonThresholdDetails" aria-expanded="true" aria-controls="yangonThresholdDetails">
+                      Yangon / Heat index trigger
+                    </button>
+                  </h3>
+                  <div id="yangonThresholdDetails" class="accordion-collapse collapse show" aria-labelledby="yangonThresholdHeading" data-bs-parent="#warningThresholdAccordion">
+                    <div class="accordion-body">The 90th percentile is derived from decades of local weather data. By tracking continuous humidity and temperature readings, the system ensures that the warning reflects Yangon's specific climate rather than a single national threshold.</div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h3 class="accordion-header" id="mandalayThresholdHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mandalayThresholdDetails" aria-expanded="false" aria-controls="mandalayThresholdDetails">
+                      Mandalay / Percentile trigger
+                    </button>
+                  </h3>
+                  <div id="mandalayThresholdDetails" class="accordion-collapse collapse" aria-labelledby="mandalayThresholdHeading" data-bs-parent="#warningThresholdAccordion">
+                    <div class="accordion-body">Mandalay's baseline humidity and temperature patterns differ from Yangon's. The local 90th percentile is a different absolute value, meaning warnings are calibrated specifically for the region's typical climate.</div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h3 class="accordion-header" id="missedHeatwaveHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#missedHeatwaveDetails" aria-expanded="false" aria-controls="missedHeatwaveDetails">
+                      2010 / A missed warning
+                    </button>
+                  </h3>
+                  <div id="missedHeatwaveDetails" class="accordion-collapse collapse" aria-labelledby="missedHeatwaveHeading" data-bs-parent="#warningThresholdAccordion">
+                    <div class="accordion-body">During the 2010 event, humidity was relatively low. Even though temperatures reached 47 degrees, the heat index stayed below the required threshold, highlighting the difficulty of creating a single rule for extreme weather.</div>
+                  </div>
+                </div>
+              </div>
+
+            </section>
+
+            <section class="heat-body-report" aria-labelledby="heat-body-title">
+              <div class="heat-body-heading" data-reveal>
+                <h2 class="report-heading" id="heat-body-title">How Extreme Heat<br />Affects the Body</h2>
+                <p class="report-lead">The hypothalamus helps regulate core temperature by increasing blood flow to the skin and triggering sweat. As sweat evaporates, it carries heat away from the body.</p>
+              </div>
+
+              <figure class="report-photo report-photo-body" data-reveal>
+                <img src="assets/images/heat-thermometer.jpg" alt="A thermometer showing high temperatures above hot sand" loading="lazy" />
+                <figcaption class="report-micro">Thermometer in hot sand / Unsplash</figcaption>
+              </figure>
+
+              <div class="heat-illness-tabs" data-reveal>
+                <ul class="nav nav-tabs" id="heatIllnessTabs" role="tablist" aria-label="Heat illness stages">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="heatCrampsTab" data-bs-toggle="tab" data-bs-target="#heatCrampsPane" type="button" role="tab" aria-controls="heatCrampsPane" aria-selected="true">01 / Heat cramps</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="heatExhaustionTab" data-bs-toggle="tab" data-bs-target="#heatExhaustionPane" type="button" role="tab" aria-controls="heatExhaustionPane" aria-selected="false">02 / Heat exhaustion</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="heatStrokeTab" data-bs-toggle="tab" data-bs-target="#heatStrokePane" type="button" role="tab" aria-controls="heatStrokePane" aria-selected="false">03 / Heatstroke</button>
+                  </li>
+                </ul>
+                <div class="tab-content" id="heatIllnessTabContent">
+                  <div class="tab-pane fade show active" id="heatCrampsPane" role="tabpanel" aria-labelledby="heatCrampsTab" tabindex="0">
+                    <p>Painful muscle spasms can follow heavy sweating and the loss of fluid and salts. Stop activity, rest somewhere cool, and sip water or an electrolyte drink if fully alert.</p>
+                  </div>
+                  <div class="tab-pane fade" id="heatExhaustionPane" role="tabpanel" aria-labelledby="heatExhaustionTab" tabindex="0">
+                    <p>Weakness, headache, nausea, dizziness and heavy sweating can signal worsening heat strain. Move to a cool place, loosen clothing, cool the skin and sip fluids. Seek medical care if symptoms worsen or do not improve.</p>
+                  </div>
+                  <div class="tab-pane fade" id="heatStrokePane" role="tabpanel" aria-labelledby="heatStrokeTab" tabindex="0">
+                    <p>Confusion, seizures, fainting or collapse can mean the body's temperature control is failing; heatstroke can develop without a preceding stage. Call emergency services and begin rapid cooling immediately. Do not give fluids to someone who is confused or unconscious.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="heat-body-copy" data-reveal>
+                <p>In humid air, sweat evaporates more slowly, so less heat leaves the body even when a person is sweating heavily. As heat exposure continues, fluid loss strains circulation and salt loss can trigger painful cramps; heat exhaustion may follow, and heatstroke is a life-threatening emergency.</p>
+                <p>Heatstroke often raises core temperature to 40°C (104°F) or higher and can disrupt brain function. It requires emergency care and immediate cooling.</p>
+                <p class="report-micro">Source: <a href="https://www.cdc.gov/heat-health/about/index.html" target="_blank" rel="noopener noreferrer">U.S. Centers for Disease Control and Prevention / About Heat and Your Health</a></p>
+              </div>
+
+              <div class="heat-body-facts" data-reveal aria-label="How the body responds to heat">
+                <div><strong>Sweat</strong><span class="report-micro">Evaporation carries heat away</span></div>
+                <div><strong>Humidity</strong><span class="report-micro">Slows sweat evaporation</span></div>
+                <div><strong>Heatstroke</strong><span class="report-micro">A medical emergency</span></div>
+              </div>
+            </section>
+
+            <section class="myanmar-impacts-report" aria-labelledby="myanmar-impacts-title">
+              <div class="impacts-heading" data-reveal>
+                <p class="impacts-kicker">Myanmar / Heat impacts</p>
+                <h2 class="report-heading" id="myanmar-impacts-title">Heatwave Impacts<br /><em>in Myanmar</em></h2>
+                <p class="report-lead">Extreme heat reaches far beyond the thermometer. It can put pressure on essential services, livelihoods and the places people call home.</p>
+              </div>
+
+              <figure class="report-photo impacts-photo" data-reveal>
+                <img src="assets/images/heat-city.jpg" alt="A city skyline beneath a hot orange sky" loading="lazy" />
+                <figcaption class="report-micro">Heat settles over the city</figcaption>
+              </figure>
+
+              <ul class="list-group impacts-list" aria-label="Consequences of extreme heat in Myanmar">
+                <li class="list-group-item impact-item" data-reveal>
+                  <span class="impact-number">01</span>
+                  <div>
+                    <p class="impact-label">Essential services</p>
+                    <h3>Strain on the power grid</h3>
+                    <p>Hot days increase demand for fans, cooling and refrigeration. Heat can also reduce the efficiency of some power generation, while drought may constrain hydropower. When supply cannot keep pace, blackouts can interrupt cooling, water pumping and other essential services.</p>
+                  </div>
+                </li>
+                <li class="list-group-item impact-item" data-reveal>
+                  <span class="impact-number">02</span>
+                  <div>
+                    <p class="impact-label">Water and reservoirs</p>
+                    <h3>Growing water scarcity</h3>
+                    <p>Long dry spells and increased evaporation can worsen drought conditions. Lower river flows and depleted reservoirs put pressure on drinking water and irrigation, particularly where supplies are already limited.</p>
+                  </div>
+                </li>
+                <li class="list-group-item impact-item" data-reveal>
+                  <span class="impact-number">03</span>
+                  <div>
+                    <p class="impact-label">Farms and livelihoods</p>
+                    <h3>Losses for crops and livestock</h3>
+                    <p>Heat and water stress can damage crops and reduce yields, especially when extreme temperatures coincide with sensitive growing stages. Livestock may eat less, become less productive and face greater risk of heat illness, affecting farmers' incomes and food supplies.</p>
+                  </div>
+                </li>
+                <li class="list-group-item impact-item" data-reveal>
+                  <span class="impact-number">04</span>
+                  <div>
+                    <p class="impact-label">Cities after sunset</p>
+                    <h3>The urban heat island effect</h3>
+                    <p>Concrete, asphalt and dense buildings absorb heat through the day and release it slowly. With less shade and greenery, cities can stay warmer than nearby areas, especially at night, leaving people with less relief and time to recover.</p>
+                  </div>
+                </li>
+              </ul>
+            </section>
+
+            <section class="community-care-report" aria-labelledby="community-care-title">
+              <div class="community-care-heading" data-reveal>
+                <p class="community-care-kicker">Health / Community care</p>
+                <h2 class="report-heading" id="community-care-title">Community care and<br /><em>vulnerable groups</em></h2>
+                <p class="community-care-intro">Some people face greater danger during a heatwave because their bodies respond differently to heat, they have ongoing health needs, or they cannot easily reach a cooler place. Regular, practical contact can help them get support early.</p>
+              </div>
+
+              <figure class="report-photo community-care-photo" data-reveal>
+                <div class="community-care-photo-frame">
+                  <img src="assets/images/bagan-heat.jpg" alt="A woman carrying a basket along a sunlit road in Old Bagan, Myanmar, on a hot day" loading="lazy" />
+                </div>
+                <figcaption class="report-micro">Old Bagan, Myanmar / <a href="https://commons.wikimedia.org/wiki/File:Old_Bagan,_Myanmar,_Burmese_woman_standing_on_the_road_in_arid_and_dry_Bagan_landscape.jpg" target="_blank" rel="noopener noreferrer">Vyacheslav Argenberg</a> / <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></figcaption>
+              </figure>
+
+              <div class="community-risk-directory" data-reveal>
+                <p class="community-care-label">Who may need closer support</p>
+                <ul class="list-group community-risk-list" aria-label="Groups at higher risk during a heatwave">
+                  <li class="list-group-item community-risk-item" data-reveal>
+                    <span class="community-risk-number">01</span>
+                    <div>
+                      <h3>Older adults</h3>
+                      <p>Age, reduced mobility and some medicines can make it harder to notice heat or cool down. Check whether they have drinking water, a cooler room and a way to ask for help.</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item community-risk-item" data-reveal>
+                    <span class="community-risk-number">02</span>
+                    <div>
+                      <h3>Infants and young children</h3>
+                      <p>Babies depend on adults to keep them cool and hydrated. Caregivers should watch for feeding changes, fewer wet nappies, unusual sleepiness or irritability.</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item community-risk-item" data-reveal>
+                    <span class="community-risk-number">03</span>
+                    <div>
+                      <h3>Pregnant women</h3>
+                      <p>Pregnancy can increase the strain of heat and dehydration. Help make time for rest in a cooler place, keep water nearby and follow advice from a maternity care provider.</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item community-risk-item" data-reveal>
+                    <span class="community-risk-number">04</span>
+                    <div>
+                      <h3>Outdoor workers</h3>
+                      <p>People working in direct sun or hot indoor spaces may have limited control over their hours. Make water, shaded rest breaks and a plan to stop work if someone becomes unwell part of the day's routine.</p>
+                    </div>
+                  </li>
+                  <li class="list-group-item community-risk-item" data-reveal>
+                    <span class="community-risk-number">05</span>
+                    <div>
+                      <h3>People with pre-existing conditions</h3>
+                      <p>Heart, lung and kidney conditions, diabetes and some medicines can affect the body's response to heat. Encourage people to follow their clinician's heat plan and not change prescribed medicines without medical advice.</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <aside class="community-care-guidance">
+                <section class="community-guidance-block" aria-labelledby="neighbor-check-title" data-reveal>
+                  <p class="community-care-label">A practical routine</p>
+                  <h3 id="neighbor-check-title">Check in with neighbours</h3>
+                  <p>Agree on a time to call, message or visit people who live alone, have limited mobility or work outside. Ask whether they have water and a cooler place to rest, and whether they need help getting there.</p>
+                  <p>Offer a specific form of help, such as bringing drinking water or arranging transport to a nearby cooling centre. If someone does not answer, follow the contact plan agreed with them; if you believe they are in immediate danger, contact local emergency services.</p>
+                </section>
+                <section class="community-guidance-block caregiver-guidance" aria-labelledby="caregiver-signs-title" data-reveal>
+                  <p class="community-care-label">For caregivers</p>
+                  <h3 id="caregiver-signs-title">Notice changes from their usual behaviour</h3>
+                  <p>For someone who cannot describe how they feel, watch for unusual tiredness, irritability, confusion, unsteadiness, flushed or hot skin, heavy sweating, fast breathing, poor feeding or fewer wet nappies. These changes can be early signs of heat stress.</p>
+                  <p>Move them to a cooler place and begin gentle cooling. Seek urgent medical help if they become confused, faint, have a seizure or are difficult to wake. Do not give drinks to anyone who is confused or unconscious.</p>
+                </section>
+              </aside>
+            </section>
+
+            <section class="heat-monitoring-report" aria-labelledby="heat-monitoring-title">
+              <figure class="heat-map-panel" data-reveal>
+                <iframe class="heat-map-frame" id="heatMapFrame" title="Interactive Myanmar heatwaves map" src="https://myanmar-heatwaves-map.vercel.app/" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <button class="heat-map-fullscreen" id="heatMapFullscreen" type="button" aria-label="View map fullscreen" aria-controls="heatMapFrame">
+                  <i class="bi bi-arrows-fullscreen" id="heatMapFullscreenIcon" aria-hidden="true"></i>
+                </button>
+                <span class="visually-hidden" id="heatMapFullscreenStatus" role="status" aria-live="polite"></span>
+              </figure>
+
+              <div class="heat-monitoring-copy">
+                <div class="heat-monitoring-heading" data-reveal>
+                  <p class="heat-monitoring-kicker">Map / Myanmar</p>
+                  <h2 class="heat-monitoring-title" id="heat-monitoring-title">Myanmar<br />heatwaves map</h2>
+                  <p class="heat-monitoring-intro">Explore the interactive Myanmar heatwaves map. Use the fullscreen control to expand the map.</p>
+                </div>
+              </div>
+            </section>
+
+          </div>
+      </section>
+    </main>
+    <div class="modal fade solar-research-modal" id="solarResearchModal" tabindex="-1" aria-labelledby="solarResearchTitle" aria-describedby="solarResearchDescription" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content">
+        <div class="modal-header"><div><h2 class="modal-title" id="solarResearchTitle">Solar energy and electricity resilience</h2></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+        <div class="modal-body" id="solarResearchDescription">
+          <p>A 2026 study by Ohn Zin Lin and colleagues examined a 22 kWp solar photovoltaic and battery installation in Yangon using operational data.</p>
+          <p>Solar generation supplied 47.1% of the monitored site’s annual electricity demand. The findings show how solar generation and storage can contribute to electricity resilience in Myanmar.</p>
+          <p>These results describe one specific installation. They are not a typical household-system expectation and do not establish how long a particular fan or air conditioner could run from a residential battery.</p>
+          <a class="modal-source-link" href="https://doi.org/10.1016/j.renene.2026.125793" target="_blank" rel="noopener noreferrer">Read the original article <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+        </div>
+      </div></div>
+    </div>
+  </body>
+</html>
