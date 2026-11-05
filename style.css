@@ -2395,6 +2395,11 @@ body.home-page .site-header {
   transition: transform .3s ease, visibility .3s ease;
 }
 
+body.safety-page .site-header {
+  border-bottom: 1px solid rgba(243,237,221,.13);
+  background: rgba(16,43,42,.98);
+}
+
 body.home-page:not(.has-scrolled) .site-header {
   visibility: hidden;
   transform: translateY(-100%);
