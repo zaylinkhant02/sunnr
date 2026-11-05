@@ -3381,6 +3381,31 @@ body.home-page .site-navbar .nav-link.active {
   color: var(--yellow);
 }
 
+.heat-map-more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin-top: 0;
+  padding: .75rem .95rem;
+  border: 1px solid rgba(243, 237, 221, .3);
+  border-radius: .35rem;
+  background: rgba(16, 43, 42, .94);
+  color: var(--cream-bright);
+  font: 500 .875rem/1.2 var(--sans);
+  text-decoration: none;
+}
+
+.heat-map-more-link:hover,
+.heat-map-more-link:focus-visible {
+  border-color: var(--yellow);
+  color: var(--yellow);
+}
+
+.heat-map-more-link:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 3px;
+}
+
 .heat-map-panel:fullscreen {
   width: 100vw;
   height: 100vh;
@@ -3414,7 +3439,7 @@ body.home-page .site-navbar .nav-link.active {
 
 .heat-monitoring-intro {
   max-width: 34rem;
-  margin: 1.5rem 0 2.5rem;
+  margin: 1.5rem 0 .75rem;
   color: rgba(243, 237, 221, .84);
   font: 400 clamp(1.2rem, 1.6vw, 1.45rem)/1.6 var(--serif);
 }
