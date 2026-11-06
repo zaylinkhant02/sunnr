@@ -1,4 +1,4 @@
-﻿/* Theme variables */
+/* Theme variables */
 :root {
   --teal: #102b2a;
   --cream: #f3eddd;
@@ -4135,5 +4135,173 @@ html.has-scroll-reveals [data-reveal].is-revealed {
   }
   .safety-hero-explore-btn{
     grid-column: span 1;
+  }
+}
+
+.site-footer {
+  padding: clamp(2.5rem, 5vw, 3.5rem) 0 1.25rem;
+  border-top: 1px solid rgba(243, 237, 221, .18);
+  background: #163633;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 1.75rem 3rem;
+}
+
+.footer-inner .footer-copy {
+  max-width: 440px;
+}
+
+.footer-inner .footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  margin-bottom: .85rem;
+  color: var(--cream-bright);
+  font: 600 1.05rem/1.2 "Space Grotesk", var(--sans);
+  text-decoration: none;
+}
+
+.footer-inner .footer-brand img {
+  display: block;
+  width: auto;
+  height: 40px;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+.footer-inner .footer-copy p {
+  margin: 0;
+  color: rgba(243, 237, 221, .76);
+  font: 400 .9rem/1.6 var(--sans);
+}
+
+.footer-inner .footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: end;
+  justify-content: flex-end;
+  gap: .6rem 1.25rem;
+  padding: 0;
+}
+
+.footer-inner .footer-nav a {
+  color: rgba(243, 237, 221, .86);
+  font: 400 .88rem/1.5 var(--sans);
+  text-decoration: none;
+}
+
+.footer-inner .footer-nav a:hover,
+.footer-inner .footer-nav a:focus-visible {
+  color: var(--yellow);
+}
+
+.footer-inner .footer-meta {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: .5rem 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(243, 237, 221, .16);
+}
+
+.footer-inner .footer-copyright {
+  margin: 0;
+  color: rgba(243, 237, 221, .7);
+  font: 400 .82rem/1.5 var(--sans);
+}
+
+.footer-inner .footer-citations-link {
+  color: var(--yellow);
+  font: 500 .86rem/1.5 var(--sans);
+  text-decoration: none;
+}
+
+.footer-inner .footer-citations-link:hover,
+.footer-inner .footer-citations-link:focus-visible {
+  color: var(--cream-bright);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+body.citations-page {
+  min-height: 100vh;
+  color: var(--teal);
+  background: var(--cream);
+}
+
+.citations-page .site-header {
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid rgba(243, 237, 221, .13);
+  background: #102b2a;
+}
+
+.citations-main {
+  min-height: 68vh;
+  padding: clamp(3.5rem, 8vw, 7rem) 0 clamp(4rem, 8vw, 7rem);
+}
+
+.citations-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.citations-title {
+  margin: 0;
+  color: var(--teal);
+  font: 500 clamp(4rem, 10vw, 7.5rem)/.9 var(--serif);
+}
+
+.citations-intro {
+  max-width: 620px;
+  margin: 1.5rem 0 3.5rem;
+  color: rgba(16, 43, 42, .78);
+  font-size: 1rem;
+}
+
+.citation-list {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.citation-list li {
+  padding-left: 1.4rem;
+  color: var(--teal);
+  font: 400 1.08rem/1.65 var(--serif);
+  text-indent: -1.4rem;
+  overflow-wrap: anywhere;
+}
+
+.citation-list a {
+  color: #805039;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .15em;
+}
+
+.citation-list a:hover,
+.citation-list a:focus-visible {
+  color: var(--rust);
+}
+
+@media (max-width: 767.98px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .footer-inner .footer-nav {
+    align-self: stretch;
+    justify-content: flex-start;
+  }
+
+  .footer-inner .footer-meta {
+    flex-wrap: wrap;
   }
 }
