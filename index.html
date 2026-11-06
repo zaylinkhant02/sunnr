@@ -58,6 +58,25 @@
               </div>
             </div>
           </section>
+          <section class="story-slide solar-slide" data-slide="1" aria-label="How solar energy can help during extreme heat">
+            <video class="scene-video" autoplay muted loop playsinline poster="assets/images/hero-slide-2-poster.jpg" aria-hidden="true"><source src="assets/videos/hero-slide-2.mp4" type="video/mp4" /></video>
+            <div class="scene-wash solar-wash"></div>
+            <div class="container-fluid scene-grid solar-grid">
+              <div class="row h-100 align-items-center gx-0 solar-content">
+                <div class="col-12 col-lg-5 solar-copy">
+                  <h2 class="solar-title">How solar energy<br />can help during<br /><em>extreme heat</em></h2>
+                  <p class="solar-intro">When grid electricity is interrupted, heat can make access to power especially important. Solar panels generate electricity in daylight, and a battery can store some of it for later.</p>
+                  <p class="solar-caveat">Together, they may support fans, suitable cooling equipment and essential devices. Available power depends on sunlight, system size, battery capacity and what is connected.</p>
+                  <button class="research-trigger" type="button" data-bs-toggle="modal" data-bs-target="#solarResearchModal">Explore the research <i class="bi bi-arrow-up-right" aria-hidden="true"></i></button>
+                </div>
+                <div class="col-12 col-lg-6 offset-lg-1 solar-steps" aria-label="How solar and battery storage can support a home">
+                  <article class="solar-step"><span class="solar-step-number">01</span><div><h3>Sunlight becomes electricity</h3><p>Roof-mounted panels generate power during daylight, including when the grid is unavailable.</p></div><i class="bi bi-sun" aria-hidden="true"></i></article>
+                  <article class="solar-step"><span class="solar-step-number">02</span><div><h3>A battery keeps some for later</h3><p>Stored energy can be used after sunset or during a power interruption.</p></div><i class="bi bi-battery-half" aria-hidden="true"></i></article>
+                  <article class="solar-step"><span class="solar-step-number">03</span><div><h3>Essential devices can stay powered</h3><p>Depending on the system, stored electricity may run a fan or other selected household devices.</p></div><i class="bi bi-house-heart" aria-hidden="true"></i></article>
+                </div>
+              </div>
+            </div>
+          </section>
           <section class="story-slide warning-slide" data-slide="2" aria-label="Preparing for extreme heat">
             <video class="scene-video warning-video" autoplay muted loop playsinline poster="assets/images/hero-slide-3-poster.jpg" aria-hidden="true"><source src="assets/videos/hero-slide-3.mp4" type="video/mp4" /></video>
             <div class="scene-wash warning-wash"></div>
@@ -364,6 +383,17 @@
           </div>
       </section>
     </main>
+    <div class="modal fade solar-research-modal" id="solarResearchModal" tabindex="-1" aria-labelledby="solarResearchTitle" aria-describedby="solarResearchDescription" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content">
+        <div class="modal-header"><div><h2 class="modal-title" id="solarResearchTitle">Solar energy and electricity resilience</h2></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+        <div class="modal-body" id="solarResearchDescription">
+          <p>A 2026 study by Ohn Zin Lin and colleagues examined a 22 kWp solar photovoltaic and battery installation in Yangon using operational data.</p>
+          <p>Solar generation supplied 47.1% of the monitored site’s annual electricity demand. The findings show how solar generation and storage can contribute to electricity resilience in Myanmar.</p>
+          <p>These results describe one specific installation. They are not a typical household-system expectation and do not establish how long a particular fan or air conditioner could run from a residential battery.</p>
+          <a class="modal-source-link" href="https://doi.org/10.1016/j.renene.2026.125793" target="_blank" rel="noopener noreferrer">Read the original article <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+        </div>
+      </div></div>
+    </div>
     <footer class="site-footer">
       <div class="container footer-inner">
         <div class="footer-copy">

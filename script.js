@@ -5,11 +5,15 @@ const slides = [...document.querySelectorAll('.story-slide')];
 const slideCount = slides.length;
 if (track && slideCount > 0) {
   track.style.width = `${slideCount * 100}%`;
-  slides.forEach((slide) => { slide.style.flexBasis = `${100 / slideCount}%`; });
+  slides.forEach((slide, index) => {
+    slide.style.flexBasis = `${100 / slideCount}%`;
+    slide.dataset.slide = String(index);
+  });
 }
 const storyProgress = document.getElementById('storyProgress');
 const storyProgressControl = document.getElementById('storyProgressControl');
 const storyNav = document.querySelector('.story-navigation');
+const solarResearchModal = document.getElementById('solarResearchModal');
 const reducedMotionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const preparednessBackgroundVideo = document.querySelector('.preparedness-background-video');
 
@@ -162,6 +166,11 @@ if (track && viewport && slides.length && storyProgress && storyProgressControl 
     if (document.hidden) stopAutoAdvance();
     else startAutoAdvance();
   });
+
+  if (solarResearchModal) {
+    solarResearchModal.addEventListener('show.bs.modal', stopAutoAdvance);
+    solarResearchModal.addEventListener('hidden.bs.modal', startAutoAdvance);
+  }
 
   window.addEventListener('resize', () => {
     updateTrackPosition();
