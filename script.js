@@ -5,13 +5,22 @@ const slides = [...document.querySelectorAll('.story-slide')];
 const slideCount = slides.length;
 if (track && slideCount > 0) {
   track.style.width = `${slideCount * 100}%`;
-  slides.forEach((slide) => { slide.style.flexBasis = `${100 / slideCount}%`; });
+  slides.forEach((slide, index) => {
+    slide.style.flexBasis = `${100 / slideCount}%`;
+    slide.dataset.slide = String(index);
+  });
 }
 const storyProgress = document.getElementById('storyProgress');
 const storyProgressControl = document.getElementById('storyProgressControl');
 const storyNav = document.querySelector('.story-navigation');
 const solarResearchModal = document.getElementById('solarResearchModal');
 const reducedMotionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+const preparednessBackgroundVideo = document.querySelector('.preparedness-background-video');
+
+if (preparednessBackgroundVideo) {
+  preparednessBackgroundVideo.defaultPlaybackRate = 1;
+  preparednessBackgroundVideo.playbackRate = 1;
+}
 
 // reveal sections when they enter the viewport
 const revealTargets = document.querySelectorAll('[data-reveal]');

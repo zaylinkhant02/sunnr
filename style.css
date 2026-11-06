@@ -1,4 +1,4 @@
-﻿/* Theme variables */
+/* Theme variables */
 :root {
   --teal: #102b2a;
   --cream: #f3eddd;
@@ -2395,6 +2395,109 @@ body.home-page .site-header {
   transition: transform .3s ease, visibility .3s ease;
 }
 
+body.safety-page .site-header {
+  border-bottom: 1px solid rgba(243,237,221,.13);
+  background: rgba(16,43,42,.98);
+}
+
+body.safety-page {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: var(--cream);
+  color: var(--teal);
+  font-family: var(--sans);
+}
+
+.safety-page .hero-section-blank {
+  display: flex;
+  min-height: 40vh;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream);
+  background-color: var(--teal);
+}
+
+.safety-page .heatwave-action-section {
+  padding: 90px 0;
+  color: var(--teal);
+  background-color: var(--cream);
+}
+
+.safety-page .heatwave-action-section .subtitle-label {
+  margin-bottom: 12px;
+  color: var(--rust);
+  font-family: var(--mono);
+  font-size: var(--mono-label-size);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.safety-page .heatwave-action-section .section-title {
+  margin-bottom: 16px;
+  color: var(--teal);
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 700;
+}
+
+.safety-page .heatwave-action-section .section-desc {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--teal);
+  font-family: var(--sans);
+  line-height: 1.6;
+  opacity: .85;
+}
+
+.safety-page .heatwave-action-section .icon-wrapper {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  border: 1.5px solid var(--teal);
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all .4s ease;
+}
+
+.safety-page .heatwave-action-section .icon-wrapper i {
+  color: var(--teal);
+  font-size: 2.5rem;
+  transition: all .4s ease;
+}
+
+.safety-page .heatwave-action-section .icon-wrapper.hovered {
+  transform: translateY(-6px) scale(1.05);
+  border-color: var(--teal);
+  background-color: var(--teal);
+  box-shadow: 0 10px 20px rgba(16, 43, 42, .15);
+}
+
+.safety-page .heatwave-action-section .icon-wrapper.hovered i {
+  transform: scale(1.1);
+  color: var(--yellow);
+}
+
+.safety-page .heatwave-action-section .card-item-title {
+  margin-bottom: 8px;
+  color: var(--teal);
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.safety-page .heatwave-action-section .card-item-desc {
+  color: var(--teal);
+  font-family: var(--sans);
+  font-size: .95rem;
+  line-height: 1.5;
+  opacity: .8;
+}
+
 body.home-page:not(.has-scrolled) .site-header {
   visibility: hidden;
   transform: translateY(-100%);
@@ -3278,6 +3381,31 @@ body.home-page .site-navbar .nav-link.active {
   color: var(--yellow);
 }
 
+.heat-map-more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin-top: 0;
+  padding: .75rem .95rem;
+  border: 1px solid rgba(243, 237, 221, .3);
+  border-radius: .35rem;
+  background: rgba(16, 43, 42, .94);
+  color: var(--cream-bright);
+  font: 500 .875rem/1.2 var(--sans);
+  text-decoration: none;
+}
+
+.heat-map-more-link:hover,
+.heat-map-more-link:focus-visible {
+  border-color: var(--yellow);
+  color: var(--yellow);
+}
+
+.heat-map-more-link:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 3px;
+}
+
 .heat-map-panel:fullscreen {
   width: 100vw;
   height: 100vh;
@@ -3311,9 +3439,143 @@ body.home-page .site-navbar .nav-link.active {
 
 .heat-monitoring-intro {
   max-width: 34rem;
-  margin: 1.5rem 0 2.5rem;
+  margin: 1.5rem 0 .75rem;
   color: rgba(243, 237, 221, .84);
   font: 400 clamp(1.2rem, 1.6vw, 1.45rem)/1.6 var(--serif);
+}
+
+.household-preparedness-report {
+  position: relative;
+  isolation: isolate;
+  width: 115%;
+  margin-right: -7.5%;
+  margin-left: -7.5%;
+  padding: clamp(4.5rem, 7vw, 7rem) 0;
+  color: var(--teal);
+  background-color: var(--cream);
+  border-top: 1px solid rgba(16, 43, 42, .32);
+}
+
+.household-preparedness-report::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  background: rgba(243, 237, 221, .5);
+  content: "";
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.preparedness-background {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.preparedness-background-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .55;
+}
+
+.preparedness-scene {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  display: flex;
+  min-height: clamp(22rem, 40vw, 34rem);
+  align-items: center;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  background: #172321;
+}
+
+.preparedness-scene::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(16, 43, 42, .9), rgba(16, 43, 42, .48) 58%, rgba(16, 43, 42, .08)),
+    linear-gradient(0deg, rgba(16, 43, 42, .28), transparent 55%);
+  content: "";
+}
+
+.preparedness-scene img {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
+}
+
+.household-preparedness-heading {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: clamp(2rem, 5vw, 5rem);
+}
+
+.household-preparedness-heading h2 {
+  margin: 0;
+  color: var(--cream-bright);
+  font: 500 clamp(4rem, 8vw, 9rem)/.98 var(--serif);
+  letter-spacing: -.045em;
+}
+
+.household-preparedness-heading h2 em {
+  display: inline-block;
+  margin-left: clamp(1rem, 4vw, 4rem);
+  color: #ffb454;
+  font-weight: 400;
+}
+
+.preparedness-card-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+  margin: -4rem clamp(1rem, 2.5vw, 2.5rem) 0;
+}
+
+.preparedness-card {
+  min-width: 0;
+  padding: clamp(1.35rem, 2.2vw, 2.25rem);
+  border-top: 3px solid var(--rust);
+  background: #fff;
+  box-shadow: 0 14px 28px rgba(16, 43, 42, .12);
+}
+
+.preparedness-number {
+  color: var(--rust);
+  font: 500 var(--mono-label-size)/1.5 var(--mono);
+}
+
+.preparedness-card h3 {
+  margin: .8rem 0 1rem;
+  color: var(--teal);
+  font: 500 clamp(1.7rem, 2.25vw, 2.5rem)/1.05 var(--serif);
+  letter-spacing: -.025em;
+}
+
+.preparedness-copy {
+  margin: 0;
+  color: rgba(16, 43, 42, .9);
+  font: 400 clamp(.98rem, 1.05vw, 1.08rem)/1.7 var(--sans);
 }
 
 html.has-scroll-reveals [data-reveal] {
@@ -3423,6 +3685,19 @@ html.has-scroll-reveals [data-reveal].is-revealed {
   .heat-monitoring-report {
     display: block;
     padding: 3.5rem 0 4.5rem;
+  }
+
+  .preparedness-scene {
+    min-height: clamp(22rem, 52vw, 30rem);
+  }
+
+  .preparedness-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: -3rem;
+  }
+
+  .preparedness-card:last-child {
+    grid-column: 1 / -1;
   }
 
   .heat-map-panel {
@@ -3590,6 +3865,48 @@ html.has-scroll-reveals [data-reveal].is-revealed {
     padding: 2.75rem 0 3.5rem;
   }
 
+  .household-preparedness-report {
+    padding: 2.75rem 0 4rem;
+  }
+
+  .preparedness-scene {
+    min-height: 20rem;
+  }
+
+  .household-preparedness-heading {
+    padding: 1.75rem;
+  }
+
+  .household-preparedness-heading h2 {
+    font-size: clamp(3rem, 13vw, 5rem);
+  }
+
+  .household-preparedness-heading h2 em {
+    margin-left: 1rem;
+  }
+
+  .preparedness-card-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: -1.5rem .75rem 0;
+  }
+
+  .preparedness-card:last-child {
+    grid-column: auto;
+  }
+
+  .preparedness-card {
+    padding: 1.25rem;
+  }
+
+  .preparedness-card h3 {
+    font-size: 2rem;
+  }
+
+  .preparedness-copy {
+    font-size: 1.05rem;
+  }
+
   .heat-map-panel {
     width: 100%;
     margin-bottom: 2.25rem;
@@ -3706,5 +4023,285 @@ html.has-scroll-reveals [data-reveal].is-revealed {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+.safety-hero-section{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--teal);
+  background-image: url('https://plus.unsplash.com/premium_photo-1753235080195-0c76f3b6e2ea?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D'); 
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.safety-hero-bg-overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(16, 43, 42, 0.4) 0%, rgba(16, 43, 42, 0.75) 100%);
+  z-index: 1;
+}
+.safety-hero-content-container{
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 0 2rem;
+  max-width: 900px;
+  text-align: left;
+}
+.safety-hero-main-title{
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--cream-bright);
+  margin-bottom: 1rem;
+}
+.safety-hero-subtitle{
+  font-family: var(--sans);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--cream);
+  opacity: 0.9;
+  max-width: 550px;
+  margin: 0;
+  line-height: 1.5;
+}
+.safety-hero-bottom-bar{
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 220px;
+  width: 100%;
+  background: rgba(16, 43, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(243, 237, 221, 0.15);
+}
+.safety-hero-bar-item{
+  padding: 1.5rem 2rem;
+  border-right: 1px solid rgba(243, 237, 221, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.safety-bar-label{
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  color: var(--cream);
+  opacity: 0.6;
+  margin-bottom: 0.35rem;
+}
+.safety-bar-value{
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--cream-bright);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.safety-hero-action-btn{
+  background-color: var(--cream);
+  color: var(--rusk);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+@media (max-width: 992px){
+  .safety-hero-bottom-bar{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .safety-hero-explore-btn{
+    grid-column: span 2;
+    padding: 1.25rem;
+  }
+}
+@media (max-width: 576px){
+  .safety-hero-bottom-bar{
+    grid-template-columns: 1fr;
+  }
+  .safety-hero-explore-btn{
+    grid-column: span 1;
+  }
+}
+
+.site-footer {
+  padding: clamp(2.5rem, 5vw, 3.5rem) 0 1.25rem;
+  border-top: 1px solid rgba(243, 237, 221, .18);
+  background: #163633;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 1.75rem 3rem;
+}
+
+.footer-inner .footer-copy {
+  max-width: 440px;
+}
+
+.footer-inner .footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  margin-bottom: .85rem;
+  color: var(--cream-bright);
+  font: 600 1.05rem/1.2 "Space Grotesk", var(--sans);
+  text-decoration: none;
+}
+
+.footer-inner .footer-brand img {
+  display: block;
+  width: auto;
+  height: 40px;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+.footer-inner .footer-copy p {
+  margin: 0;
+  color: rgba(243, 237, 221, .76);
+  font: 400 .9rem/1.6 var(--sans);
+}
+
+.footer-inner .footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: end;
+  justify-content: flex-end;
+  gap: .6rem 1.25rem;
+  padding: 0;
+}
+
+.footer-inner .footer-nav a {
+  color: rgba(243, 237, 221, .86);
+  font: 400 .88rem/1.5 var(--sans);
+  text-decoration: none;
+}
+
+.footer-inner .footer-nav a:hover,
+.footer-inner .footer-nav a:focus-visible {
+  color: var(--yellow);
+}
+
+.footer-inner .footer-meta {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: .5rem 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(243, 237, 221, .16);
+}
+
+.footer-inner .footer-copyright {
+  margin: 0;
+  color: rgba(243, 237, 221, .7);
+  font: 400 .82rem/1.5 var(--sans);
+}
+
+.footer-inner .footer-citations-link {
+  color: var(--yellow);
+  font: 500 .86rem/1.5 var(--sans);
+  text-decoration: none;
+}
+
+.footer-inner .footer-citations-link:hover,
+.footer-inner .footer-citations-link:focus-visible {
+  color: var(--cream-bright);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+body.citations-page {
+  min-height: 100vh;
+  color: var(--teal);
+  background: var(--cream);
+}
+
+.citations-page .site-header {
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid rgba(243, 237, 221, .13);
+  background: #102b2a;
+}
+
+.citations-main {
+  min-height: 68vh;
+  padding: clamp(3.5rem, 8vw, 7rem) 0 clamp(4rem, 8vw, 7rem);
+}
+
+.citations-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.citations-title {
+  margin: 0;
+  color: var(--teal);
+  font: 500 clamp(4rem, 10vw, 7.5rem)/.9 var(--serif);
+}
+
+.citations-intro {
+  max-width: 620px;
+  margin: 1.5rem 0 3.5rem;
+  color: rgba(16, 43, 42, .78);
+  font-size: 1rem;
+}
+
+.citation-list {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.citation-list li {
+  padding-left: 1.4rem;
+  color: var(--teal);
+  font: 400 1.08rem/1.65 var(--serif);
+  text-indent: -1.4rem;
+  overflow-wrap: anywhere;
+}
+
+.citation-list a {
+  color: #805039;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .15em;
+}
+
+.citation-list a:hover,
+.citation-list a:focus-visible {
+  color: var(--rust);
+}
+
+@media (max-width: 767.98px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .footer-inner .footer-nav {
+    align-self: stretch;
+    justify-content: flex-start;
+  }
+
+  .footer-inner .footer-meta {
+    flex-wrap: wrap;
   }
 }
