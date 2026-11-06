@@ -3444,6 +3444,140 @@ body.home-page .site-navbar .nav-link.active {
   font: 400 clamp(1.2rem, 1.6vw, 1.45rem)/1.6 var(--serif);
 }
 
+.household-preparedness-report {
+  position: relative;
+  isolation: isolate;
+  width: 115%;
+  margin-right: -7.5%;
+  margin-left: -7.5%;
+  padding: clamp(4.5rem, 7vw, 7rem) 0;
+  color: var(--teal);
+  background-color: var(--cream);
+  border-top: 1px solid rgba(16, 43, 42, .32);
+}
+
+.household-preparedness-report::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  background: rgba(243, 237, 221, .5);
+  content: "";
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.preparedness-background {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.preparedness-background-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .55;
+}
+
+.preparedness-scene {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  display: flex;
+  min-height: clamp(22rem, 40vw, 34rem);
+  align-items: center;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  background: #172321;
+}
+
+.preparedness-scene::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(16, 43, 42, .9), rgba(16, 43, 42, .48) 58%, rgba(16, 43, 42, .08)),
+    linear-gradient(0deg, rgba(16, 43, 42, .28), transparent 55%);
+  content: "";
+}
+
+.preparedness-scene img {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
+}
+
+.household-preparedness-heading {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: clamp(2rem, 5vw, 5rem);
+}
+
+.household-preparedness-heading h2 {
+  margin: 0;
+  color: var(--cream-bright);
+  font: 500 clamp(4rem, 8vw, 9rem)/.98 var(--serif);
+  letter-spacing: -.045em;
+}
+
+.household-preparedness-heading h2 em {
+  display: inline-block;
+  margin-left: clamp(1rem, 4vw, 4rem);
+  color: #ffb454;
+  font-weight: 400;
+}
+
+.preparedness-card-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+  margin: -4rem clamp(1rem, 2.5vw, 2.5rem) 0;
+}
+
+.preparedness-card {
+  min-width: 0;
+  padding: clamp(1.35rem, 2.2vw, 2.25rem);
+  border-top: 3px solid var(--rust);
+  background: #fff;
+  box-shadow: 0 14px 28px rgba(16, 43, 42, .12);
+}
+
+.preparedness-number {
+  color: var(--rust);
+  font: 500 var(--mono-label-size)/1.5 var(--mono);
+}
+
+.preparedness-card h3 {
+  margin: .8rem 0 1rem;
+  color: var(--teal);
+  font: 500 clamp(1.7rem, 2.25vw, 2.5rem)/1.05 var(--serif);
+  letter-spacing: -.025em;
+}
+
+.preparedness-copy {
+  margin: 0;
+  color: rgba(16, 43, 42, .9);
+  font: 400 clamp(.98rem, 1.05vw, 1.08rem)/1.7 var(--sans);
+}
+
 html.has-scroll-reveals [data-reveal] {
   opacity: 0;
   transform: translateY(18px);
@@ -3551,6 +3685,19 @@ html.has-scroll-reveals [data-reveal].is-revealed {
   .heat-monitoring-report {
     display: block;
     padding: 3.5rem 0 4.5rem;
+  }
+
+  .preparedness-scene {
+    min-height: clamp(22rem, 52vw, 30rem);
+  }
+
+  .preparedness-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: -3rem;
+  }
+
+  .preparedness-card:last-child {
+    grid-column: 1 / -1;
   }
 
   .heat-map-panel {
@@ -3718,6 +3865,48 @@ html.has-scroll-reveals [data-reveal].is-revealed {
     padding: 2.75rem 0 3.5rem;
   }
 
+  .household-preparedness-report {
+    padding: 2.75rem 0 4rem;
+  }
+
+  .preparedness-scene {
+    min-height: 20rem;
+  }
+
+  .household-preparedness-heading {
+    padding: 1.75rem;
+  }
+
+  .household-preparedness-heading h2 {
+    font-size: clamp(3rem, 13vw, 5rem);
+  }
+
+  .household-preparedness-heading h2 em {
+    margin-left: 1rem;
+  }
+
+  .preparedness-card-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: -1.5rem .75rem 0;
+  }
+
+  .preparedness-card:last-child {
+    grid-column: auto;
+  }
+
+  .preparedness-card {
+    padding: 1.25rem;
+  }
+
+  .preparedness-card h3 {
+    font-size: 2rem;
+  }
+
+  .preparedness-copy {
+    font-size: 1.05rem;
+  }
+
   .heat-map-panel {
     width: 100%;
     margin-bottom: 2.25rem;
@@ -3834,5 +4023,170 @@ html.has-scroll-reveals [data-reveal].is-revealed {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+
+.site-footer {
+  padding: clamp(2.75rem, 5vw, 4.25rem) 0 1.25rem;
+  border-top: 1px solid rgba(243, 237, 221, .18);
+  background: #163633;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(280px, 1fr);
+  align-items: start;
+  gap: 2rem 4rem;
+}
+
+.footer-inner .footer-copy {
+  max-width: 430px;
+}
+
+.footer-inner .footer-copy p {
+  margin: 0;
+  color: rgba(243, 237, 221, .72);
+  font: 400 .9rem/1.6 var(--sans);
+}
+
+.footer-inner .footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1rem;
+  color: var(--cream-bright);
+  font: 600 1.15rem/1 "Space Grotesk", var(--sans);
+  text-decoration: none;
+}
+
+.footer-inner .footer-brand img {
+  width: auto;
+  height: 38px;
+  object-fit: contain;
+}
+
+.footer-inner .footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-self: end;
+  gap: .75rem 1.5rem;
+  padding-top: 0;
+}
+
+.footer-inner .footer-nav a {
+  color: rgba(243, 237, 221, .82);
+  font: 400 .9rem/1.5 var(--sans);
+  text-decoration: none;
+}
+
+.footer-inner .footer-nav a:hover,
+.footer-inner .footer-nav a:focus-visible {
+  color: var(--yellow);
+}
+
+.footer-inner .footer-meta {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: .5rem 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(243, 237, 221, .16);
+}
+
+.footer-inner .footer-copyright {
+  margin: 0;
+  color: rgba(243, 237, 221, .68);
+  font: 400 .82rem/1.5 var(--sans);
+}
+
+.footer-inner .footer-citations-link {
+  color: var(--yellow);
+  font: 500 .84rem/1.5 var(--sans);
+  text-decoration: none;
+}
+
+.footer-inner .footer-citations-link:hover,
+.footer-inner .footer-citations-link:focus-visible {
+  color: var(--cream-bright);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+body.citations-page {
+  min-height: 100vh;
+  color: var(--teal);
+  background: var(--cream);
+}
+
+.citations-page .site-header {
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid rgba(243, 237, 221, .13);
+  background: #102b2a;
+}
+
+.citations-main {
+  min-height: 68vh;
+  padding: clamp(3.5rem, 8vw, 7rem) 0 clamp(4rem, 8vw, 7rem);
+}
+
+.citations-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.citations-title {
+  margin: 0;
+  color: var(--teal);
+  font: 500 clamp(4rem, 10vw, 7.5rem)/.9 var(--serif);
+}
+
+.citations-intro {
+  max-width: 620px;
+  margin: 1.5rem 0 3.5rem;
+  color: rgba(16, 43, 42, .78);
+  font-size: 1rem;
+}
+
+.citation-list {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.citation-list li {
+  padding-left: 1.4rem;
+  color: var(--teal);
+  font: 400 1.08rem/1.65 var(--serif);
+  text-indent: -1.4rem;
+  overflow-wrap: anywhere;
+}
+
+.citation-list a {
+  color: #805039;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .15em;
+}
+
+.citation-list a:hover,
+.citation-list a:focus-visible {
+  color: var(--rust);
+}
+
+@media (max-width: 767.98px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .footer-inner .footer-nav {
+    align-self: stretch;
+  }
+
+  .footer-inner .footer-meta {
+    flex-wrap: wrap;
   }
 }
