@@ -214,3 +214,16 @@ if (heatMapPanel && heatMapFullscreen && heatMapFullscreenStatus) {
 
   document.addEventListener('fullscreenchange', updateHeatMapFullscreenControl);
 }
+document.addEventListener("DOMContentLoaded", function() {
+  const iconWrappers = document.querySelectorAll('.heatwave-action-section .icon-wrapper');
+
+  iconWrappers.forEach(function(icon) {
+    icon.addEventListener('mouseenter', function() {
+      icon.classList.add('hovered');
+    });
+
+    icon.addEventListener('mouseleave', function() {
+      icon.classList.remove('hovered');
+    });
+  });
+});

@@ -1,4 +1,4 @@
-/* Theme variables */
+﻿/* Theme variables */
 :root {
   --teal: #102b2a;
   --cream: #f3eddd;
@@ -2430,7 +2430,6 @@ body.safety-page {
   font-family: var(--mono);
   font-size: var(--mono-label-size);
   letter-spacing: 2px;
-  text-transform: uppercase;
 }
 
 .safety-page .heatwave-action-section .section-title {
@@ -4304,4 +4303,1405 @@ body.citations-page {
   .footer-inner .footer-meta {
     flex-wrap: wrap;
   }
+}
+.safety-general-action *,
+.safety-general-action *::before,
+.safety-general-action *::after {
+  box-sizing: border-box;
+}
+
+.safety-general-action img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.safety-general-action h2,
+.safety-general-action h3,
+.safety-general-action h4,
+.safety-general-action p {
+  margin-top: 0;
+}
+
+.safety-general-action em {
+  color: var(--rust);
+  font-family: var(--serif);
+  font-weight: 400;
+}
+
+.safety-general-action__container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.safety-general-action__eyebrow,
+.safety-general-action__mini-label {
+  color: var(--rust);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+}
+
+.safety-general-action__heading {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 70px;
+  align-items: end;
+  padding: 85px 9% 75px;
+  background: var(--cream);
+  color: var(--teal);
+}
+
+.safety-general-action__heading h2 {
+  max-width: 650px;
+  margin: 17px 0 0;
+  font-size: clamp(45px, 5.5vw, 72px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -2px;
+}
+
+.safety-general-action__heading p {
+  max-width: 470px;
+  margin-bottom: 5px;
+  color: #666b60;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.safety-general-action__category {
+  padding: 85px 9%;
+  border-bottom: 1px solid rgba(243, 237, 221, .13);
+}
+
+.safety-general-action__category:nth-of-type(even) {
+  background: #183735;
+}
+
+.safety-general-action__category-heading {
+  margin-bottom: 45px;
+}
+
+.safety-general-action__category-heading > span {
+  color: var(--yellow);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.8px;
+}
+
+.safety-general-action__category-heading h3 {
+  margin: 13px 0 0;
+  color: var(--cream);
+  font-size: clamp(40px, 5vw, 60px);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.safety-general-action__exposure-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 55px;
+}
+
+.safety-general-action__image-card {
+  position: relative;
+  min-height: 490px;
+  overflow: hidden;
+}
+
+.safety-general-action__image-card img {
+  position: absolute;
+  inset: 0;
+  transition: transform .6s ease;
+}
+
+.safety-general-action__image-card:hover img {
+  transform: scale(1.05);
+}
+
+.safety-general-action__image-card::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    transparent 45%,
+    rgba(16, 43, 42, .9)
+  );
+  content: "";
+}
+
+.safety-general-action__image-caption {
+  position: absolute;
+  z-index: 1;
+  right: 30px;
+  bottom: 30px;
+  left: 30px;
+}
+
+.safety-general-action__image-caption span {
+  color: var(--yellow);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.safety-general-action__image-caption h4 {
+  margin: 10px 0 0;
+  color: var(--cream);
+  font-family: var(--serif);
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+.safety-general-action__tip-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.safety-general-action__tip {
+  display: flex;
+  gap: 22px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(243, 237, 221, .17);
+}
+
+.safety-general-action__tip:first-child {
+  padding-top: 0;
+}
+
+.safety-general-action__tip > i {
+  flex-shrink: 0;
+  color: var(--yellow);
+  font-size: 23px;
+}
+
+.safety-general-action__tip h4 {
+  margin-bottom: 8px;
+  color: var(--cream);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.safety-general-action__tip p {
+  margin-bottom: 0;
+  color: var(--cream);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.safety-general-action__cooling-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.safety-general-action__cooling-card {
+  overflow: hidden;
+  background: var(--cream);
+  color: var(--teal);
+}
+
+.safety-general-action__cooling-image {
+  height: 240px;
+  overflow: hidden;
+}
+
+.safety-general-action__cooling-image img {
+  transition: transform .6s ease;
+}
+
+.safety-general-action__cooling-card:hover img {
+  transform: scale(1.06);
+}
+
+.safety-general-action__cooling-content {
+  position: relative;
+  min-height: 230px;
+  padding: 27px;
+}
+
+.safety-general-action__cooling-content > span {
+  color: var(--rust);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.safety-general-action__cooling-content > i {
+  display: block;
+  margin: 17px 0 8px;
+  color: var(--rust);
+  font-size: 23px;
+}
+
+.safety-general-action__cooling-content h4 {
+  margin-bottom: 10px;
+  font-family: var(--serif);
+  font-size: 29px;
+  line-height: 1.1;
+}
+
+.safety-general-action__cooling-content p {
+  margin-bottom: 0;
+  color: #64675e;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.safety-general-action__home-layout {
+  display: grid;
+  grid-template-columns: .95fr 1.05fr;
+  gap: 50px;
+}
+
+.safety-general-action__home-visual {
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+}
+
+.safety-general-action__home-visual > img {
+  position: absolute;
+  inset: 0;
+}
+
+.safety-general-action__temperature {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 27px;
+  background: rgba(16, 43, 42, .94);
+}
+
+.safety-general-action__temperature > span {
+  color: var(--yellow);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.3px;
+}
+
+.safety-general-action__temperature-values {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin: 17px 0;
+}
+
+.safety-general-action__temperature-values div:not(
+  .safety-general-action__temperature-divider
+) {
+  display: flex;
+  flex-direction: column;
+}
+
+.safety-general-action__temperature-values strong {
+  color: var(--cream);
+  font-family: var(--serif);
+  font-size: 53px;
+  line-height: 1;
+}
+
+.safety-general-action__temperature-values small {
+  margin-top: 8px;
+  color: var(--cream);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.safety-general-action__temperature-divider {
+  width: 1px;
+  height: 60px;
+  background: rgba(243, 237, 221, .3);
+}
+
+.safety-general-action__temperature p {
+  margin-bottom: 0;
+  color: var(--cream);
+  font-size: 11px;
+}
+
+.safety-general-action__home-tips {
+  display: flex;
+  flex-direction: column;
+}
+
+.safety-general-action__home-tip {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 18px;
+  padding: 23px 0;
+  border-bottom: 1px solid rgba(243, 237, 221, .17);
+}
+
+.safety-general-action__home-tip:first-child {
+  padding-top: 0;
+}
+
+.safety-general-action__home-tip > span {
+  color: var(--yellow);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.safety-general-action__home-tip h4 {
+  margin-bottom: 8px;
+  color: var(--cream);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.safety-general-action__home-tip p {
+  margin-bottom: 0;
+  color: var(--cream);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.safety-general-action__community {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 55px;
+  align-items: center;
+}
+
+.safety-general-action__community-image {
+  height: 510px;
+  overflow: hidden;
+}
+
+.safety-general-action__community-image img {
+  transition: transform .6s ease;
+}
+
+.safety-general-action__community-image:hover img {
+  transform: scale(1.05);
+}
+
+.safety-general-action__community-content h4 {
+  margin: 15px 0;
+  color: var(--cream);
+  font-family: var(--serif);
+  font-size: clamp(35px, 4vw, 48px);
+  line-height: 1.1;
+}
+
+.safety-general-action__community-content > p {
+  color: var(--cream);
+  font-size: 12px;
+  line-height: 2;
+}
+
+.safety-general-action__people-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding: 0;
+  margin: 25px 0;
+  list-style: none;
+}
+
+.safety-general-action__people-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--cream);
+  font-size: 12px;
+}
+
+.safety-general-action__people-list i {
+  color: var(--yellow);
+}
+
+.safety-general-action__child-warning {
+  display: flex;
+  gap: 15px;
+  padding: 20px;
+  border-left: 3px solid var(--sga-rust);
+  background: rgba(255, 249, 235, .06);
+}
+
+.safety-general-action__child-warning > i {
+  flex-shrink: 0;
+  color: var(--yellow);
+  font-size: 19px;
+}
+
+.safety-general-action__child-warning p {
+  margin-bottom: 0;
+  color: var(--cream);
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+.safety-general-action__child-warning strong{
+  color: var(--cream);
+}
+.safety-general-action__emergency{
+  padding: 85px 9%;
+  background: var(--cream);
+  color: var(--teal);
+}
+.safety-general-action__emergency .safety-general-action__category-heading > span{
+  color: var(--rust);
+}
+
+.safety-general-action__emergency .safety-general-action__category-heading h3{
+  color: var(--teal);
+}
+.safety-general-action__emergency-intro{
+  max-width: 550px;
+  margin-top: -25px;
+  margin-bottom: 35px;
+  color: #64675e;
+  font-size: 13px;
+  line-height: 1.9;
+}
+.safety-general-action__emergency-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.safety-general-action__emergency-card{
+  padding: 32px;
+  border: 1px solid rgba(16, 43, 42, .16);
+  background: var(--cream-bright);
+}
+.safety-general-action__emergency-icon{
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 22px;
+  border-radius: 50%;
+  background: #e9e2d0;
+  color: var(--rust);
+  font-size: 22px;
+}
+.safety-general-action__emergency-label{
+  color: var(--rust);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.4px;
+}
+.safety-general-action__emergency-card h4{
+  margin: 12px 0;
+  color: var(--teal);
+  font-family: var(--serif);
+  font-size: 36px;
+  line-height: 1.1;
+}
+
+.safety-general-action__emergency-card > p{
+  min-height: 45px;
+  color: #64675e;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.safety-general-action__emergency-card ul{
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 18px 0;
+  margin: 15px 0;
+  border-top: 1px solid rgba(16, 43, 42, .15);
+  border-bottom: 1px solid rgba(16, 43, 42, .15);
+  list-style: none;
+}
+.safety-general-action__emergency-card li{
+  position: relative;
+  padding-left: 20px;
+  color: #424e47;
+  font-size: 12px;
+}
+.safety-general-action__emergency-card li::before{
+  position: absolute;
+  left: 0;
+  color: var(--rust);
+  content: "→";
+}
+.safety-general-action__response{
+  padding: 19px;
+  background: #eee7d6;
+}
+.safety-general-action__response strong{
+  color: var(--rust);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.safety-general-action__response p{
+  margin: 9px 0 0;
+  color: #4e5a51;
+  font-size: 11px;
+  line-height: 1.9;
+}
+.safety-general-action__medical-note{
+  margin-top: 17px;
+  color: #686b60;
+  font-size: 11px;
+  line-height: 1.8;
+}
+.safety-general-action__emergency-card--critical{
+  border: 2px solid var(--rust);
+  background: #fff3e9;
+}
+
+.safety-general-action__emergency-card--critical
+.safety-general-action__emergency-icon{
+  background: var(--rust);
+  color: white;
+}
+
+.safety-general-action__emergency-card--critical
+.safety-general-action__response{
+  background: #f3dfd0;
+}
+.safety-general-action__emergency-banner{
+  display: flex;
+  align-items: center;
+  gap: 23px;
+  margin-top: 25px;
+  padding: 25px 30px;
+  background: var(--rust);
+  color: white;
+}
+
+.safety-general-action__emergency-banner > i{
+  flex-shrink: 0;
+  font-size: 32px;
+}
+
+.safety-general-action__emergency-banner strong{
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.safety-general-action__emergency-banner p{
+  margin: 5px 0 0;
+  color: rgba(255,255,255,.85);
+  font-size: 11px;
+}
+.safety-general-action__source{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding: 28px 9%;
+  background: #0b2221;
+}
+
+.safety-general-action__source > span{
+  flex-shrink: 0;
+  color: var(--yellow);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.safety-general-action__source p{
+  margin: 0;
+  color: var(--cream);
+  font-size: 11px;
+}
+
+.safety-general-action__source a{
+  margin-left: 10px;
+  color: var(--cream);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 992px) {
+
+  .safety-general-action__heading,
+  .safety-general-action__category,
+  .safety-general-action__emergency{
+    padding-right: 6%;
+    padding-left: 6%;
+  }
+
+  .safety-general-action__exposure-grid{
+    gap: 30px;
+  }
+
+  .safety-general-action__home-layout{
+    gap: 30px;
+  }
+
+  .safety-general-action__community{
+    gap: 30px;
+  }
+
+  .safety-general-action__cooling-content{
+    padding: 20px;
+  }
+
+}
+@media (max-width: 768px){
+
+  .safety-general-action__heading{
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 65px 7%;
+  }
+
+  .safety-general-action__heading h2{
+    font-size: 48px;
+  }
+
+  .safety-general-action__category,.safety-general-action__emergency{
+    padding: 65px 7%;
+  }
+
+  .safety-general-action__category-heading{
+    margin-bottom: 32px;
+  }
+
+  .safety-general-action__category-heading h3{
+    font-size: 43px;
+  }
+
+  .safety-general-action__exposure-grid,
+  .safety-general-action__home-layout,
+  .safety-general-action__community{
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .safety-general-action__image-card{
+    min-height: 370px;
+  }
+
+  .safety-general-action__cooling-grid{
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .safety-general-action__cooling-card:last-child{
+    grid-column: 1 / -1;
+  }
+
+  .safety-general-action__home-visual{
+    min-height: 460px;
+  }
+
+  .safety-general-action__community-image{
+    height: 390px;
+  }
+
+  .safety-general-action__emergency-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .safety-general-action__source{
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 25px 7%;
+  }
+
+}
+@media (max-width: 480px) {
+
+  .safety-general-action__heading h2{
+    font-size: 41px;
+  }
+
+  .safety-general-action__category-heading h3{
+    font-size: 36px;
+  }
+
+  .safety-general-action__cooling-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .safety-general-action__cooling-card:last-child{
+    grid-column: auto;
+  }
+
+  .safety-general-action__cooling-image{
+    height: 220px;
+  }
+
+  .safety-general-action__cooling-content{
+    min-height: auto;
+    padding: 24px;
+  }
+
+  .safety-general-action__image-card{
+    min-height: 320px;
+  }
+
+  .safety-general-action__home-visual{
+    min-height: 420px;
+  }
+
+  .safety-general-action__temperature-values{
+    gap: 20px;
+  }
+
+  .safety-general-action__temperature-values strong{
+    font-size: 44px;
+  }
+
+  .safety-general-action__emergency-card{
+    padding: 23px;
+  }
+
+  .safety-general-action__emergency-card h4{
+    font-size: 32px;
+  }
+
+  .safety-general-action__emergency-banner{
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+}
+.safety-general-action {
+  background: var(--teal);
+  color: var(--cream);
+}
+.safety-general-action__heading{
+  background: var(--cream);
+  color: var(--teal);
+}
+.safety-general-action__category:nth-of-type(even){
+  background: var(--teal);
+}
+.safety-general-action__cooling-card{
+  background: var(--cream-bright);
+  color: var(--teal);
+}
+.safety-general-action__emergency{
+  background: var(--cream);
+  color: var(--teal);
+}
+.safety-general-action__emergency-card--critical{
+  border-color: var(--rust);
+  background: var(--cream-bright);
+}
+.safety-general-action__emergency-banner{
+  background: var(--rust);
+  color: var(--cream-bright);
+}
+.safety-general-action__category-heading > span{
+  color: var(--yellow);
+}
+.safety-general-action__source a:hover{
+  color: var(--data-blue);
+}
+.safety-general-heat-myths{
+  width: 100%;
+  overflow: hidden;
+  background: var(--cream-bright);
+  color: var(--teal);
+  font-family: var(--sans);
+  line-height: 1.65;
+}
+
+.safety-general-heat-myths *,
+.safety-general-heat-myths *::before,
+.safety-general-heat-myths *::after {
+  box-sizing: border-box;
+}
+
+.safety-general-heat-myths img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.safety-general-heat-myths h2,
+.safety-general-heat-myths h3,
+.safety-general-heat-myths h4,
+.safety-general-heat-myths p {
+  margin-top: 0;
+}
+
+.safety-general-heat-myths em {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--rust);
+}
+
+.safety-general-heat-myths__eyebrow {
+  display: inline-block;
+  color: var(--rust);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  line-height: 1.8;
+}
+
+.safety-general-heat-myths__intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 490px;
+  background: var(--cream);
+}
+
+.safety-general-heat-myths__intro-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 75px 11%;
+}
+
+.safety-general-heat-myths__intro-content h2 {
+  max-width: 540px;
+  margin: 20px 0;
+  color: var(--teal);
+  font-family: var(--serif);
+  font-size: clamp(43px, 5.2vw, 68px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -1.5px;
+}
+
+.safety-general-heat-myths__intro-content p {
+  max-width: 440px;
+  margin-bottom: 13px;
+  color: #60665c;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.safety-general-heat-myths__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 19px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--rust);
+  color: var(--rust);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: gap .3s ease;
+}
+
+.safety-general-heat-myths__link:hover {
+  gap: 23px;
+  color: var(--teal);
+}
+
+.safety-general-heat-myths__link i {
+  font-size: 15px;
+}
+
+.safety-general-heat-myths__intro-image {
+  position: relative;
+  min-height: 490px;
+  overflow: hidden;
+}
+
+.safety-general-heat-myths__intro-image img {
+  position: absolute;
+  inset: 0;
+  transition: transform .7s ease;
+}
+
+.safety-general-heat-myths__intro-image:hover img {
+  transform: scale(1.04);
+}
+
+.safety-general-heat-myths__image-caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 45px 35px 25px;
+  background: linear-gradient(
+    transparent,
+    rgba(16, 43, 42, .8)
+  );
+  color: var(--cream-bright);
+}
+
+.safety-general-heat-myths__image-caption span {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1.3px;
+  color: var(--yellow);
+}
+
+.safety-general-heat-myths__image-caption p {
+  margin: 7px 0 0;
+  font-family: var(--serif);
+  font-size: 24px;
+}
+
+.safety-general-heat-myths__main {
+  padding: 85px 8%;
+  background: var(--cream-bright);
+}
+
+.safety-general-heat-myths__section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 50px;
+  margin-bottom: 45px;
+}
+
+.safety-general-heat-myths__section-heading h3 {
+  max-width: 630px;
+  margin: 13px 0 0;
+  color: var(--teal);
+  font-family: var(--serif);
+  font-size: clamp(38px, 4.5vw, 55px);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.safety-general-heat-myths__section-heading > p {
+  max-width: 310px;
+  margin-bottom: 5px;
+  color: #74756b;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.safety-general-heat-myths__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  align-items: start;
+}
+
+.safety-general-heat-myths__card {
+  position: relative;
+  min-width: 0;
+  border: 1px solid rgba(16, 43, 42, .10);
+  background: #fffefa;
+  transition:
+    border-color .3s ease,
+    box-shadow .3s ease,
+    transform .3s ease;
+}
+
+.safety-general-heat-myths__card:hover {
+  border-color: rgba(189, 87, 60, .5);
+  box-shadow: 0 8px 25px rgba(16, 43, 42, .06);
+  transform: translateY(-3px);
+}
+
+.safety-general-heat-myths__card[open] {
+  border-color: var(--rust);
+  box-shadow: 0 8px 25px rgba(16, 43, 42, .07);
+}
+
+.safety-general-heat-myths__card summary {
+  display: grid;
+  grid-template-columns: 35px 1fr 18px;
+  gap: 12px;
+  align-items: start;
+  min-height: 145px;
+  padding: 23px 19px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.safety-general-heat-myths__card summary::-webkit-details-marker {
+  display: none;
+}
+
+.safety-general-heat-myths__number {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--cream-bright);
+  font-family: var(--mono);
+  font-size: 11px;
+  transition: 0.3s ease;
+}
+
+.safety-general-heat-myths__card[open] .safety-general-heat-myths__number {
+  background: var(--rust);
+}
+
+.safety-general-heat-myths__card-title > span {
+  display: block;
+  margin: 3px 0 11px;
+  color: var(--rust);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .8px;
+}
+
+.safety-general-heat-myths__card-title h4 {
+  margin: 0;
+  color: var(--teal);
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.safety-general-heat-myths__card summary > i {
+  padding-top: 7px;
+  color: var(--rust);
+  font-size: 13px;
+  transition: transform .3s ease;
+}
+
+.safety-general-heat-myths__card summary > i::before {
+  content: "\f4fe";
+}
+
+.safety-general-heat-myths__card[open] summary > i {
+  transform: rotate(45deg);
+}
+
+.safety-general-heat-myths__answer {
+  padding: 0 22px 23px 66px;
+  animation: heat-myth-reveal .3s ease;
+}
+
+@keyframes heat-myth-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.safety-general-heat-myths__tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 9px;
+  background: rgba(189, 87, 60, .10);
+  color: var(--rust);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.safety-general-heat-myths__answer p {
+  margin: 0;
+  color: #676a60;
+  font-size: 11px;
+  line-height: 1.95;
+}
+
+.safety-general-heat-myths__grid-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  margin-top: 35px;
+  padding: 20px;
+  border-top: 1px solid rgba(16, 43, 42, .15);
+  border-bottom: 1px solid rgba(16, 43, 42, .15);
+}
+
+.safety-general-heat-myths__grid-note i {
+  color: var(--rust);
+  font-size: 18px;
+}
+
+.safety-general-heat-myths__grid-note p {
+  margin: 0;
+  color: #686b61;
+  font-family: var(--serif);
+  font-size: 19px;
+}
+
+.safety-general-heat-myths__conclusion {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 440px;
+  background: var(--cream);
+}
+
+.safety-general-heat-myths__conclusion-image {
+  min-height: 440px;
+  overflow: hidden;
+}
+
+.safety-general-heat-myths__conclusion-image img {
+  transition: transform .7s ease;
+}
+
+.safety-general-heat-myths__conclusion-image:hover img {
+  transform: scale(1.04);
+}
+
+.safety-general-heat-myths__conclusion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 65px 11%;
+}
+
+.safety-general-heat-myths__conclusion-content h3 {
+  max-width: 480px;
+  margin: 16px 0;
+  color: var(--teal);
+  font-family: var(--serif);
+  font-size: clamp(39px, 4.5vw, 55px);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.safety-general-heat-myths__conclusion-content > p {
+  max-width: 450px;
+  margin-bottom: 13px;
+  color: #666b60;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.safety-general-heat-myths__conclusion-note {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: 15px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(16, 43, 42, .2);
+}
+
+.safety-general-heat-myths__conclusion-note i {
+  color: var(--rust);
+  font-size: 23px;
+}
+
+.safety-general-heat-myths__conclusion-note span {
+  color: var(--rust);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .7px;
+  line-height: 1.8;
+}
+
+.safety-general-heat-myths__source {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px 25px;
+  padding: 24px 8%;
+  background: var(--teal);
+}
+
+.safety-general-heat-myths__source > span {
+  color: var(--yellow);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.safety-general-heat-myths__source a {
+  color: var(--cream);
+  font-size: 11px;
+  text-decoration: none;
+  transition: color .3s ease;
+}
+
+.safety-general-heat-myths__source a:hover {
+  color: var(--data-blue);
+}
+
+.safety-general-heat-myths__source a i {
+  margin-left: 5px;
+}
+
+@media (max-width: 992px) {
+
+  .safety-general-heat-myths__intro-content {
+    padding: 55px 8%;
+  }
+
+  .safety-general-heat-myths__main {
+    padding: 70px 6%;
+  }
+
+  .safety-general-heat-myths__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .safety-general-heat-myths__section-heading {
+    gap: 25px;
+  }
+
+  .safety-general-heat-myths__conclusion-content {
+    padding: 50px 8%;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .safety-general-heat-myths__intro,
+  .safety-general-heat-myths__conclusion {
+    grid-template-columns: 1fr;
+  }
+
+  .safety-general-heat-myths__intro-content {
+    padding: 60px 7%;
+  }
+
+  .safety-general-heat-myths__intro-content h2 {
+    font-size: 49px;
+  }
+
+  .safety-general-heat-myths__intro-image {
+    min-height: 350px;
+  }
+
+  .safety-general-heat-myths__main {
+    padding: 60px 6%;
+  }
+
+  .safety-general-heat-myths__section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .safety-general-heat-myths__section-heading h3 {
+    font-size: 42px;
+  }
+
+  .safety-general-heat-myths__section-heading > p {
+    max-width: 480px;
+  }
+
+  .safety-general-heat-myths__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .safety-general-heat-myths__card summary {
+    min-height: 155px;
+    padding: 18px 13px;
+    grid-template-columns: 29px 1fr 15px;
+    gap: 9px;
+  }
+
+  .safety-general-heat-myths__number {
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+  }
+
+  .safety-general-heat-myths__card-title h4 {
+    font-size: 19px;
+  }
+
+  .safety-general-heat-myths__card-title > span {
+    font-size: 8px;
+  }
+
+  .safety-general-heat-myths__answer {
+    padding: 0 14px 19px;
+  }
+
+  .safety-general-heat-myths__conclusion-image {
+    min-height: 320px;
+  }
+
+  .safety-general-heat-myths__conclusion-content {
+    padding: 55px 7%;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .safety-general-heat-myths__intro-content h2 {
+    font-size: 42px;
+  }
+
+  .safety-general-heat-myths__intro-image {
+    min-height: 290px;
+  }
+
+  .safety-general-heat-myths__main {
+    padding: 50px 5%;
+  }
+
+  .safety-general-heat-myths__section-heading h3 {
+    font-size: 36px;
+  }
+
+  .safety-general-heat-myths__grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .safety-general-heat-myths__card summary {
+    min-height: auto;
+    padding: 20px;
+    grid-template-columns: 35px 1fr 18px;
+    gap: 12px;
+  }
+
+  .safety-general-heat-myths__number {
+    width: 32px;
+    height: 32px;
+  }
+
+  .safety-general-heat-myths__card-title h4 {
+    font-size: 22px;
+  }
+
+  .safety-general-heat-myths__answer {
+    padding: 0 20px 22px 67px;
+  }
+
+  .safety-general-heat-myths__grid-note {
+    align-items: flex-start;
+  }
+
+  .safety-general-heat-myths__grid-note p {
+    font-size: 16px;
+  }
+
+  .safety-general-heat-myths__conclusion-image {
+    min-height: 270px;
+  }
+
+  .safety-general-heat-myths__conclusion-content {
+    padding: 45px 7%;
+  }
+
+  .safety-general-heat-myths__conclusion-content h3 {
+    font-size: 40px;
+  }
+
+  .safety-general-heat-myths__source {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 25px 7%;
+  }
+
+}
+.safety-general-heat-myths__card summary > i::before {
+  content: "+";
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 21px;
+}
+
+.safety-general-heat-myths__card[open] summary > i::before {
+  content: "−";
+}
+
+.safety-general-heat-myths__card[open] summary > i {
+  transform: none;
 }
