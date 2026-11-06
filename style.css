@@ -3532,7 +3532,7 @@ body.home-page .site-navbar .nav-link.active {
 .household-preparedness-heading h2 {
   margin: 0;
   color: var(--cream-bright);
-  font: 500 clamp(4rem, 8vw, 9rem)/.98 var(--serif);
+  font: 500 clamp(4rem, 8vw, 9rem)/1.15 var(--serif);
   letter-spacing: -.045em;
 }
 
