@@ -10,8 +10,13 @@ if (track && slideCount > 0) {
 const storyProgress = document.getElementById('storyProgress');
 const storyProgressControl = document.getElementById('storyProgressControl');
 const storyNav = document.querySelector('.story-navigation');
-const solarResearchModal = document.getElementById('solarResearchModal');
 const reducedMotionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+const preparednessBackgroundVideo = document.querySelector('.preparedness-background-video');
+
+if (preparednessBackgroundVideo) {
+  preparednessBackgroundVideo.defaultPlaybackRate = 1;
+  preparednessBackgroundVideo.playbackRate = 1;
+}
 
 // reveal sections when they enter the viewport
 const revealTargets = document.querySelectorAll('[data-reveal]');
@@ -157,11 +162,6 @@ if (track && viewport && slides.length && storyProgress && storyProgressControl 
     if (document.hidden) stopAutoAdvance();
     else startAutoAdvance();
   });
-
-  if (solarResearchModal) {
-    solarResearchModal.addEventListener('show.bs.modal', stopAutoAdvance);
-    solarResearchModal.addEventListener('hidden.bs.modal', startAutoAdvance);
-  }
 
   window.addEventListener('resize', () => {
     updateTrackPosition();
