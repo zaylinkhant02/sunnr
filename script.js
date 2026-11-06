@@ -17,6 +17,63 @@ const solarResearchModal = document.getElementById('solarResearchModal');
 const reducedMotionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const preparednessBackgroundVideo = document.querySelector('.preparedness-background-video');
 
+const contactForm = document.getElementById('contactForm');
+if (contactForm instanceof HTMLFormElement) {
+  const fields = [
+    { input: contactForm.elements.namedItem('name'), error: document.getElementById('contactNameError') },
+    { input: contactForm.elements.namedItem('email'), error: document.getElementById('contactEmailError') },
+    { input: contactForm.elements.namedItem('message'), error: document.getElementById('contactMessageError') },
+  ].filter((field) => field.input instanceof HTMLInputElement || field.input instanceof HTMLTextAreaElement);
+  const status = document.getElementById('contactFormStatus');
+  const message = contactForm.elements.namedItem('message');
+  const messageCount = document.getElementById('contactMessageCount');
+
+  if (message instanceof HTMLTextAreaElement && messageCount instanceof HTMLOutputElement) {
+    message.addEventListener('input', () => {
+      const atLimit = message.value.length >= message.maxLength;
+      messageCount.textContent = atLimit ? `${message.value.length} / ${message.maxLength}` : '';
+      messageCount.hidden = !atLimit;
+    });
+  }
+
+  function validateContactField(input, error, showError) {
+    const isBlank = !input.value.trim();
+    input.setCustomValidity(isBlank ? 'Please fill out this field.' : '');
+    const message = isBlank
+      ? 'This field is required.'
+      : input.validity.typeMismatch
+        ? 'Enter a valid email address.'
+        : input.validity.tooLong
+          ? `This field must be ${input.maxLength} characters or fewer.`
+          : '';
+
+    input.setAttribute('aria-invalid', String(Boolean(message)));
+    error.textContent = showError ? message : '';
+    error.classList.toggle('is-visible', showError && Boolean(message));
+    return !message;
+  }
+
+  fields.forEach(({ input, error }) => {
+    input.addEventListener('input', () => {
+      if (input.hasAttribute('aria-invalid')) validateContactField(input, error, true);
+      if (status) status.textContent = '';
+    });
+  });
+
+  contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const invalidField = fields.find(({ input, error }) => !validateContactField(input, error, true));
+
+    if (invalidField) {
+      invalidField.input.focus();
+      if (status) status.textContent = 'Please correct the highlighted fields.';
+      return;
+    }
+
+    if (status) status.textContent = 'Your message is valid, but this page is not connected to a message service yet.';
+  });
+}
+
 if (preparednessBackgroundVideo) {
   preparednessBackgroundVideo.defaultPlaybackRate = 1;
   preparednessBackgroundVideo.playbackRate = 1;

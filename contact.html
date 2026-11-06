@@ -45,11 +45,19 @@
             <div class="contact-card">
                 <span class="card-number">01</span>
                 <h2>Send a message</h2>
-                <form id="contactForm">
-                    <input type="text" placeholder="Your name" required>
-                    <input type="email" placeholder="Email address" required>
-                    <textarea rows="4" placeholder="Write your message..."required></textarea>
+                <form id="contactForm" novalidate>
+                    <label for="contactName">Your name</label>
+                    <input id="contactName" name="name" type="text" placeholder="Your name" autocomplete="name" maxlength="100" aria-describedby="contactNameError" required>
+                    <span class="field-error" id="contactNameError"></span>
+                    <label for="contactEmail">Email address</label>
+                    <input id="contactEmail" name="email" type="email" placeholder="Email address" autocomplete="email" maxlength="254" aria-describedby="contactEmailError" required>
+                    <span class="field-error" id="contactEmailError"></span>
+                    <label for="contactMessage">Your message</label>
+                    <textarea id="contactMessage" name="message" rows="4" placeholder="Write your message..." maxlength="2000" aria-describedby="contactMessageError contactMessageCount" required></textarea>
+                    <span class="field-error" id="contactMessageError"></span>
+                    <output class="character-count" id="contactMessageCount" aria-live="polite" hidden></output>
                     <button type="submit">Send Message</button>
+                    <p class="form-status" id="contactFormStatus" role="status" aria-live="polite"></p>
                 </form>
             </div>
             <!-- Contact Info -->
@@ -99,6 +107,26 @@
             </div>
         </div>
     </section>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-copy">
+                <a class="footer-brand" href="index.html"><img src="assets/images/logo-white.png" alt=""><span>Sunnr</span></a>
+                <p>Sunnr provides supplementary heatwave monitoring and preparedness information for residents of Myanmar.</p>
+            </div>
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="risk-map.html">Risk Map</a>
+                <a href="safety.html">Safety Tips</a>
+                <a href="contact.html" aria-current="page">Contact</a>
+            </nav>
+            <div class="footer-meta">
+                <p class="footer-copyright">© Sunnr 2026. All rights reserved.</p>
+                <a class="footer-citations-link" href="citations.html">View citations</a>
+            </div>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
