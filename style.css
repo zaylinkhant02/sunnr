@@ -3811,3 +3811,115 @@ html.has-scroll-reveals [data-reveal].is-revealed {
     transition: none;
   }
 }
+.safety-hero-section{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--teal);
+  background-image: url('https://plus.unsplash.com/premium_photo-1753235080195-0c76f3b6e2ea?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D'); 
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.safety-hero-bg-overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(16, 43, 42, 0.4) 0%, rgba(16, 43, 42, 0.75) 100%);
+  z-index: 1;
+}
+.safety-hero-content-container{
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 0 2rem;
+  max-width: 900px;
+  text-align: left;
+}
+.safety-hero-main-title{
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--cream-bright);
+  margin-bottom: 1rem;
+}
+.safety-hero-subtitle{
+  font-family: var(--sans);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--cream);
+  opacity: 0.9;
+  max-width: 550px;
+  margin: 0;
+  line-height: 1.5;
+}
+.safety-hero-bottom-bar{
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 220px;
+  width: 100%;
+  background: rgba(16, 43, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(243, 237, 221, 0.15);
+}
+.safety-hero-bar-item{
+  padding: 1.5rem 2rem;
+  border-right: 1px solid rgba(243, 237, 221, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.safety-bar-label{
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  color: var(--cream);
+  opacity: 0.6;
+  margin-bottom: 0.35rem;
+}
+.safety-bar-value{
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--cream-bright);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.safety-hero-action-btn{
+  background-color: var(--cream);
+  color: var(--rusk);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+@media (max-width: 992px){
+  .safety-hero-bottom-bar{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .safety-hero-explore-btn{
+    grid-column: span 2;
+    padding: 1.25rem;
+  }
+}
+@media (max-width: 576px){
+  .safety-hero-bottom-bar{
+    grid-template-columns: 1fr;
+  }
+  .safety-hero-explore-btn{
+    grid-column: span 1;
+  }
+}
