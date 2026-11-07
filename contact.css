@@ -13,12 +13,16 @@
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
+    padding-top: 76px;
     background-color: var(--cream);
     color: var(--dark-green);
     font-family: var(--sans);
   }
   .site-header {
-    position: relative;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
     z-index: 1000;
     width: 100%;
     background-color: var(--dark-green);
@@ -58,8 +62,8 @@
   .site-navbar .nav-link {
     position: relative;
     padding: 13px 9px;
-    color: rgba(243,237,221,.85);
-    font: 500 .82rem/1.4 var(--sans);
+    color: rgba(243,237,221,.78);
+    font: 500 .82rem/1.4 "DM Sans", var(--sans);
     white-space: nowrap;
     transition: color .3s ease;
   }
@@ -112,21 +116,20 @@
   .menu-icon::after { top: 7px; }
   
   @media (max-width: 1199.98px) {
+    .site-navbar { min-height: 68px; }
+    body { padding-top: 68px; }
     .site-navbar .navbar-nav {
       align-items: stretch !important;
       gap: 0;
-      padding: 12px 0 8px;
+      padding: 13px 0 10px;
     }
-    .site-navbar .nav-link { padding: 10px 0; }
+    .site-navbar .nav-link { padding: 11px 0; }
     .site-navbar .nav-link::after {
       right: auto;
       bottom: 5px;
       left: 0;
-      width: 42px;
+      width: 36px;
     }
-  }
-  @media (max-width: 767.98px) {
-    .site-navbar { min-height: 66px; }
   }
   .contact-section {
     padding: 8rem 0;

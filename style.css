@@ -2396,12 +2396,18 @@ body.home-page .site-header {
 }
 
 body.safety-page .site-header {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
   border-bottom: 1px solid rgba(243,237,221,.13);
   background: rgba(16,43,42,.98);
 }
 
 body.safety-page {
   min-height: 100vh;
+  padding-top: 76px;
   overflow-x: hidden;
   overflow-y: auto;
   background-color: var(--cream);
@@ -2509,47 +2515,6 @@ body.home-page.has-scrolled .site-header {
   pointer-events: auto;
 }
 
-body.home-page .site-navbar {
-  min-height: 82px;
-  padding: 12px 0;
-}
-
-body.home-page .site-brand {
-  font-size: 1.05rem;
-  letter-spacing: .02em;
-}
-
-body.home-page .site-navbar .navbar-nav {
-  gap: clamp(2px, .55vw, 11px);
-}
-
-body.home-page .site-navbar .nav-link {
-  padding: 13px 8px;
-  color: rgba(243,237,221,.76);
-  font: 500 .78rem/1.4 var(--sans);
-  letter-spacing: 0;
-}
-
-body.home-page .site-navbar .nav-link::after {
-  right: 8px;
-  bottom: 5px;
-  left: 8px;
-  width: auto;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .3s ease;
-}
-
-body.home-page .site-navbar .nav-link:hover::after,
-body.home-page .site-navbar .nav-link:focus-visible::after,
-body.home-page .site-navbar .nav-link.active::after {
-  transform: scaleX(1);
-}
-
-body.home-page .site-navbar .nav-link.active {
-  color: var(--yellow);
-}
-
 .home-page .story-viewport {
   position: relative;
   inset: auto;
@@ -2570,6 +2535,10 @@ body.home-page .site-navbar .nav-link.active {
 }
 
 @media (max-width: 1199.98px) {
+  body.safety-page {
+    padding-top: 68px;
+  }
+
   .site-navbar {
     min-height: 68px;
   }
@@ -2594,34 +2563,11 @@ body.home-page .site-navbar .nav-link.active {
     right: auto;
   }
 
-  body.home-page .site-navbar {
-    min-height: 68px;
-  }
-
   .home-page .story-viewport {
     height: 100vh;
     height: 100svh;
   }
 
-  body.home-page .site-navbar .navbar-nav {
-    gap: 0;
-    padding: 13px 0 10px;
-  }
-
-  body.home-page .site-navbar .nav-link {
-    padding: 11px 0;
-  }
-
-  body.home-page .site-navbar .nav-link::after {
-    right: auto;
-    bottom: 5px;
-    left: 0;
-    width: 36px;
-  }
-
-  body.home-page .site-navbar .nav-link.active::after {
-    right: auto;
-  }
 }
 
 .field-report {
