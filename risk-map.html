@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Explore heat conditions across Myanmar, then learn how the hot season and prolonged heat affect communities." />
+    <meta name="theme-color" content="#102b2a" />
+    <title>Sunnr | Myanmar Heat Information Map</title>
+    <link rel="icon" type="image/png" href="assets/images/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://videos.pexels.com" />
+    <link rel="preconnect" href="https://images.pexels.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body class="site-body risk-map-page">
+    <header class="site-header">
+      <nav class="navbar navbar-expand-xl site-navbar" aria-label="Main navigation">
+        <div class="container">
+          <a class="navbar-brand site-brand" href="index.html"><img src="assets/images/logo-white.png" alt="" /><span class="brand-word">Sunnr</span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="menu-icon"></span></button>
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto align-items-xl-center">
+              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
+              <li class="nav-item"><a class="nav-link" href="solar-control.html">Solar panel control</a></li>
+              <li class="nav-item"><a class="nav-link" href="monitoring.html">Heat monitoring</a></li>
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="risk-map.html">Risk map</a></li>
+              <li class="nav-item"><a class="nav-link" href="safety.html">Safety tips</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="risk-map-main">
+      <section class="risk-map-hero" aria-labelledby="risk-map-title">
+        <video class="risk-map-hero-video" autoplay muted loop playsinline preload="metadata" poster="https://images.pexels.com/videos/10794810/desert-sand-sun-sunrise-10794810.jpeg" aria-hidden="true">
+          <source src="https://videos.pexels.com/video-files/10794810/10794810-hd_2560_1440_30fps.mp4" type="video/mp4" />
+        </video>
+        <div class="risk-map-heading container">
+          <h1 class="risk-map-title" id="risk-map-title">Heat conditions in Myanmar</h1>
+          <p class="risk-map-intro">Explore how temperatures across Myanmar compare with what is usual. The map offers a broad view, while conditions can differ from one place to the next.</p>
+        </div>
+      </section>
+
+      <header class="risk-map-map-heading container">
+        <h2 id="risk-map-map-title">Risk Map</h2>
+      </header>
+
+      <div class="risk-map-frame-wrap container">
+        <button class="risk-map-fullscreen" id="riskMapFullscreen" type="button" aria-label="View map fullscreen" aria-controls="riskMapFrame">
+          <i class="bi bi-arrows-fullscreen" aria-hidden="true"></i>
+        </button>
+        <span class="visually-hidden" id="riskMapFullscreenStatus" role="status" aria-live="polite"></span>
+        <iframe
+          class="risk-map-frame"
+          id="riskMapFrame"
+          src="https://myanmar-heatwaves-map.vercel.app/"
+          title="Interactive map of heat conditions in Myanmar"
+          width="100%"
+          height="100%"
+          frameborder="0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+      <div class="risk-map-actions container">
+        <a class="risk-map-full-link" href="https://myanmar-heatwaves-map.vercel.app/" target="_blank" rel="noopener noreferrer">Open the interactive map in a new tab</a>
+      </div>
+
+      <section class="risk-map-guide container" aria-labelledby="risk-map-guide-title">
+        <div class="risk-map-guide-inner">
+          <header class="risk-map-guide-heading">
+            <p class="risk-map-kicker">A closer look</p>
+            <h2 id="risk-map-guide-title">Reading heat<br /><em>across places</em></h2>
+            <p class="risk-map-guide-lead">The labels compare temperatures with the usual range for a place. They describe conditions in the air; the effects on people also depend on how long the heat lasts and whether there is a chance to cool down.</p>
+            <figure class="risk-map-guide-visual">
+              <img src="https://images.unsplash.com/photo-1535748020240-f647f81842ee?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Golden sun setting over Yangon, Myanmar" loading="lazy" />
+              <figcaption><span>Yangon, Myanmar</span><span>Heat across places</span></figcaption>
+            </figure>
+          </header>
+
+          <div class="risk-map-guide-content">
+            <h3 class="risk-map-category-heading">Temperature levels</h3>
+            <ul class="risk-map-category-grid" aria-label="Temperature categories">
+              <li class="risk-map-category risk-map-category-normal">
+                <span class="risk-map-category-index" aria-hidden="true">01</span>
+                <div class="risk-map-category-copy">
+                  <span class="risk-map-category-name">Normal</span>
+                  <strong class="risk-map-category-threshold">Less than 2°C above usual</strong>
+                </div>
+              </li>
+              <li class="risk-map-category risk-map-category-mild">
+                <span class="risk-map-category-index" aria-hidden="true">02</span>
+                <div class="risk-map-category-copy">
+                  <span class="risk-map-category-name">Mild</span>
+                  <strong class="risk-map-category-threshold">2°C to less than 4°C above usual</strong>
+                </div>
+              </li>
+              <li class="risk-map-category risk-map-category-elevated">
+                <span class="risk-map-category-index" aria-hidden="true">03</span>
+                <div class="risk-map-category-copy">
+                  <span class="risk-map-category-name">Elevated</span>
+                  <strong class="risk-map-category-threshold">4°C or more above usual</strong>
+                </div>
+              </li>
+              <li class="risk-map-category risk-map-category-warning">
+                <span class="risk-map-category-index" aria-hidden="true">04</span>
+                <div class="risk-map-category-copy">
+                  <span class="risk-map-category-name">Warning</span>
+                  <strong class="risk-map-category-threshold">5°C or more above usual for three consecutive days</strong>
+                </div>
+              </li>
+            </ul>
+
+            <div class="risk-map-guide-notes">
+              <aside class="risk-map-timeline" aria-labelledby="risk-map-timeline-title">
+                <span class="risk-map-timeline-mark" aria-hidden="true"><i class="bi bi-clock-history"></i></span>
+                <div>
+                  <p class="risk-map-timeline-label">Past conditions</p>
+                  <h3 id="risk-map-timeline-title">Explore the timeline</h3>
+                  <p>Select an available date and time to view recorded conditions. The timeline shows past conditions rather than forecasts.</p>
+                </div>
+              </aside>
+
+              <aside class="risk-map-disclaimer" aria-labelledby="risk-map-disclaimer-title">
+                <p class="risk-map-disclaimer-label" id="risk-map-disclaimer-title">Supplementary information</p>
+                <p>This map provides supplementary information and may not show current conditions. For official heat-risk maps and warnings, follow announcements from Myanmar’s government and local guidance when deciding how to stay safe.</p>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="living-heat-section" aria-labelledby="living-heat-title">
+        <div class="living-heat-intro container">
+          <header class="living-heat-heading">
+            <p class="living-heat-kicker">Across Myanmar / The hot season</p>
+            <h2 id="living-heat-title">How Heat Varies Across Myanmar</h2>
+            <p>The map compares temperatures with local norms. Elevation, distance from the sea and the arrival of monsoon rain help explain why its patterns differ from place to place.</p>
+          </header>
+        </div>
+
+        <div class="living-heat-stories container">
+          <article class="living-heat-story living-heat-patterns" aria-labelledby="living-heat-patterns-title">
+            <figure class="living-heat-photo living-heat-patterns-photo">
+              <img src="https://images.unsplash.com/photo-1583257242616-b4c5a5dee7d0?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Hot-air balloons rise over Bagan's temples and green trees" loading="lazy" />
+              <figcaption><span>01 / Bagan, Myanmar</span><span>A landscape across the central plain</span></figcaption>
+            </figure>
+
+            <div class="living-heat-copy living-heat-patterns-copy">
+              <p class="living-heat-eyebrow">What lies behind the map</p>
+              <h3 id="living-heat-patterns-title">One season, distinct local patterns</h3>
+              <p class="living-heat-lead">Before the monsoon, strong sun and often-clear skies let heat build across Myanmar. The landscape shapes how long it lasts and how it feels.</p>
+
+              <ul class="living-heat-regions" aria-label="How geography shapes heat">
+                <li><strong>Central dry zone</strong><span>Far from the sea and sheltered from much of the rain, dry-zone towns can see intense afternoon heat and longer spells without rain.</span></li>
+                <li><strong>Coast and delta</strong><span>These lowlands are generally more humid than the dry zone. As monsoon cloud and rain arrive, daytime temperatures can ease while humid nights may still feel warm.</span></li>
+                <li><strong>Uplands</strong><span>Higher ground is generally cooler than the lowlands, though valleys and unusual hot spells can still bring uncomfortable heat.</span></li>
+              </ul>
+
+              <div class="living-heat-transition">
+                <p class="living-heat-transition-label">As the monsoon arrives</p>
+                <p>Its onset is uneven, so cloud and rain often begin along the coast before reaching inland areas, so the central dry zone can stay hot between showers. More regular rain usually eases daytime temperatures, while humid air can keep nights warm.</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-copy">
+          <a class="footer-brand" href="index.html"><img src="assets/images/logo-white.png" alt="" /><span>Sunnr</span></a>
+          <p>Sunnr provides supplementary heatwave monitoring and preparedness information for residents of Myanmar.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="risk-map.html" aria-current="page">Risk Map</a>
+          <a href="safety.html">Safety Tips</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="footer-meta">
+          <p class="footer-copyright">© Sunnr 2026. All rights reserved.</p>
+          <a class="footer-citations-link" href="citations.html">View citations</a>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>

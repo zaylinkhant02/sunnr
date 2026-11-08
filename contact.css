@@ -230,6 +230,8 @@
   .contact-card input[aria-invalid="true"],
   .contact-card textarea[aria-invalid="true"] { border-color: #a33424; }
   .contact-card .form-status { margin: 0; }
+  .contact-card .form-status.is-error { color: #a33424; }
+  .contact-card .form-status.is-success { color: var(--dark-green); }
   .contact-card button {
     width: 100%;
     padding: 14px 20px;
@@ -240,6 +242,10 @@
     transition: background .3s ease;
   }
   .contact-card button:hover { background: #173a38; }
+  .contact-card button:disabled {
+    cursor: wait;
+    opacity: .7;
+  }
   .contact-info {
     display: flex;
     flex-direction: column;

@@ -1,4 +1,4 @@
-﻿// set up the hero carousel sizing based on how many slides are present
+// set up the hero carousel sizing based on how many slides are present
 const track = document.getElementById('storyTrack');
 const viewport = document.querySelector('.story-viewport');
 const slides = [...document.querySelectorAll('.story-slide')];
@@ -27,6 +27,7 @@ if (contactForm instanceof HTMLFormElement) {
   const status = document.getElementById('contactFormStatus');
   const message = contactForm.elements.namedItem('message');
   const messageCount = document.getElementById('contactMessageCount');
+  const submitButton = contactForm.querySelector('button[type="submit"]');
 
   if (message instanceof HTMLTextAreaElement && messageCount instanceof HTMLOutputElement) {
     message.addEventListener('input', () => {
@@ -56,21 +57,76 @@ if (contactForm instanceof HTMLFormElement) {
   fields.forEach(({ input, error }) => {
     input.addEventListener('input', () => {
       if (input.hasAttribute('aria-invalid')) validateContactField(input, error, true);
-      if (status) status.textContent = '';
+      if (status) {
+        status.textContent = '';
+        status.classList.remove('is-error', 'is-success');
+      }
     });
   });
 
-  contactForm.addEventListener('submit', (event) => {
+  contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const invalidField = fields.find(({ input, error }) => !validateContactField(input, error, true));
 
     if (invalidField) {
       invalidField.input.focus();
-      if (status) status.textContent = 'Please correct the highlighted fields.';
+      if (status) {
+        status.textContent = 'Please correct the highlighted fields.';
+        status.classList.add('is-error');
+        status.classList.remove('is-success');
+      }
       return;
     }
 
-    if (status) status.textContent = 'Your message is valid, but this page is not connected to a message service yet.';
+    const formData = new FormData(contactForm);
+    const payload = {
+      name: String(formData.get('name')).trim(),
+      email: String(formData.get('email')).trim(),
+      message: String(formData.get('message')).trim(),
+    };
+    const originalButtonText = submitButton?.textContent;
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+    }
+    if (status) {
+      status.textContent = 'Sending your message...';
+      status.classList.remove('is-error', 'is-success');
+    }
+
+    try {
+      const response = await fetch('https://defaultc7828ed774b74eac8daa4d2abb39a1.c3.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/15/workflows/abdbcf18524b43f987ea101cf6a854f7/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=r930mh5Jqqylk8VVPf8fX7Q8GNg_mVRkjL9NpE0KVUw', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error(`Contact request failed (${response.status}).`);
+
+      contactForm.reset();
+      fields.forEach(({ input, error }) => {
+        input.removeAttribute('aria-invalid');
+        error.textContent = '';
+        error.classList.remove('is-visible');
+      });
+      if (messageCount instanceof HTMLOutputElement) messageCount.hidden = true;
+      if (status) {
+        status.textContent = 'Thank you! Your message has been sent.';
+        status.classList.add('is-success');
+      }
+    } catch (error) {
+      console.error('Unable to send contact form:', error);
+      if (status) {
+        status.textContent = 'We could not send your message. Please try again later.';
+        status.classList.add('is-error');
+      }
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        if (originalButtonText !== null) submitButton.textContent = originalButtonText;
+      }
+    }
   });
 }
 
@@ -271,6 +327,41 @@ if (heatMapPanel && heatMapFullscreen && heatMapFullscreenStatus) {
 
   document.addEventListener('fullscreenchange', updateHeatMapFullscreenControl);
 }
+
+const riskMapPanel = document.querySelector('.risk-map-frame-wrap');
+const riskMapFullscreen = document.getElementById('riskMapFullscreen');
+const riskMapFullscreenStatus = document.getElementById('riskMapFullscreenStatus');
+
+if (riskMapPanel && riskMapFullscreen && riskMapFullscreenStatus) {
+  const fullscreenIcon = riskMapFullscreen.querySelector('i');
+
+  function updateRiskMapFullscreenControl() {
+    const isFullscreen = document.fullscreenElement === riskMapPanel;
+    riskMapFullscreen.setAttribute('aria-label', isFullscreen ? 'Exit fullscreen map' : 'View map fullscreen');
+    fullscreenIcon?.classList.toggle('bi-arrows-fullscreen', !isFullscreen);
+    fullscreenIcon?.classList.toggle('bi-fullscreen-exit', isFullscreen);
+  }
+
+  riskMapFullscreen.addEventListener('click', async () => {
+    riskMapFullscreenStatus.textContent = '';
+
+    try {
+      if (document.fullscreenElement === riskMapPanel) {
+        await document.exitFullscreen();
+      } else if (typeof riskMapPanel.requestFullscreen === 'function') {
+        await riskMapPanel.requestFullscreen();
+      } else {
+        riskMapFullscreenStatus.textContent = 'Fullscreen is not supported in this browser.';
+      }
+    } catch (error) {
+      console.error('Unable to change the risk map fullscreen state.', error);
+      riskMapFullscreenStatus.textContent = 'Fullscreen could not be opened.';
+    }
+  });
+
+  document.addEventListener('fullscreenchange', updateRiskMapFullscreenControl);
+}
+
 document.addEventListener("DOMContentLoaded", function() {
   const iconWrappers = document.querySelectorAll('.heatwave-action-section .icon-wrapper');
 
