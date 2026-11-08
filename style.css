@@ -4822,7 +4822,7 @@ body.risk-map-page {
 
 .safety-general-action__container {
   width: 100%;
-  max-width: 1440px;
+  max-width: none;
   margin: 0 auto;
 }
 
@@ -5557,6 +5557,13 @@ body.risk-map-page {
 .safety-general-action__heading{
   background: var(--cream);
   color: var(--teal);
+}
+.safety-general-action__category#avoid-heat{
+  background: linear-gradient(
+    to bottom in oklab,
+    var(--cream) 0%,
+    var(--teal) 10px
+  );
 }
 .safety-general-action__category:nth-of-type(even){
   background: var(--teal);
