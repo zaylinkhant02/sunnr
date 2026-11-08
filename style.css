@@ -2415,7 +2415,7 @@ body.safety-page {
   font-family: var(--sans);
 }
 
-.safety-page .hero-section-blank {
+.safety-page .hero-section{
   display: flex;
   min-height: 40vh;
   align-items: center;
@@ -3978,7 +3978,7 @@ html.has-scroll-reveals [data-reveal].is-revealed {
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--teal);
-  background-image: url('https://plus.unsplash.com/premium_photo-1753235080195-0c76f3b6e2ea?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D'); 
+  background-image: url('https://images.unsplash.com/photo-1458937622057-056de760b45e?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D'); 
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -4003,7 +4003,7 @@ html.has-scroll-reveals [data-reveal].is-revealed {
 }
 .safety-hero-main-title{
   font-family: var(--serif);
-  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-size: clamp(3.5rem, 4vw + 2rem, 7rem);
   font-weight: 600;
   line-height: 1.05;
   color: var(--cream-bright);
@@ -4011,7 +4011,7 @@ html.has-scroll-reveals [data-reveal].is-revealed {
 }
 .safety-hero-subtitle{
   font-family: var(--sans);
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(1rem, 0.5vw + 0.9rem, 1.25rem);
   color: var(--cream);
   opacity: 0.9;
   max-width: 550px;
@@ -5221,41 +5221,51 @@ body.citations-page {
   align-items: start;
 }
 
-.safety-general-heat-myths__card {
-  position: relative;
+.safety-general-heat-myths__grid .accordion-item {
   min-width: 0;
   border: 1px solid rgba(16, 43, 42, .10);
+  border-radius: 0;
   background: #fffefa;
+  overflow: hidden;
   transition:
     border-color .3s ease,
     box-shadow .3s ease,
     transform .3s ease;
 }
 
-.safety-general-heat-myths__card:hover {
+.safety-general-heat-myths__grid .accordion-item:hover {
   border-color: rgba(189, 87, 60, .5);
   box-shadow: 0 8px 25px rgba(16, 43, 42, .06);
   transform: translateY(-3px);
 }
 
-.safety-general-heat-myths__card[open] {
+.safety-general-heat-myths__grid .accordion-item:has(.accordion-button:not(.collapsed)) {
   border-color: var(--rust);
   box-shadow: 0 8px 25px rgba(16, 43, 42, .07);
 }
 
-.safety-general-heat-myths__card summary {
+.safety-general-heat-myths__grid .accordion-button {
   display: grid;
-  grid-template-columns: 35px 1fr 18px;
+  grid-template-columns: 35px minmax(0, 1fr) 18px;
   gap: 12px;
   align-items: start;
   min-height: 145px;
   padding: 23px 19px;
-  cursor: pointer;
-  list-style: none;
+  border: 0;
+  border-radius: 0 !important;
+  background: #fffefa;
+  color: var(--teal);
+  box-shadow: none !important;
+  text-align: left;
 }
 
-.safety-general-heat-myths__card summary::-webkit-details-marker {
+.safety-general-heat-myths__grid .accordion-button::after {
   display: none;
+}
+
+.safety-general-heat-myths__grid .accordion-button:not(.collapsed) {
+  background: #fffefa;
+  color: var(--teal);
 }
 
 .safety-general-heat-myths__number {
@@ -5268,11 +5278,17 @@ body.citations-page {
   color: var(--cream-bright);
   font-family: var(--mono);
   font-size: 11px;
-  transition: 0.3s ease;
+  font-weight: 400;
+  transition:  0.3s ease;
 }
 
-.safety-general-heat-myths__card[open] .safety-general-heat-myths__number {
+.safety-general-heat-myths__grid .accordion-button:not(.collapsed)
+.safety-general-heat-myths__number {
   background: var(--rust);
+}
+
+.safety-general-heat-myths__card-title {
+  min-width: 0;
 }
 
 .safety-general-heat-myths__card-title > span {
@@ -5293,22 +5309,19 @@ body.citations-page {
   line-height: 1.25;
 }
 
-.safety-general-heat-myths__card summary > i {
+.safety-general-heat-myths__plus {
   padding-top: 7px;
   color: var(--rust);
   font-size: 13px;
   transition: transform .3s ease;
 }
 
-.safety-general-heat-myths__card summary > i::before {
-  content: "\f4fe";
-}
-
-.safety-general-heat-myths__card[open] summary > i {
+.safety-general-heat-myths__grid .accordion-button:not(.collapsed)
+.safety-general-heat-myths__plus {
   transform: rotate(45deg);
 }
 
-.safety-general-heat-myths__answer {
+.safety-general-heat-myths__grid .accordion-body {
   padding: 0 22px 23px 66px;
   animation: heat-myth-reveal .3s ease;
 }
@@ -5365,6 +5378,33 @@ body.citations-page {
   font-family: var(--serif);
   font-size: 19px;
 }
+@media (max-width: 991.98px) {
+  .safety-general-heat-myths__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575.98px) {
+  .safety-general-heat-myths__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .safety-general-heat-myths__grid .accordion-button {
+    min-height: 120px;
+    padding: 20px 16px;
+    grid-template-columns: 32px minmax(0, 1fr) 16px;
+    gap: 10px;
+  }
+
+  .safety-general-heat-myths__card-title h4 {
+    font-size: 20px;
+  }
+
+  .safety-general-heat-myths__grid .accordion-body {
+    padding: 0 18px 22px 58px;
+  }
+}
+
 
 .safety-general-heat-myths__conclusion {
   display: grid;
@@ -5650,4 +5690,675 @@ body.citations-page {
 
 .safety-general-heat-myths__card[open] summary > i {
   transform: none;
+}
+
+.safety-solar-action{
+    background:var(--cream-bright);
+    color:var(--teal);
+    padding:100px 0;
+    overflow:hidden;
+    font-family:var(--sans);
+}
+
+.safety-solar-action img,
+.safety-solar-misconceptions img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.safety-solar-action__intro{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:60px;
+    min-height:480px;
+    margin-bottom:100px;
+}
+
+.safety-solar-action__intro-text{
+    max-width:510px;
+}
+
+.safety-solar-action__eyebrow{
+    display:block;
+    color:var(--rust);
+    font:500 .8rem var(--mono);
+    letter-spacing:2px;
+    margin-bottom:22px;
+}
+
+.safety-solar-action__intro h2{
+    font:500 clamp(2.8rem,5vw,4.5rem)/1.05 var(--serif);
+    color:var(--teal);
+    margin:0;
+    max-width:550px;
+}
+
+.safety-solar-action__line{
+    width:55px;
+    height:3px;
+    background:var(--yellow);
+    margin:28px 0;
+}
+
+.safety-solar-action__intro-text p{
+    font-size:1rem;
+    line-height:1.9;
+    color:var(--teal);
+    opacity:.8;
+    max-width:460px;
+}
+
+.safety-solar-action__visual{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:460px;
+}
+
+.safety-solar-action__orbit{
+    position:relative;
+    width:min(100%,440px);
+    aspect-ratio:1;
+    border:1px solid rgba(16,43,42,.13);
+    border-radius:50%;
+}
+
+.safety-solar-action__orbit:before,
+.safety-solar-action__orbit:after{
+    content:"";
+    position:absolute;
+    inset:12%;
+    border:1px dashed rgba(16,43,42,.2);
+    border-radius:50%;
+}
+
+.safety-solar-action__orbit:after{
+    inset:25%;
+    border-style:solid;
+    opacity:.5;
+}
+
+.safety-solar-action__solar-center{
+    position:absolute;
+    width:45%;
+    aspect-ratio:1;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    overflow:hidden;
+    border:9px solid var(--cream);
+    box-shadow:0 10px 35px rgba(16,43,42,.15);
+    z-index:2;
+}
+
+.safety-solar-action__solar-center img{
+    filter:sepia(.2);
+}
+
+.safety-solar-action__solar-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    background:rgba(16,43,42,.4);
+    color:var(--cream-bright);
+    font-size:.85rem;
+    font-weight:600;
+}
+
+.safety-solar-action__solar-overlay i{
+    font-size:1.7rem;
+    color:var(--yellow);
+}
+
+.safety-solar-action__orbit-item{
+    position:absolute;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    z-index:3;
+    width:120px;
+    color:var(--teal);
+}
+
+.safety-solar-action__orbit-item i{
+    font-size:1.5rem;
+    color:var(--rust);
+    margin-bottom:7px;
+}
+
+.safety-solar-action__orbit-item span{
+    font-weight:600;
+    font-size:.9rem;
+}
+
+.safety-solar-action__orbit-item small{
+    font-size:.7rem;
+    opacity:.7;
+}
+
+.safety-solar-action__orbit-item.orbit-top{
+    top:-28px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.safety-solar-action__orbit-item.orbit-right{
+    right:-65px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.safety-solar-action__orbit-item.orbit-bottom{
+    bottom:-30px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.safety-solar-action__orbit-item.orbit-left{
+    left:-65px;
+    top:50%;
+    transform:translateY(-50%);
+}
+.safety-solar-action__heading{
+    margin-bottom:38px;
+    max-width:650px;
+}
+
+.safety-solar-action__heading>span,
+.safety-solar-misconceptions__heading>span{
+    color:var(--rust);
+    font:500 .75rem var(--mono);
+    letter-spacing:1.5px;
+}
+
+.safety-solar-action__heading h3,
+.safety-solar-misconceptions__heading h3{
+    font:500 clamp(2rem,4vw,3rem)/1.15 var(--serif);
+    margin:15px 0;
+}
+
+.safety-solar-action__heading p{
+    opacity:.75;
+    line-height:1.8;
+}
+.safety-solar-action__card{
+    height:100%;
+    background:rgba(255,255,255,.55);
+    border:1px solid rgba(16,43,42,.09);
+    transition:transform .3s ease,box-shadow .3s ease;
+}
+
+.safety-solar-action__card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 15px 35px rgba(16,43,42,.09);
+}
+
+.safety-solar-action__image{
+    height:220px;
+    position:relative;
+    overflow:hidden;
+}
+
+.safety-solar-action__image img{
+    transition:transform .5s ease;
+}
+
+.safety-solar-action__card:hover .safety-solar-action__image img{
+    transform:scale(1.05);
+}
+
+.safety-solar-action__image span{
+    position:absolute;
+    top:15px;
+    left:15px;
+    background:var(--teal);
+    color:var(--cream);
+    width:35px;
+    height:35px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    font: .8rem var(--mono);
+}
+
+.safety-solar-action__card-content{
+    padding:28px;
+}
+
+.safety-solar-action__card-content>i{
+    display:grid;
+    place-items:center;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:rgba(189,87,60,.12);
+    color:var(--rust);
+    font-size:1.3rem;
+    margin-bottom:20px;
+}
+
+.safety-solar-action__card-content h4{
+    font:500 1.5rem/1.2 var(--serif);
+    margin-bottom:14px;
+}
+
+.safety-solar-action__card-content p{
+    font-size:.88rem;
+    line-height:1.85;
+    opacity:.75;
+    margin:0;
+}
+.safety-solar-action__maintenance{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    margin-top:110px;
+    background:var(--cream);
+}
+
+.safety-solar-action__maintenance-image{
+    min-height:570px;
+}
+
+.safety-solar-action__maintenance-content{
+    padding:55px clamp(25px,5vw,65px);
+}
+
+.safety-solar-action__maintenance-content h3{
+    font:500 clamp(2rem,3.5vw,3rem)/1.15 var(--serif);
+    margin:15px 0 20px;
+}
+
+.safety-solar-action__maintenance-content>p{
+    font-size:.9rem;
+    line-height:1.8;
+    opacity:.75;
+    margin-bottom:30px;
+}
+
+.safety-solar-action__tip{
+    display:flex;
+    gap:17px;
+    padding:17px 0;
+    border-bottom:1px solid rgba(16,43,42,.12);
+}
+
+.safety-solar-action__tip>i{
+    color:var(--rust);
+    font-size:1.25rem;
+    flex-shrink:0;
+    margin-top:3px;
+}
+
+.safety-solar-action__tip h5{
+    font-size:.95rem;
+    font-weight:600;
+    margin:0 0 5px;
+}
+
+.safety-solar-action__tip p{
+    font-size:.82rem;
+    line-height:1.7;
+    opacity:.7;
+    margin:0;
+}
+
+.safety-solar-action__note{
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    background:rgba(131,191,255,.12);
+    border-left:3px solid var(--data-blue);
+    padding:25px 30px;
+    margin-top:35px;
+}
+
+.safety-solar-action__note i{
+    color:var(--data-blue-dark);
+    font-size:1.3rem;
+}
+
+.safety-solar-action__note p{
+    margin:0;
+    color:var(--teal);
+    font-size:.88rem;
+    line-height:1.8;
+}
+.safety-solar-misconceptions{
+    background:var(--cream);
+    color:var(--teal);
+    padding:100px 0;
+    overflow:hidden;
+    font-family:var(--sans);
+}
+
+.safety-solar-misconceptions__intro{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:65px;
+    align-items:center;
+    margin-bottom:110px;
+}
+
+.safety-solar-misconceptions__intro-text{
+    max-width:520px;
+}
+
+.safety-solar-misconceptions__eyebrow{
+    display:block;
+    color:var(--rust);
+    font:500 .78rem var(--mono);
+    letter-spacing:1.8px;
+    margin-bottom:20px;
+}
+
+.safety-solar-misconceptions__intro h2{
+    font:500 clamp(2.7rem,5vw,4.3rem)/1.08 var(--serif);
+    margin:0;
+}
+
+.safety-solar-misconceptions__line{
+    height:3px;
+    width:55px;
+    background:var(--yellow);
+    margin:25px 0;
+}
+
+.safety-solar-misconceptions__intro-text>p{
+    font-size:.95rem;
+    line-height:1.9;
+    opacity:.75;
+}
+
+.safety-solar-misconceptions__subtext{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:var(--rust);
+    font:500 .7rem var(--mono);
+    letter-spacing:1px;
+    margin-top:35px;
+}
+
+.safety-solar-misconceptions__subtext i{
+    font-size:1.1rem;
+}
+
+.safety-solar-misconceptions__image{
+    position:relative;
+    height:430px;
+    overflow:hidden;
+}
+
+.safety-solar-misconceptions__image img{
+    filter:sepia(.2);
+}
+
+.safety-solar-misconceptions__image-caption{
+    position:absolute;
+    bottom:20px;
+    left:20px;
+    right:20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:17px 20px;
+    background:rgba(16,43,42,.85);
+    color:var(--cream-bright);
+    font-size:.85rem;
+}
+
+.safety-solar-misconceptions__image-caption i{
+    color:var(--yellow);
+    font-size:1.2rem;
+}
+
+.safety-solar-misconceptions__content{
+    max-width:950px;
+    margin:0 auto;
+}
+
+.safety-solar-misconceptions__heading{
+    margin-bottom:35px;
+}
+
+.safety-solar-misconceptions__heading h3{
+    margin-top:14px;
+}
+
+.safety-solar-misconceptions__accordion{
+    border-top:1px solid rgba(16,43,42,.2);
+}
+
+.safety-solar-misconceptions__accordion .accordion-item{
+    background:transparent;
+    border:0;
+    border-bottom:1px solid rgba(16,43,42,.2);
+    border-radius:0;
+}
+
+.safety-solar-misconceptions__accordion .accordion-button{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    padding:27px 15px;
+    background:transparent;
+    color:var(--teal);
+    box-shadow:none;
+    font-family:var(--sans);
+}
+
+.safety-solar-misconceptions__accordion .accordion-button:not(.collapsed){
+    color:var(--teal);
+    background:rgba(255,255,255,.4);
+}
+
+.safety-solar-misconceptions__accordion .accordion-button:focus{
+    border-color:transparent;
+    box-shadow:none;
+}
+
+.safety-solar-misconceptions__number{
+    color:var(--rust);
+    font:500 .9rem var(--mono);
+    flex-shrink:0;
+}
+
+.safety-solar-misconceptions__question{
+    font:500 1.3rem/1.4 var(--serif);
+    padding-right:15px;
+}
+
+.safety-solar-misconceptions__accordion .accordion-button:after{
+    background-size:14px;
+    width:14px;
+    height:14px;
+    flex-shrink:0;
+}
+
+.safety-solar-misconceptions__accordion .accordion-body{
+    padding:10px 65px 35px;
+    background:rgba(255,255,255,.35);
+}
+
+.safety-solar-misconceptions__label{
+    display:inline-block;
+    color:var(--rust);
+    font:500 .72rem var(--mono);
+    letter-spacing:1.5px;
+    margin-bottom:15px;
+}
+.safety-solar-misconceptions__accordion .accordion-body p{
+    font-size:.9rem;
+    line-height:1.9;
+    opacity:.8;
+    margin-bottom:12px;
+}
+
+.safety-solar-misconceptions__accordion .accordion-body p:last-child{
+    margin-bottom:0;
+}
+.safety-solar-misconceptions__bottom{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    max-width:750px;
+    margin:65px auto 0;
+    padding:30px;
+    background:rgba(255,249,235,.65);
+    text-align:center;
+}
+
+.safety-solar-misconceptions__bottom i{
+    color:var(--rust);
+    font-size:1.6rem;
+    flex-shrink:0;
+}
+
+.safety-solar-misconceptions__bottom p{
+    font:500 1.15rem/1.6 var(--serif);
+    margin:0;
+}
+@media(max-width:991px){
+
+    .safety-solar-action,
+    .safety-solar-misconceptions{
+        padding:75px 0;
+    }
+
+    .safety-solar-action__intro,
+    .safety-solar-misconceptions__intro{
+        grid-template-columns:1fr;
+        gap:65px;
+        margin-bottom:80px;
+    }
+
+    .safety-solar-action__intro-text,
+    .safety-solar-misconceptions__intro-text{
+        max-width:650px;
+    }
+
+    .safety-solar-action__visual{
+        margin:0 auto;
+        width:100%;
+        max-width:500px;
+    }
+
+    .safety-solar-action__maintenance{
+        grid-template-columns:1fr;
+    }
+
+    .safety-solar-action__maintenance-image{
+        min-height:380px;
+        max-height:450px;
+    }
+
+    .safety-solar-misconceptions__image{
+        height:380px;
+    }
+}
+@media(max-width:575px){
+
+    .safety-solar-action,
+    .safety-solar-misconceptions{
+        padding:60px 0;
+    }
+
+    .safety-solar-action__intro h2,
+    .safety-solar-misconceptions__intro h2{
+        font-size:2.7rem;
+    }
+
+    .safety-solar-action__visual{
+        min-height:340px;
+    }
+
+    .safety-solar-action__orbit{
+        width:290px;
+    }
+
+    .safety-solar-action__orbit-item{
+        width:90px;
+    }
+
+    .safety-solar-action__orbit-item.orbit-left{
+        left:-43px;
+    }
+
+    .safety-solar-action__orbit-item.orbit-right{
+        right:-43px;
+    }
+
+    .safety-solar-action__orbit-item span{
+        font-size:.75rem;
+    }
+
+    .safety-solar-action__orbit-item small{
+        font-size:.6rem;
+    }
+
+    .safety-solar-action__orbit-item i{
+        font-size:1.2rem;
+    }
+
+    .safety-solar-action__image{
+        height:190px;
+    }
+
+    .safety-solar-action__card-content{
+        padding:23px;
+    }
+
+    .safety-solar-action__maintenance-content{
+        padding:35px 23px;
+    }
+
+    .safety-solar-action__maintenance-image{
+        min-height:270px;
+    }
+
+    .safety-solar-action__note{
+        padding:20px;
+    }
+
+    .safety-solar-misconceptions__image{
+        height:280px;
+    }
+
+    .safety-solar-misconceptions__accordion .accordion-button{
+        gap:14px;
+        padding:22px 8px;
+    }
+
+    .safety-solar-misconceptions__question{
+        font-size:1.1rem;
+    }
+
+    .safety-solar-misconceptions__accordion .accordion-body{
+        padding:10px 20px 25px;
+    }
+
+    .safety-solar-misconceptions__bottom{
+        padding:22px 15px;
+        margin-top:45px;
+    }
+
+    .safety-solar-misconceptions__bottom p{
+        font-size:1rem;
+    }
+}
+.safety-general-heat-myths__card-title span.d-block{
+  font-family:var(--serif);
+  font-size:22px;
+  line-height:1.25;
+  color:var(--teal);
 }
