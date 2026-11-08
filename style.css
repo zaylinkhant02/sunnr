@@ -4250,6 +4250,550 @@ body.citations-page {
     flex-wrap: wrap;
   }
 }
+
+body.risk-map-page {
+  min-height: 100vh;
+  color: var(--teal);
+  background: var(--cream);
+}
+
+.risk-map-page .site-header {
+  position: sticky;
+  z-index: 1000;
+  top: 0;
+  border-bottom: 1px solid rgba(243, 237, 221, .13);
+  background: #102b2a;
+}
+
+.risk-map-main {
+  padding: 0 0 clamp(3rem, 6vw, 5rem);
+}
+
+.risk-map-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  min-height: clamp(390px, 52vw, 650px);
+  align-items: center;
+  overflow: hidden;
+  background: #102b2a url("assets/images/heat-city.jpg") center 55% / cover no-repeat;
+}
+
+.risk-map-hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(16, 43, 42, .97) 0%, rgba(16, 43, 42, .88) 43%, rgba(16, 43, 42, .55) 100%);
+  content: "";
+}
+
+.risk-map-hero-video {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+.risk-map-hero .risk-map-heading {
+  position: relative;
+  width: 100%;
+  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.risk-map-kicker {
+  margin: 0 0 .75rem;
+  color: var(--teal);
+  font: 500 .82rem/1.5 var(--mono);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.risk-map-title {
+  max-width: 1000px;
+  margin: 0;
+  color: var(--cream-bright);
+  font: 500 clamp(3.5rem, 9vw, 7rem)/.92 var(--serif);
+}
+
+.risk-map-intro {
+  max-width: 660px;
+  margin: 1.5rem 0 0;
+  color: rgba(243, 237, 221, .86);
+  font: 400 clamp(1.05rem, 2vw, 1.25rem)/1.6 var(--sans);
+}
+
+.risk-map-map-heading {
+  padding-top: clamp(2rem, 4vw, 3rem);
+}
+
+.risk-map-map-heading h2 {
+  margin: 0;
+  color: var(--teal);
+  font: 500 clamp(2rem, 3.5vw, 3rem)/1 var(--serif);
+}
+
+.risk-map-frame-wrap {
+  position: relative;
+  box-sizing: border-box;
+  height: clamp(360px, 70vh, 600px);
+  margin: clamp(1rem, 2vw, 1.5rem) auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(16, 43, 42, .2);
+  border-radius: .5rem;
+  background: #111820;
+}
+
+.risk-map-fullscreen {
+  position: absolute;
+  z-index: 1;
+  top: .85rem;
+  right: .85rem;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(243, 237, 221, .3);
+  border-radius: .35rem;
+  background: rgba(16, 43, 42, .94);
+  color: #f3eddd;
+  cursor: pointer;
+}
+
+.risk-map-fullscreen i {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.risk-map-fullscreen:hover,
+.risk-map-fullscreen:focus-visible {
+  border-color: #dec56e;
+  color: #dec56e;
+}
+
+.risk-map-fullscreen:focus-visible {
+  outline: 2px solid #dec56e;
+  outline-offset: 3px;
+}
+
+.risk-map-frame {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+}
+
+.risk-map-frame-wrap:fullscreen {
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #111820;
+}
+
+.risk-map-frame-wrap:fullscreen .risk-map-frame {
+  height: 100%;
+}
+
+.risk-map-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+}
+
+.risk-map-full-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: .65rem 1rem;
+  border: 1px solid rgba(16, 43, 42, .3);
+  border-radius: .35rem;
+  color: var(--teal);
+  font: 500 .9rem/1.2 var(--sans);
+  text-decoration: none;
+}
+
+.risk-map-full-link:hover,
+.risk-map-full-link:focus-visible {
+  border-color: #805039;
+  color: #805039;
+}
+
+.risk-map-full-link:focus-visible {
+  outline: 2px solid #805039;
+  outline-offset: 3px;
+}
+
+.risk-map-guide {
+  padding-top: clamp(4.5rem, 8vw, 7rem);
+  padding-bottom: clamp(4.5rem, 8vw, 7rem);
+}
+
+.risk-map-guide-inner {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: 3.5rem 8%;
+}
+
+.risk-map-guide-heading,
+.risk-map-guide-content,
+.risk-map-guide-notes {
+  min-width: 0;
+}
+
+.risk-map-guide-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.risk-map-guide-heading .risk-map-kicker {
+  margin: 0 0 1rem;
+  color: #a44f35;
+  font: 400 .76rem/1.5 var(--mono);
+  letter-spacing: .06em;
+}
+
+.risk-map-guide h2 {
+  max-width: 560px;
+  margin: 0;
+  color: var(--teal);
+  font: 500 clamp(3.2rem, 6.4vw, 5.4rem)/.94 var(--serif);
+  letter-spacing: -.035em;
+}
+
+.risk-map-guide h2 em {
+  color: #a44f35;
+  font-weight: 400;
+}
+
+.risk-map-guide-lead {
+  max-width: 430px;
+  margin: 1.4rem 0 0;
+  color: #354844;
+  font: 400 1rem/1.75 var(--sans);
+}
+
+.risk-map-guide-visual {
+  position: relative;
+  width: 100%;
+  height: clamp(15rem, 25vw, 21rem);
+  margin: 2rem 0 0;
+  overflow: hidden;
+  background: #d7b27c;
+}
+
+.risk-map-guide-visual::after {
+  position: absolute;
+  inset: 30% 0 0;
+  background: linear-gradient(transparent, rgba(16, 43, 42, .86));
+  content: "";
+}
+
+.risk-map-guide-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 54%;
+}
+
+.risk-map-guide-visual figcaption {
+  position: absolute;
+  z-index: 1;
+  right: 1.25rem;
+  bottom: 1.1rem;
+  left: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .4rem 1rem;
+  color: var(--cream-bright);
+  font: 500 .75rem/1.5 var(--sans);
+}
+
+.risk-map-guide-visual figcaption span:first-child {
+  color: var(--yellow);
+}
+
+.risk-map-category-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: .15rem 0 0;
+  color: var(--teal);
+  font: 500 1.55rem/1.2 var(--serif);
+}
+
+.risk-map-category-heading span {
+  flex: 0 0 auto;
+  color: #8b7961;
+  font: 500 .72rem/1.4 var(--sans);
+}
+
+.risk-map-category-grid {
+  margin: 1.1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.risk-map-category {
+  --category-color: #173b4a;
+  display: grid;
+  grid-template-columns: 2.8rem minmax(0, 1fr);
+  gap: .2rem 1rem;
+  min-width: 0;
+  padding: 1.1rem 0 1rem;
+  border-top: 1px solid rgba(16, 43, 42, .2);
+}
+
+.risk-map-category-mild {
+  --category-color: #38bdf8;
+}
+
+.risk-map-category-elevated {
+  --category-color: #facc15;
+}
+
+.risk-map-category-warning {
+  --category-color: #fb923c;
+}
+
+.risk-map-category-index {
+  padding-top: .15rem;
+  color: var(--category-color);
+  font: 500 .76rem/1.5 var(--sans);
+}
+
+.risk-map-category-copy {
+  min-width: 0;
+}
+
+.risk-map-category-name {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--teal);
+  font: 600 .86rem/1.4 var(--sans);
+}
+
+.risk-map-category-name::before {
+  width: .55rem;
+  height: .55rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--category-color);
+  content: "";
+}
+
+.risk-map-category-threshold {
+  display: block;
+  margin-top: .35rem;
+  color: var(--teal);
+  font: 500 1.25rem/1.25 var(--serif);
+}
+
+.risk-map-category-copy > p {
+  margin: .25rem 0 0;
+  color: #59645d;
+  font: 400 .86rem/1.5 var(--sans);
+}
+
+.risk-map-guide-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(16, 43, 42, .2);
+}
+
+.risk-map-timeline {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: .85rem;
+}
+
+.risk-map-timeline-mark {
+  display: grid;
+  width: 1.8rem;
+  height: 1.8rem;
+  place-items: center;
+  color: #a44f35;
+  font-size: 1rem;
+}
+
+.risk-map-timeline-label,
+.risk-map-disclaimer-label {
+  margin: 0 0 .25rem;
+  color: #a44f35;
+  font: 600 .72rem/1.5 var(--sans);
+  letter-spacing: .04em;
+}
+
+.risk-map-timeline h3 {
+  margin: 0;
+  color: var(--teal);
+  font: 500 1.45rem/1.2 var(--serif);
+}
+
+.risk-map-timeline div > p:last-child {
+  margin: .4rem 0 0;
+  color: #59645d;
+  font: 400 .88rem/1.65 var(--sans);
+}
+
+.risk-map-disclaimer {
+  padding-left: 1.5rem;
+  border-left: 1px solid rgba(16, 43, 42, .25);
+  color: #59645d;
+  font: 400 .85rem/1.65 var(--sans);
+}
+
+.risk-map-disclaimer-label {
+  margin-bottom: .45rem;
+}
+
+.risk-map-disclaimer > p:last-child {
+  margin: 0;
+}
+
+.risk-map-history {
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+  padding: clamp(3rem, 7vw, 5.5rem) 0;
+  background: var(--cream);
+}
+
+.risk-map-history-inner {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: 2rem 4rem;
+}
+
+.risk-map-history-heading,
+.risk-map-history-content {
+  min-width: 0;
+}
+
+.risk-map-history h2 {
+  max-width: 440px;
+  margin: 0;
+  color: var(--teal);
+  font: 500 clamp(2.5rem, 5vw, 4rem)/.98 var(--serif);
+}
+
+.risk-map-history-content {
+  max-width: 720px;
+  padding-top: 2rem;
+  color: rgba(16, 43, 42, .86);
+  font: 400 1.05rem/1.7 var(--serif);
+}
+
+.risk-map-history-content > p {
+  margin: 0 0 1.25rem;
+}
+
+.risk-map-history-data {
+  margin: 1.5rem 0;
+  border-top: 1px solid rgba(16, 43, 42, .3);
+}
+
+.risk-map-history-data .list-group-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border: 0;
+  border-bottom: 1px solid rgba(16, 43, 42, .3);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.risk-map-history-label {
+  font: 400 .8rem/1.5 var(--mono);
+}
+
+.risk-map-history-number {
+  flex: 0 0 auto;
+  color: var(--teal);
+  font: 500 clamp(3rem, 6vw, 5rem)/.9 var(--serif);
+  letter-spacing: -.04em;
+}
+
+@media (max-width: 767.98px) {
+  .risk-map-guide-inner {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+
+  .risk-map-guide h2 {
+    font-size: clamp(2.7rem, 10.5vw, 4rem);
+  }
+
+  .risk-map-guide-visual {
+    height: clamp(14rem, 55vw, 21rem);
+  }
+
+  .risk-map-guide-notes,
+  .risk-map-history-inner {
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+  }
+
+  .risk-map-disclaimer {
+    padding: 1.25rem 0 0;
+    border-top: 1px solid rgba(16, 43, 42, .2);
+    border-left: 0;
+  }
+
+  .risk-map-history-content {
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .risk-map-guide-inner,
+  .risk-map-guide-notes {
+    column-gap: 5%;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .risk-map-guide {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .risk-map-category {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: .2rem .65rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .risk-map-hero-video {
+    display: none;
+  }
+}
+
 .safety-general-action *,
 .safety-general-action *::before,
 .safety-general-action *::after {
@@ -6361,4 +6905,459 @@ body.citations-page {
   font-size:22px;
   line-height:1.25;
   color:var(--teal);
+}
+
+.living-heat-section {
+  overflow: hidden;
+  background: var(--cream);
+  color: var(--teal);
+}
+
+.living-heat-intro {
+  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.living-heat-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(15rem, .8fr);
+  align-items: end;
+  gap: 1rem 4rem;
+}
+
+.living-heat-kicker,
+.living-heat-eyebrow,
+.living-heat-photo figcaption,
+.living-heat-symptom-label,
+.living-heat-safe-label {
+  color: var(--rust);
+  font: 500 .72rem/1.5 var(--mono);
+  letter-spacing: .04em;
+}
+
+.living-heat-kicker {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.living-heat-heading h2 {
+  max-width: 800px;
+  margin: 0;
+  color: var(--teal);
+  font: 500 clamp(2.8rem, 6vw, 5.5rem)/.9 var(--serif);
+  letter-spacing: -.025em;
+}
+
+.living-heat-heading > p:last-child {
+  max-width: 380px;
+  margin: 0 0 .35rem;
+  color: rgba(16, 43, 42, .75);
+  font: 400 1rem/1.8 var(--sans);
+}
+
+.living-heat-story {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+  align-items: center;
+  gap: clamp(2.5rem, 7vw, 7rem);
+}
+
+.living-heat-patterns {
+  padding: 0 0 clamp(5rem, 10vw, 9rem);
+}
+
+.living-heat-photo {
+  position: relative;
+  min-width: 0;
+  min-height: 660px;
+  margin: 0;
+  overflow: hidden;
+  background: #183735;
+}
+
+.living-heat-patterns-photo {
+  min-height: 700px;
+  margin-left: -2rem;
+}
+
+.living-heat-photo::after {
+  position: absolute;
+  inset: 30% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(16, 43, 42, .78));
+  content: "";
+  pointer-events: none;
+}
+
+.living-heat-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .7s ease;
+}
+
+.living-heat-patterns-photo img {
+  object-position: 54% center;
+}
+
+.living-heat-photo:hover img {
+  transform: scale(1.035);
+}
+
+.living-heat-photo figcaption {
+  position: absolute;
+  z-index: 1;
+  right: clamp(1.25rem, 3vw, 3rem);
+  bottom: clamp(1.25rem, 3vw, 3rem);
+  left: clamp(1.25rem, 3vw, 3rem);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--cream-bright);
+}
+
+.living-heat-photo figcaption span:last-child {
+  color: rgba(255, 249, 235, .8);
+  text-align: right;
+}
+
+.living-heat-copy {
+  position: relative;
+  min-width: 0;
+}
+
+.living-heat-patterns-copy {
+  padding: 1rem 0 0;
+}
+
+.living-heat-index {
+  position: absolute;
+  z-index: 0;
+  top: -5.8rem;
+  left: -.55rem;
+  margin: 0;
+  color: rgba(189, 87, 60, .11);
+  font: 500 clamp(8rem, 16vw, 14rem)/1 var(--serif);
+  pointer-events: none;
+}
+
+.living-heat-eyebrow,
+.living-heat-copy h3,
+.living-heat-lead,
+.living-heat-regions,
+.living-heat-transition,
+.living-heat-symptoms,
+.living-heat-history-notes,
+.living-heat-safe-care {
+  position: relative;
+  z-index: 1;
+}
+
+.living-heat-eyebrow {
+  margin: 0 0 .8rem;
+}
+
+.living-heat-copy h3 {
+  max-width: 520px;
+  margin: 0;
+  color: var(--teal);
+  font: 500 clamp(2.8rem, 5vw, 4.5rem)/.95 var(--serif);
+}
+
+.living-heat-lead {
+  max-width: 490px;
+  margin: 1.2rem 0 1.75rem;
+  color: rgba(16, 43, 42, .75);
+  font: 400 1rem/1.75 var(--sans);
+}
+
+.living-heat-regions {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(16, 43, 42, .24);
+  list-style: none;
+}
+
+.living-heat-regions li {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, .55fr) 1fr;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(16, 43, 42, .18);
+  color: rgba(16, 43, 42, .86);
+  font: 400 .94rem/1.65 var(--sans);
+}
+
+.living-heat-regions strong {
+  color: var(--teal);
+  font-weight: 600;
+}
+
+.living-heat-transition {
+  margin-top: 1.8rem;
+  padding: 1rem 0 0 1rem;
+  border-left: 2px solid #b48b3a;
+}
+
+.living-heat-transition-label {
+  margin: 0 0 .45rem;
+  color: var(--rust);
+  font: 500 .72rem/1.5 var(--mono);
+}
+
+.living-heat-transition > p:last-child {
+  max-width: 490px;
+  margin: 0;
+  color: rgba(16, 43, 42, .8);
+  font: 400 .92rem/1.7 var(--sans);
+}
+
+.living-heat-symptoms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+}
+
+.living-heat-symptom {
+  padding-top: .8rem;
+  border-top: 2px solid #b48b3a;
+}
+
+.living-heat-symptom-urgent {
+  border-color: var(--rust);
+}
+
+.living-heat-symptom-label {
+  margin: 0 0 .45rem;
+  color: var(--teal);
+  font-size: .68rem;
+  font-weight: 600;
+}
+
+.living-heat-symptom-urgent .living-heat-symptom-label {
+  color: var(--rust);
+}
+
+.living-heat-symptom > p:last-child {
+  margin: 0;
+  color: rgba(16, 43, 42, .8);
+  font: 400 .85rem/1.65 var(--sans);
+}
+
+.living-heat-history {
+  position: relative;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  width: 100vw;
+  margin-left: calc((100vw - 100%)/-2);
+  padding: clamp(4rem, 8vw, 7rem) max(2rem, calc((100vw - 1296px)/2));
+  background: var(--teal);
+  color: var(--cream);
+}
+
+.living-heat-history-copy {
+  padding: 1rem 0 1rem clamp(0rem, 2vw, 2rem);
+}
+
+.living-heat-history .living-heat-index {
+  color: rgba(243, 237, 221, .09);
+}
+
+.living-heat-history .living-heat-eyebrow,
+.living-heat-history .living-heat-safe-label {
+  color: #e6c86f;
+}
+
+.living-heat-history .living-heat-copy h3 {
+  color: var(--cream-bright);
+}
+
+.living-heat-history .living-heat-lead,
+.living-heat-history .living-heat-history-notes,
+.living-heat-history .living-heat-safe-care {
+  color: rgba(243, 237, 221, .82);
+}
+
+.living-heat-history-photo {
+  min-height: 690px;
+  margin-right: -2rem;
+}
+
+.living-heat-history-photo::after {
+  background: linear-gradient(90deg, rgba(16, 43, 42, .25), transparent 40%), linear-gradient(180deg, transparent 55%, rgba(16, 43, 42, .65));
+}
+
+.living-heat-history-photo img {
+  object-position: 48% center;
+}
+
+.living-heat-history .living-heat-photo figcaption {
+  color: var(--cream-bright);
+}
+
+.living-heat-history-notes {
+  margin-top: 2rem;
+  border-top: 1px solid rgba(243, 237, 221, .28);
+}
+
+.living-heat-history-notes p {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, .55fr) 1fr;
+  gap: .8rem;
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(243, 237, 221, .2);
+  font: 400 .9rem/1.65 var(--sans);
+}
+
+.living-heat-history-notes strong {
+  color: var(--cream-bright);
+  font-weight: 500;
+}
+
+.living-heat-safe-care {
+  margin-top: 1.8rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--rust);
+}
+
+.living-heat-safe-label {
+  margin: 0 0 .4rem;
+  font-size: .68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.living-heat-safe-care > p:last-child {
+  max-width: 500px;
+  margin: 0;
+  font: 400 .9rem/1.7 var(--sans);
+}
+
+@media (max-width: 991.98px) {
+  .living-heat-story,
+  .living-heat-history {
+    grid-template-columns: minmax(0, 1fr) minmax(0, .9fr);
+    gap: 2rem;
+  }
+
+  .living-heat-patterns-photo,
+  .living-heat-history-photo {
+    min-height: 600px;
+  }
+
+  .living-heat-history {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  .living-heat-history-notes p {
+    grid-template-columns: 1fr;
+    gap: .2rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .living-heat-intro {
+    padding-top: 3.5rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .living-heat-heading {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .living-heat-heading h2 {
+    font-size: clamp(2.7rem, 10vw, 4.2rem);
+  }
+
+  .living-heat-heading > p:last-child {
+    max-width: 520px;
+  }
+
+  .living-heat-regions li {
+    grid-template-columns: 1fr;
+    gap: .15rem;
+  }
+
+  .living-heat-story,
+  .living-heat-history {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .living-heat-patterns {
+    padding-bottom: 4rem;
+  }
+
+  .living-heat-patterns-photo,
+  .living-heat-history-photo {
+    min-height: 460px;
+    margin-right: -12px;
+    margin-left: -12px;
+  }
+
+  .living-heat-patterns-copy,
+  .living-heat-history-copy {
+    padding: 3.25rem 0 0;
+  }
+
+  .living-heat-index {
+    top: -5.4rem;
+    left: -.4rem;
+    font-size: 8rem;
+  }
+
+  .living-heat-history {
+    padding: 3.5rem 1.5rem;
+  }
+
+  .living-heat-history-photo {
+    grid-row: 1;
+    margin: -3.5rem -1.5rem 0;
+  }
+
+  .living-heat-history-copy {
+    padding-top: 4rem;
+  }
+
+  .living-heat-history-notes p {
+    grid-template-columns: minmax(7.5rem, .55fr) 1fr;
+    gap: .8rem;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .living-heat-symptoms {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .living-heat-patterns-photo,
+  .living-heat-history-photo {
+    min-height: 360px;
+  }
+
+  .living-heat-photo figcaption {
+    flex-direction: column;
+    gap: .3rem;
+  }
+
+  .living-heat-photo figcaption span:last-child {
+    text-align: left;
+  }
+
+  .living-heat-history-notes p {
+    grid-template-columns: 1fr;
+    gap: .2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .living-heat-photo img {
+    transition: none;
+  }
 }

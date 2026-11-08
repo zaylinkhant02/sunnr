@@ -10,7 +10,12 @@
     --sans: Arial, sans-serif;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    scrollbar-color: #d9b700 #102b2a;
+    scrollbar-width: thin;
+  }
+  html::-webkit-scrollbar { width: 12px; }
   body {
     margin: 0;
     padding-top: 76px;
@@ -25,6 +30,7 @@
     left: 0;
     z-index: 1000;
     width: 100%;
+    border-bottom: 1px solid rgba(243, 237, 221, .13);
     background-color: var(--dark-green);
   }
   .site-navbar {
@@ -230,6 +236,8 @@
   .contact-card input[aria-invalid="true"],
   .contact-card textarea[aria-invalid="true"] { border-color: #a33424; }
   .contact-card .form-status { margin: 0; }
+  .contact-card .form-status.is-error { color: #a33424; }
+  .contact-card .form-status.is-success { color: var(--dark-green); }
   .contact-card button {
     width: 100%;
     padding: 14px 20px;
@@ -240,6 +248,10 @@
     transition: background .3s ease;
   }
   .contact-card button:hover { background: #173a38; }
+  .contact-card button:disabled {
+    cursor: wait;
+    opacity: .7;
+  }
   .contact-info {
     display: flex;
     flex-direction: column;
