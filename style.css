@@ -6015,14 +6015,14 @@ body.citations-page {
     display:flex;
     gap:18px;
     align-items:flex-start;
-    background:rgba(131,191,255,.12);
-    border-left:3px solid var(--data-blue);
+    background:#bd583c23;
+    border-left:3px solid var(--rust);
     padding:25px 30px;
     margin-top:35px;
 }
 
 .safety-solar-action__note i{
-    color:var(--data-blue-dark);
+    color:var(--teal);
     font-size:1.3rem;
 }
 
