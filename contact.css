@@ -10,7 +10,12 @@
     --sans: Arial, sans-serif;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    scrollbar-color: #d9b700 #102b2a;
+    scrollbar-width: thin;
+  }
+  html::-webkit-scrollbar { width: 12px; }
   body {
     margin: 0;
     padding-top: 76px;
@@ -25,6 +30,7 @@
     left: 0;
     z-index: 1000;
     width: 100%;
+    border-bottom: 1px solid rgba(243, 237, 221, .13);
     background-color: var(--dark-green);
   }
   .site-navbar {
