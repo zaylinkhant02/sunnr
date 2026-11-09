@@ -3970,73 +3970,91 @@ html.has-scroll-reveals [data-reveal].is-revealed {
     transition: none;
   }
 }
-.safety-hero-section{
+
+.safety-hero-section {
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   background-color: var(--teal);
-  background-image: url('https://images.unsplash.com/photo-1458937622057-056de760b45e?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D'); 
+  background-image: url('https://images.unsplash.com/photo-1458937622057-056de760b45e?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0');
   background-size: cover;
   background-position: center;
   overflow: hidden;
 }
-.safety-hero-bg-overlay{
+
+.safety-hero-bg-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(16, 43, 42, 0.4) 0%, rgba(16, 43, 42, 0.75) 100%);
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 43, 42, 0.4) 0%,
+    rgba(16, 43, 42, 0.8) 100%
+  );
   z-index: 1;
 }
-.safety-hero-content-container{
+
+.safety-hero-content-container {
   position: relative;
   z-index: 2;
   margin-top: auto;
   margin-bottom: auto;
-  padding: 0 2rem;
-  max-width: 900px;
+  padding: 5rem 2rem;
+  max-width: 1000px;
+  margin-left: 0;
+  margin-right: auto;
   text-align: left;
 }
-.safety-hero-main-title{
+
+.safety-hero-main-title {
   font-family: var(--serif);
-  font-size: clamp(3.5rem, 4vw + 2rem, 7rem);
+  font-size: clamp(3.5rem, 5vw + 1rem, 7rem);
   font-weight: 600;
   line-height: 1.05;
   color: var(--cream-bright);
   margin-bottom: 1rem;
 }
-.safety-hero-subtitle{
+
+.safety-hero-subtitle {
   font-family: var(--sans);
   font-size: clamp(1rem, 0.5vw + 0.9rem, 1.25rem);
   color: var(--cream);
   opacity: 0.9;
   max-width: 550px;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.6;
 }
-.safety-hero-bottom-bar{
+
+.safety-hero-bottom-bar {
   position: relative;
   z-index: 2;
+
   display: grid;
-  grid-template-columns: repeat(4, 1fr) 220px;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) 220px;
+
   width: 100%;
-  background: rgba(16, 43, 42, 0.65);
+  background: rgba(16, 43, 42, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+
   border-top: 1px solid rgba(243, 237, 221, 0.15);
 }
-.safety-hero-bar-item{
+
+.safety-hero-bar-item {
   padding: 1.5rem 2rem;
   border-right: 1px solid rgba(243, 237, 221, 0.15);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 0;
 }
-.safety-bar-label{
+
+.safety-bar-label {
   font-family: var(--mono);
   font-size: 0.75rem;
   letter-spacing: 1.5px;
@@ -4044,7 +4062,8 @@ html.has-scroll-reveals [data-reveal].is-revealed {
   opacity: 0.6;
   margin-bottom: 0.35rem;
 }
-.safety-bar-value{
+
+.safety-bar-value {
   font-family: var(--sans);
   font-size: 0.95rem;
   font-weight: 600;
@@ -4053,34 +4072,96 @@ html.has-scroll-reveals [data-reveal].is-revealed {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.safety-hero-action-btn{
+
+.safety-hero-action-btn {
+  background-color: var(--cream);
+  color: var(--rusk);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1rem;
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.safety-hero-action-btn:hover {
+  background-color: var(--rusk);
+  color: var(--cream-bright);
+}
+
+/* Tablet */
+
+@media (max-width: 992px) {
+  .safety-hero-section {
+    min-height: 90vh;
+  }
+
+  .safety-hero-bottom-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .safety-hero-bar-item {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .safety-hero-action-btn {
+    grid-column: span 2;
+    padding: 1.25rem;
+    min-height: 65px;
+  }
+}
+
+@media (max-width: 576px) {
+  .safety-hero-section {
+    min-height: 100svh;
+  }
+
+  .safety-hero-content-container {
+    padding: 4rem 1.5rem;
+  }
+
+  .safety-hero-main-title {
+    font-size: clamp(3rem, 12vw, 4.5rem);
+  }
+
+  .safety-hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .safety-hero-bottom-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .safety-hero-bar-item {
+    padding: 1rem 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(243, 237, 221, 0.15);
+  }
+
+  .safety-bar-value {
+    white-space: normal;
+  }
+
+  .safety-hero-action-btn {
+    grid-column: span 1;
+    min-height: 60px;
+  }
+}
+.safety-hero-action-btn {
   background-color: var(--cream);
   color: var(--rusk);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
   font-family: var(--sans);
   font-weight: 700;
   font-size: 1rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-@media (max-width: 992px){
-  .safety-hero-bottom-bar{
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .safety-hero-explore-btn{
-    grid-column: span 2;
-    padding: 1.25rem;
-  }
-}
-@media (max-width: 576px){
-  .safety-hero-bottom-bar{
-    grid-template-columns: 1fr;
-  }
-  .safety-hero-explore-btn{
-    grid-column: span 1;
-  }
+  cursor: default;
 }
 
 .site-footer {
@@ -4830,7 +4911,7 @@ body.risk-map-page {
 .safety-general-action__mini-label {
   color: var(--rust);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: clamp(9.35px, calc(9.35px + 0.3vw), 11px);
   letter-spacing: 1.8px;
 }
 
@@ -4857,7 +4938,7 @@ body.risk-map-page {
   max-width: 470px;
   margin-bottom: 5px;
   color: #666b60;
-  font-size: 14px;
+  font-size: clamp(11.9px, calc(11.9px + 0.3vw), 14px);
   line-height: 2;
 }
 
@@ -4877,7 +4958,7 @@ body.risk-map-page {
 .safety-general-action__category-heading > span {
   color: var(--yellow);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: clamp(8.5px, calc(8.5px + 0.3vw), 10px);
   letter-spacing: 1.8px;
 }
 
@@ -4932,7 +5013,7 @@ body.risk-map-page {
 .safety-general-action__image-caption span {
   color: var(--yellow);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: clamp(8.5px, calc(8.5px + 0.3vw), 10px);
   letter-spacing: 1.5px;
 }
 
@@ -4940,7 +5021,7 @@ body.risk-map-page {
   margin: 10px 0 0;
   color: var(--cream);
   font-family: var(--serif);
-  font-size: 40px;
+  font-size: clamp(34px, calc(34px + 0.3vw), 40px);
   line-height: 1.1;
 }
 
@@ -4963,20 +5044,20 @@ body.risk-map-page {
 .safety-general-action__tip > i {
   flex-shrink: 0;
   color: var(--yellow);
-  font-size: 23px;
+  font-size: clamp(19.55px, calc(19.55px + 0.3vw), 23px);
 }
 
 .safety-general-action__tip h4 {
   margin-bottom: 8px;
   color: var(--cream);
-  font-size: 17px;
+  font-size: clamp(14.45px, calc(14.45px + 0.3vw), 17px);
   font-weight: 500;
 }
 
 .safety-general-action__tip p {
   margin-bottom: 0;
   color: var(--cream);
-  font-size: 12px;
+  font-size: clamp(10.2px, calc(10.2px + 0.3vw), 12px);
   line-height: 1.9;
 }
 
@@ -5014,7 +5095,7 @@ body.risk-map-page {
 .safety-general-action__cooling-content > span {
   color: var(--rust);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: clamp(8.5px, calc(8.5px + 0.3vw), 10px);
   letter-spacing: 1px;
 }
 
@@ -5022,20 +5103,20 @@ body.risk-map-page {
   display: block;
   margin: 17px 0 8px;
   color: var(--rust);
-  font-size: 23px;
+  font-size: clamp(19.55px, calc(19.55px + 0.3vw), 23px);
 }
 
 .safety-general-action__cooling-content h4 {
   margin-bottom: 10px;
   font-family: var(--serif);
-  font-size: 29px;
+  font-size: clamp(24.65px, calc(24.65px + 0.3vw), 29px);
   line-height: 1.1;
 }
 
 .safety-general-action__cooling-content p {
   margin-bottom: 0;
   color: #64675e;
-  font-size: 12px;
+  font-size: clamp(10.2px, calc(10.2px + 0.3vw), 12px);
   line-height: 1.9;
 }
 
@@ -5068,7 +5149,7 @@ body.risk-map-page {
 .safety-general-action__temperature > span {
   color: var(--yellow);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: clamp(8.5px, calc(8.5px + 0.3vw), 10px);
   letter-spacing: 1.3px;
 }
 
@@ -5089,7 +5170,7 @@ body.risk-map-page {
 .safety-general-action__temperature-values strong {
   color: var(--cream);
   font-family: var(--serif);
-  font-size: 53px;
+  font-size: clamp(45.05px, calc(45.05px + 0.3vw), 53px);
   line-height: 1;
 }
 
@@ -5097,7 +5178,7 @@ body.risk-map-page {
   margin-top: 8px;
   color: var(--cream);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: clamp(7.65px, calc(7.65px + 0.3vw), 9px);
   letter-spacing: 1px;
 }
 
@@ -5110,7 +5191,7 @@ body.risk-map-page {
 .safety-general-action__temperature p {
   margin-bottom: 0;
   color: var(--cream);
-  font-size: 11px;
+  font-size: clamp(9.35px, calc(9.35px + 0.3vw), 11px);
 }
 
 .safety-general-action__home-tips {
@@ -5133,20 +5214,20 @@ body.risk-map-page {
 .safety-general-action__home-tip > span {
   color: var(--yellow);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: clamp(9.35px, calc(9.35px + 0.3vw), 11px);
 }
 
 .safety-general-action__home-tip h4 {
   margin-bottom: 8px;
   color: var(--cream);
-  font-size: 17px;
+  font-size: clamp(14.45px, calc(14.45px + 0.3vw), 17px);
   font-weight: 500;
 }
 
 .safety-general-action__home-tip p {
   margin-bottom: 0;
   color: var(--cream);
-  font-size: 12px;
+  font-size: clamp(10.2px, calc(10.2px + 0.3vw), 12px);
   line-height: 1.9;
 }
 
@@ -5180,7 +5261,7 @@ body.risk-map-page {
 
 .safety-general-action__community-content > p {
   color: var(--cream);
-  font-size: 12px;
+  font-size: clamp(10.2px, calc(10.2px + 0.3vw), 12px);
   line-height: 2;
 }
 
@@ -5198,7 +5279,7 @@ body.risk-map-page {
   gap: 12px;
   align-items: flex-start;
   color: var(--cream);
-  font-size: 12px;
+  font-size: clamp(10.2px, calc(10.2px + 0.3vw), 12px);
 }
 
 .safety-general-action__people-list i {
@@ -5216,13 +5297,13 @@ body.risk-map-page {
 .safety-general-action__child-warning > i {
   flex-shrink: 0;
   color: var(--yellow);
-  font-size: 19px;
+  font-size: clamp(16.15px, calc(16.15px + 0.3vw), 19px);
 }
 
 .safety-general-action__child-warning p {
   margin-bottom: 0;
   color: var(--cream);
-  font-size: 11px;
+  font-size: clamp(9.35px, calc(9.35px + 0.3vw), 11px);
   line-height: 1.9;
 }
 
@@ -5246,7 +5327,7 @@ body.risk-map-page {
   margin-top: -25px;
   margin-bottom: 35px;
   color: #64675e;
-  font-size: 13px;
+  font-size: clamp(11.05px, calc(11.05px + 0.3vw), 13px);
   line-height: 1.9;
 }
 .safety-general-action__emergency-grid{
@@ -5268,26 +5349,26 @@ body.risk-map-page {
   border-radius: 50%;
   background: #e9e2d0;
   color: var(--rust);
-  font-size: 22px;
+  font-size: clamp(18.7px, calc(18.7px + 0.3vw), 22px);
 }
 .safety-general-action__emergency-label{
   color: var(--rust);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: clamp(8.5px, calc(8.5px + 0.3vw), 10px);
   letter-spacing: 1.4px;
 }
 .safety-general-action__emergency-card h4{
   margin: 12px 0;
   color: var(--teal);
   font-family: var(--serif);
-  font-size: 36px;
+  font-size: clamp(30.6px, calc(30.6px + 0.3vw), 36px);
   line-height: 1.1;
 }
 
 .safety-general-action__emergency-card > p{
   min-height: 45px;
   color: #64675e;
-  font-size: 12px;
+  font-size: clamp(10.2px, calc(10.2px + 0.3vw), 12px);
   line-height: 1.8;
 }
 .safety-general-action__emergency-card ul{
@@ -5304,7 +5385,7 @@ body.risk-map-page {
   position: relative;
   padding-left: 20px;
   color: #424e47;
-  font-size: 12px;
+  font-size: clamp(10.2px, calc(10.2px + 0.3vw), 12px);
 }
 .safety-general-action__emergency-card li::before{
   position: absolute;
@@ -5319,19 +5400,19 @@ body.risk-map-page {
 .safety-general-action__response strong{
   color: var(--rust);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: clamp(8.5px, calc(8.5px + 0.3vw), 10px);
   letter-spacing: 1px;
 }
 .safety-general-action__response p{
   margin: 9px 0 0;
   color: #4e5a51;
-  font-size: 11px;
+  font-size: clamp(9.35px, calc(9.35px + 0.3vw), 11px);
   line-height: 1.9;
 }
 .safety-general-action__medical-note{
   margin-top: 17px;
   color: #686b60;
-  font-size: 11px;
+  font-size: clamp(9.35px, calc(9.35px + 0.3vw), 11px);
   line-height: 1.8;
 }
 .safety-general-action__emergency-card--critical{
@@ -5361,19 +5442,19 @@ body.risk-map-page {
 
 .safety-general-action__emergency-banner > i{
   flex-shrink: 0;
-  font-size: 32px;
+  font-size: clamp(27.2px, calc(27.2px + 0.3vw), 32px);
 }
 
 .safety-general-action__emergency-banner strong{
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: clamp(9.35px, calc(9.35px + 0.3vw), 11px);
   letter-spacing: 1px;
 }
 
 .safety-general-action__emergency-banner p{
   margin: 5px 0 0;
   color: rgba(255,255,255,.85);
-  font-size: 11px;
+  font-size: clamp(9.35px, calc(9.35px + 0.3vw), 11px);
 }
 .safety-general-action__source{
   display: flex;
@@ -5388,14 +5469,14 @@ body.risk-map-page {
   flex-shrink: 0;
   color: var(--yellow);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: clamp(8.5px, calc(8.5px + 0.3vw), 10px);
   letter-spacing: 1px;
 }
 
 .safety-general-action__source p{
   margin: 0;
   color: var(--cream);
-  font-size: 11px;
+  font-size: clamp(9.35px, calc(9.35px + 0.3vw), 11px);
 }
 
 .safety-general-action__source a{
@@ -5440,7 +5521,7 @@ body.risk-map-page {
   }
 
   .safety-general-action__heading h2{
-    font-size: 48px;
+    font-size: clamp(40.8px, calc(40.8px + 0.3vw), 48px);
   }
 
   .safety-general-action__category,.safety-general-action__emergency{
@@ -5452,7 +5533,7 @@ body.risk-map-page {
   }
 
   .safety-general-action__category-heading h3{
-    font-size: 43px;
+    font-size: clamp(36.55px, calc(36.55px + 0.3vw), 43px);
   }
 
   .safety-general-action__exposure-grid,
@@ -5496,11 +5577,11 @@ body.risk-map-page {
 @media (max-width: 480px) {
 
   .safety-general-action__heading h2{
-    font-size: 41px;
+    font-size: clamp(34.85px, calc(34.85px + 0.3vw), 41px);
   }
 
   .safety-general-action__category-heading h3{
-    font-size: 36px;
+    font-size: clamp(30.6px, calc(30.6px + 0.3vw), 36px);
   }
 
   .safety-general-action__cooling-grid{
@@ -5533,7 +5614,7 @@ body.risk-map-page {
   }
 
   .safety-general-action__temperature-values strong{
-    font-size: 44px;
+    font-size: clamp(37.4px, calc(37.4px + 0.3vw), 44px);
   }
 
   .safety-general-action__emergency-card{
@@ -5541,7 +5622,7 @@ body.risk-map-page {
   }
 
   .safety-general-action__emergency-card h4{
-    font-size: 32px;
+    font-size: clamp(27.2px, calc(27.2px + 0.3vw), 32px);
   }
 
   .safety-general-action__emergency-banner{
@@ -5622,7 +5703,7 @@ body.risk-map-page {
   display: inline-block;
   color: var(--rust);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: clamp(8.5px, calc(8.5px + 0.3vw), 10px);
   letter-spacing: 1.5px;
   line-height: 1.8;
 }
@@ -5657,7 +5738,7 @@ body.risk-map-page {
   max-width: 440px;
   margin-bottom: 13px;
   color: #60665c;
-  font-size: 12px;
+  font-size: clamp(10.2px, calc(10.2px + 0.3vw), 12px);
   line-height: 2;
 }
 
@@ -5670,7 +5751,7 @@ body.risk-map-page {
   border-bottom: 1px solid var(--rust);
   color: var(--rust);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: clamp(8.5px, calc(8.5px + 0.3vw), 10px);
   letter-spacing: 1px;
   text-decoration: none;
   transition: gap .3s ease;
@@ -5682,7 +5763,7 @@ body.risk-map-page {
 }
 
 .safety-general-heat-myths__link i {
-  font-size: 15px;
+  font-size: clamp(12.75px, calc(12.75px + 0.3vw), 15px);
 }
 
 .safety-general-heat-myths__intro-image {
@@ -5716,7 +5797,7 @@ body.risk-map-page {
 
 .safety-general-heat-myths__image-caption span {
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: clamp(7.65px, calc(7.65px + 0.3vw), 9px);
   letter-spacing: 1.3px;
   color: var(--yellow);
 }
@@ -5724,7 +5805,7 @@ body.risk-map-page {
 .safety-general-heat-myths__image-caption p {
   margin: 7px 0 0;
   font-family: var(--serif);
-  font-size: 24px;
+  font-size: clamp(20.4px, calc(20.4px + 0.3vw), 24px);
 }
 
 .safety-general-heat-myths__main {
@@ -5754,7 +5835,7 @@ body.risk-map-page {
   max-width: 310px;
   margin-bottom: 5px;
   color: #74756b;
-  font-size: 12px;
+  font-size: clamp(10.2px, calc(10.2px + 0.3vw), 12px);
   line-height: 1.9;
 }
 
@@ -5821,7 +5902,7 @@ body.risk-map-page {
   background: var(--teal);
   color: var(--cream-bright);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: clamp(9.35px, calc(9.35px + 0.3vw), 11px);
   font-weight: 400;
   transition:  0.3s ease;
 }
@@ -5840,7 +5921,7 @@ body.risk-map-page {
   margin: 3px 0 11px;
   color: var(--rust);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: clamp(7.65px, calc(7.65px + 0.3vw), 9px);
   letter-spacing: .8px;
 }
 
@@ -5848,7 +5929,7 @@ body.risk-map-page {
   margin: 0;
   color: var(--teal);
   font-family: var(--serif);
-  font-size: 22px;
+  font-size: clamp(18.7px, calc(18.7px + 0.3vw), 22px);
   font-weight: 500;
   line-height: 1.25;
 }
@@ -5856,7 +5937,7 @@ body.risk-map-page {
 .safety-general-heat-myths__plus {
   padding-top: 7px;
   color: var(--rust);
-  font-size: 13px;
+  font-size: clamp(11.05px, calc(11.05px + 0.3vw), 13px);
   transition: transform .3s ease;
 }
 
@@ -5889,14 +5970,14 @@ body.risk-map-page {
   background: rgba(189, 87, 60, .10);
   color: var(--rust);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: clamp(7.65px, calc(7.65px + 0.3vw), 9px);
   letter-spacing: 1px;
 }
 
 .safety-general-heat-myths__answer p {
   margin: 0;
   color: #676a60;
-  font-size: 11px;
+  font-size: clamp(9.35px, calc(9.35px + 0.3vw), 11px);
   line-height: 1.95;
 }
 
@@ -5913,14 +5994,14 @@ body.risk-map-page {
 
 .safety-general-heat-myths__grid-note i {
   color: var(--rust);
-  font-size: 18px;
+  font-size: clamp(15.3px, calc(15.3px + 0.3vw), 18px);
 }
 
 .safety-general-heat-myths__grid-note p {
   margin: 0;
   color: #686b61;
   font-family: var(--serif);
-  font-size: 19px;
+  font-size: clamp(16.15px, calc(16.15px + 0.3vw), 19px);
 }
 @media (max-width: 991.98px) {
   .safety-general-heat-myths__grid {
@@ -5941,7 +6022,7 @@ body.risk-map-page {
   }
 
   .safety-general-heat-myths__card-title h4 {
-    font-size: 20px;
+    font-size: clamp(17px, calc(17px + 0.3vw), 20px);
   }
 
   .safety-general-heat-myths__grid .accordion-body {
@@ -5992,7 +6073,7 @@ body.risk-map-page {
   max-width: 450px;
   margin-bottom: 13px;
   color: #666b60;
-  font-size: 12px;
+  font-size: clamp(10.2px, calc(10.2px + 0.3vw), 12px);
   line-height: 2;
 }
 
@@ -6007,13 +6088,13 @@ body.risk-map-page {
 
 .safety-general-heat-myths__conclusion-note i {
   color: var(--rust);
-  font-size: 23px;
+  font-size: clamp(19.55px, calc(19.55px + 0.3vw), 23px);
 }
 
 .safety-general-heat-myths__conclusion-note span {
   color: var(--rust);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: clamp(7.65px, calc(7.65px + 0.3vw), 9px);
   letter-spacing: .7px;
   line-height: 1.8;
 }
@@ -6031,13 +6112,13 @@ body.risk-map-page {
 .safety-general-heat-myths__source > span {
   color: var(--yellow);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: clamp(7.65px, calc(7.65px + 0.3vw), 9px);
   letter-spacing: 1px;
 }
 
 .safety-general-heat-myths__source a {
   color: var(--cream);
-  font-size: 11px;
+  font-size: clamp(9.35px, calc(9.35px + 0.3vw), 11px);
   text-decoration: none;
   transition: color .3s ease;
 }
@@ -6086,7 +6167,7 @@ body.risk-map-page {
   }
 
   .safety-general-heat-myths__intro-content h2 {
-    font-size: 49px;
+    font-size: clamp(41.65px, calc(41.65px + 0.3vw), 49px);
   }
 
   .safety-general-heat-myths__intro-image {
@@ -6104,7 +6185,7 @@ body.risk-map-page {
   }
 
   .safety-general-heat-myths__section-heading h3 {
-    font-size: 42px;
+    font-size: clamp(35.7px, calc(35.7px + 0.3vw), 42px);
   }
 
   .safety-general-heat-myths__section-heading > p {
@@ -6126,15 +6207,15 @@ body.risk-map-page {
   .safety-general-heat-myths__number {
     width: 28px;
     height: 28px;
-    font-size: 10px;
+    font-size: clamp(8.5px, calc(8.5px + 0.3vw), 10px);
   }
 
   .safety-general-heat-myths__card-title h4 {
-    font-size: 19px;
+    font-size: clamp(16.15px, calc(16.15px + 0.3vw), 19px);
   }
 
   .safety-general-heat-myths__card-title > span {
-    font-size: 8px;
+    font-size: clamp(6.8px, calc(6.8px + 0.3vw), 8px);
   }
 
   .safety-general-heat-myths__answer {
@@ -6154,7 +6235,7 @@ body.risk-map-page {
 @media (max-width: 480px) {
 
   .safety-general-heat-myths__intro-content h2 {
-    font-size: 42px;
+    font-size: clamp(35.7px, calc(35.7px + 0.3vw), 42px);
   }
 
   .safety-general-heat-myths__intro-image {
@@ -6166,7 +6247,7 @@ body.risk-map-page {
   }
 
   .safety-general-heat-myths__section-heading h3 {
-    font-size: 36px;
+    font-size: clamp(30.6px, calc(30.6px + 0.3vw), 36px);
   }
 
   .safety-general-heat-myths__grid {
@@ -6187,7 +6268,7 @@ body.risk-map-page {
   }
 
   .safety-general-heat-myths__card-title h4 {
-    font-size: 22px;
+    font-size: clamp(18.7px, calc(18.7px + 0.3vw), 22px);
   }
 
   .safety-general-heat-myths__answer {
@@ -6199,7 +6280,7 @@ body.risk-map-page {
   }
 
   .safety-general-heat-myths__grid-note p {
-    font-size: 16px;
+    font-size: clamp(13.6px, calc(13.6px + 0.3vw), 16px);
   }
 
   .safety-general-heat-myths__conclusion-image {
@@ -6211,7 +6292,7 @@ body.risk-map-page {
   }
 
   .safety-general-heat-myths__conclusion-content h3 {
-    font-size: 40px;
+    font-size: clamp(34px, calc(34px + 0.3vw), 40px);
   }
 
   .safety-general-heat-myths__source {
@@ -6225,7 +6306,7 @@ body.risk-map-page {
   content: "+";
   font-family: var(--sans);
   font-style: normal;
-  font-size: 21px;
+  font-size: clamp(17.85px, calc(17.85px + 0.3vw), 21px);
 }
 
 .safety-general-heat-myths__card[open] summary > i::before {
@@ -6288,7 +6369,7 @@ body.risk-map-page {
 }
 
 .safety-solar-action__intro-text p{
-    font-size:1rem;
+    font-size:clamp(0.85rem, calc(0.85rem + 0.3vw), 1rem);
     line-height:1.9;
     color:var(--teal);
     opacity:.8;
@@ -6353,12 +6434,12 @@ body.risk-map-page {
     gap:8px;
     background:rgba(16,43,42,.4);
     color:var(--cream-bright);
-    font-size:.85rem;
+    font-size:clamp(0.7225rem, calc(0.7225rem + 0.3vw), .85rem);
     font-weight:600;
 }
 
 .safety-solar-action__solar-overlay i{
-    font-size:1.7rem;
+    font-size:clamp(1.445rem, calc(1.445rem + 0.3vw), 1.7rem);
     color:var(--yellow);
 }
 
@@ -6374,18 +6455,18 @@ body.risk-map-page {
 }
 
 .safety-solar-action__orbit-item i{
-    font-size:1.5rem;
+    font-size:clamp(1.275rem, calc(1.275rem + 0.3vw), 1.5rem);
     color:var(--rust);
     margin-bottom:7px;
 }
 
 .safety-solar-action__orbit-item span{
     font-weight:600;
-    font-size:.9rem;
+    font-size:clamp(0.765rem, calc(0.765rem + 0.3vw), .9rem);
 }
 
 .safety-solar-action__orbit-item small{
-    font-size:.7rem;
+    font-size:clamp(0.595rem, calc(0.595rem + 0.3vw), .7rem);
     opacity:.7;
 }
 
@@ -6486,7 +6567,7 @@ body.risk-map-page {
     border-radius:50%;
     background:rgba(189,87,60,.12);
     color:var(--rust);
-    font-size:1.3rem;
+    font-size:clamp(1.105rem, calc(1.105rem + 0.3vw), 1.3rem);
     margin-bottom:20px;
 }
 
@@ -6496,7 +6577,7 @@ body.risk-map-page {
 }
 
 .safety-solar-action__card-content p{
-    font-size:.88rem;
+    font-size:clamp(0.748rem, calc(0.748rem + 0.3vw), .88rem);
     line-height:1.85;
     opacity:.75;
     margin:0;
@@ -6522,7 +6603,7 @@ body.risk-map-page {
 }
 
 .safety-solar-action__maintenance-content>p{
-    font-size:.9rem;
+    font-size:clamp(0.765rem, calc(0.765rem + 0.3vw), .9rem);
     line-height:1.8;
     opacity:.75;
     margin-bottom:30px;
@@ -6537,19 +6618,19 @@ body.risk-map-page {
 
 .safety-solar-action__tip>i{
     color:var(--rust);
-    font-size:1.25rem;
+    font-size:clamp(1.0625rem, calc(1.0625rem + 0.3vw), 1.25rem);
     flex-shrink:0;
     margin-top:3px;
 }
 
 .safety-solar-action__tip h5{
-    font-size:.95rem;
+    font-size:clamp(0.8075rem, calc(0.8075rem + 0.3vw), .95rem);
     font-weight:600;
     margin:0 0 5px;
 }
 
 .safety-solar-action__tip p{
-    font-size:.82rem;
+    font-size:clamp(0.697rem, calc(0.697rem + 0.3vw), .82rem);
     line-height:1.7;
     opacity:.7;
     margin:0;
@@ -6567,13 +6648,13 @@ body.risk-map-page {
 
 .safety-solar-action__note i{
     color:var(--teal);
-    font-size:1.3rem;
+    font-size:clamp(1.105rem, calc(1.105rem + 0.3vw), 1.3rem);
 }
 
 .safety-solar-action__note p{
     margin:0;
     color:var(--teal);
-    font-size:.88rem;
+    font-size:clamp(0.748rem, calc(0.748rem + 0.3vw), .88rem);
     line-height:1.8;
 }
 .safety-solar-misconceptions{
@@ -6617,7 +6698,7 @@ body.risk-map-page {
 }
 
 .safety-solar-misconceptions__intro-text>p{
-    font-size:.95rem;
+    font-size:clamp(0.8075rem, calc(0.8075rem + 0.3vw), .95rem);
     line-height:1.9;
     opacity:.75;
 }
@@ -6633,7 +6714,7 @@ body.risk-map-page {
 }
 
 .safety-solar-misconceptions__subtext i{
-    font-size:1.1rem;
+    font-size:clamp(0.935rem, calc(0.935rem + 0.3vw), 1.1rem);
 }
 
 .safety-solar-misconceptions__image{
@@ -6657,12 +6738,12 @@ body.risk-map-page {
     padding:17px 20px;
     background:rgba(16,43,42,.85);
     color:var(--cream-bright);
-    font-size:.85rem;
+    font-size:clamp(0.7225rem, calc(0.7225rem + 0.3vw), .85rem);
 }
 
 .safety-solar-misconceptions__image-caption i{
     color:var(--yellow);
-    font-size:1.2rem;
+    font-size:clamp(1.02rem, calc(1.02rem + 0.3vw), 1.2rem);
 }
 
 .safety-solar-misconceptions__content{
@@ -6741,7 +6822,7 @@ body.risk-map-page {
     margin-bottom:15px;
 }
 .safety-solar-misconceptions__accordion .accordion-body p{
-    font-size:.9rem;
+    font-size:clamp(0.765rem, calc(0.765rem + 0.3vw), .9rem);
     line-height:1.9;
     opacity:.8;
     margin-bottom:12px;
@@ -6764,7 +6845,7 @@ body.risk-map-page {
 
 .safety-solar-misconceptions__bottom i{
     color:var(--rust);
-    font-size:1.6rem;
+    font-size:clamp(1.36rem, calc(1.36rem + 0.3vw), 1.6rem);
     flex-shrink:0;
 }
 
@@ -6819,7 +6900,7 @@ body.risk-map-page {
 
     .safety-solar-action__intro h2,
     .safety-solar-misconceptions__intro h2{
-        font-size:2.7rem;
+        font-size:clamp(2.295rem, calc(2.295rem + 0.3vw), 2.7rem);
     }
 
     .safety-solar-action__visual{
@@ -6843,15 +6924,15 @@ body.risk-map-page {
     }
 
     .safety-solar-action__orbit-item span{
-        font-size:.75rem;
+        font-size:clamp(0.6375rem, calc(0.6375rem + 0.3vw), .75rem);
     }
 
     .safety-solar-action__orbit-item small{
-        font-size:.6rem;
+        font-size:clamp(0.51rem, calc(0.51rem + 0.3vw), .6rem);
     }
 
     .safety-solar-action__orbit-item i{
-        font-size:1.2rem;
+        font-size:clamp(1.02rem, calc(1.02rem + 0.3vw), 1.2rem);
     }
 
     .safety-solar-action__image{
@@ -6884,7 +6965,7 @@ body.risk-map-page {
     }
 
     .safety-solar-misconceptions__question{
-        font-size:1.1rem;
+        font-size:clamp(0.935rem, calc(0.935rem + 0.3vw), 1.1rem);
     }
 
     .safety-solar-misconceptions__accordion .accordion-body{
@@ -6897,15 +6978,16 @@ body.risk-map-page {
     }
 
     .safety-solar-misconceptions__bottom p{
-        font-size:1rem;
+        font-size:clamp(0.85rem, calc(0.85rem + 0.3vw), 1rem);
     }
 }
 .safety-general-heat-myths__card-title span.d-block{
   font-family:var(--serif);
-  font-size:22px;
+  font-size:clamp(18.7px, calc(18.7px + 0.3vw), 22px);
   line-height:1.25;
   color:var(--teal);
 }
+
 
 .living-heat-section {
   overflow: hidden;
@@ -7359,5 +7441,216 @@ body.risk-map-page {
 @media (prefers-reduced-motion: reduce) {
   .living-heat-photo img {
     transition: none;
+  }
+}
+.safety-final-quiz {
+  background: var(--teal);
+  color: var(--cream);
+  padding: clamp(60px, 7vw, 90px) 0;
+}
+
+.safety-final-quiz__intro {
+  max-width: 650px;
+  margin: 0 auto clamp(30px, 4vw, 45px);
+  text-align: center;
+}
+
+.safety-final-quiz__eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--yellow);
+  font-family: var(--mono);
+  font-size: clamp(0.7rem, 1.2vw, 0.875rem);
+  letter-spacing: clamp(1px, 0.2vw, 2px);
+}
+
+.safety-final-quiz__intro h2 {
+  margin: 0 0 15px;
+  font-family: var(--serif);
+  font-size: clamp(2.25rem, 5vw, 3.625rem);
+  line-height: 1.1;
+  color: var(--cream-bright);
+}
+
+.safety-final-quiz__intro p {
+  margin: 0;
+  color: var(--cream);
+  opacity: 0.8;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+}
+
+.safety-final-quiz__card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 35px);
+  background: var(--cream-bright);
+  color: var(--teal);
+  border-radius: 8px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+}
+
+.safety-final-quiz__top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-family: var(--mono);
+  font-size: clamp(0.65rem, 1.2vw, 0.8125rem);
+  font-weight: 600;
+  color: var(--teal);
+}
+
+#quiz-previous-score {
+  color: var(--rust);
+}
+
+.safety-final-quiz__progress {
+  width: 100%;
+  height: 9px;
+  margin-bottom: clamp(22px, 3vw, 32px);
+  overflow: hidden;
+  background: #ded8c8;
+  border-radius: 20px;
+}
+
+.safety-final-quiz__progress-fill {
+  width: 0;
+  height: 100%;
+  background: var(--rust);
+  border-radius: 20px;
+  transition: width 0.4s ease;
+}
+
+.safety-final-quiz__category {
+  display: inline-block;
+  margin-bottom: 13px;
+  color: var(--rust);
+  font-family: var(--mono);
+  font-size: clamp(0.65rem, 1.1vw, 0.75rem);
+  letter-spacing: clamp(1px, 0.15vw, 1.5px);
+  font-weight: 600;
+}
+
+.safety-final-quiz__card h3 {
+  margin: 0 0 25px;
+  font-family: var(--serif);
+  font-size: clamp(1.5625rem, 4vw, 2.125rem);
+  line-height: 1.25;
+  color: var(--teal);
+}
+
+.safety-final-quiz__options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.safety-final-quiz__option {
+  min-height: 65px;
+  padding: clamp(12px, 2vw, 15px) clamp(14px, 2.5vw, 18px);
+  border: 1px solid rgba(16, 43, 42, 0.25);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--teal);
+  font: 500 clamp(0.8125rem, 1.3vw, 0.9375rem)/1.4 var(--sans);
+  text-align: left;
+  cursor: pointer;
+  transition:0.2s ease,
+}
+
+.safety-final-quiz__option:hover:not(:disabled) {
+  border-color: var(--rust);
+  background: #f1e5d2;
+}
+
+.safety-final-quiz__option:focus-visible,
+.safety-final-quiz__next:focus-visible {
+  outline: 3px solid var(--data-blue);
+  outline-offset: 3px;
+}
+
+.safety-final-quiz__option:disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+
+.safety-final-quiz__option.correct {
+  border-color: #39784f;
+  background: #dcebdd;
+  color: #174a2b;
+}
+
+.safety-final-quiz__option.wrong {
+  border-color: var(--rust);
+  background: #f3ded6;
+  color: #813a2a;
+}
+
+.safety-final-quiz__feedback {
+  min-height: 28px;
+  margin: 22px 0 15px;
+  font-size: clamp(0.8125rem, 1.3vw, 0.875rem);
+  line-height: 1.6;
+}
+
+.safety-final-quiz__feedback.correct {
+  color: #28643c;
+}
+
+.safety-final-quiz__feedback.wrong {
+  color: #a3422d;
+}
+
+.safety-final-quiz__next {
+  display: inline-block;
+  padding: clamp(11px, 1.5vw, 13px) clamp(18px, 2.5vw, 23px);
+  border: 1px solid var(--teal);
+  border-radius: 3px;
+  background: var(--teal);
+  color: var(--cream-bright);
+  font: 600 clamp(0.8125rem, 1.3vw, 0.875rem) var(--sans);
+  cursor: pointer;
+  transition:0.2s ease,
+}
+
+.safety-final-quiz__next:hover:not(:disabled) {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--teal);
+}
+
+.safety-final-quiz__next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.safety-final-quiz__result {
+  padding: 25px 0;
+  text-align: center;
+}
+
+.safety-final-quiz__result h3 {
+  margin: 10px 0;
+  font-size: clamp(2rem, 4vw, 2.375rem);
+}
+
+.safety-final-quiz__result p {
+  margin-bottom: 25px;
+  line-height: 1.7;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+}
+
+.safety-final-quiz__saved {
+  margin: 25px 0 0;
+  color: #77766c;
+  font-family: var(--mono);
+  font-size: clamp(0.625rem, 1vw, 0.6875rem);
+  text-align: center;
+}
+
+@media (max-width: 576px) {
+  .safety-final-quiz__options {
+    grid-template-columns: 1fr;
   }
 }

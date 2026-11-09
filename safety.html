@@ -70,8 +70,9 @@
             <span class="safety-bar-label">Analysis</span>
             <span class="safety-bar-value">Risk Map &amp; Adaptation</span>
           </div>
-          <a href="#explore" class="safety-hero-action-btn">
-            <span>Action</span>
+          <div class="safety-hero-action-btn">
+            <span>Explore More</span>
+          </div>
           </a>
         </div>
       </section>
@@ -1377,6 +1378,83 @@
             </div>
 
         </div>
+    </section>
+
+    <section class="safety-final-quiz" id="heatwave-quiz">
+      <div class="container">
+
+        <div class="safety-final-quiz__intro">
+          <span class="safety-final-quiz__eyebrow">The Final Challenge</span>
+          <h2>How Much Do You Know?</h2>
+          <p>
+            You've explored heatwaves, safety measures and solar energy.
+            Now it's time to put your knowledge to the test.
+          </p>
+        </div>
+
+        <div class="safety-final-quiz__card">
+
+          <div class="safety-final-quiz__top">
+            <span id="quiz-question-count">Question 1 of 6</span>
+            <span id="quiz-score">Score: 0</span>
+          </div>
+
+          <div class="safety-final-quiz__progress">
+            <div
+              class="safety-final-quiz__progress-fill"
+              id="quiz-progress"
+              role="progressbar"
+              aria-label="Quiz progress"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0">
+            </div>
+          </div>
+
+          <div id="quiz-content">
+            <span class="safety-final-quiz__category" id="quiz-category">
+              Heatwave Safety
+            </span>
+
+            <h3 id="quiz-question">Loading question...</h3>
+
+            <div class="safety-final-quiz__options" id="quiz-options">
+            </div>
+
+            <p
+              class="safety-final-quiz__feedback"
+              id="quiz-feedback"
+              aria-live="polite">
+            </p>
+
+            <button
+              class="safety-final-quiz__next"
+              id="quiz-next"
+              type="button"
+              disabled>
+              Next Question →
+            </button>
+          </div>
+
+          <div class="safety-final-quiz__result" id="quiz-result" hidden>
+            <span class="safety-final-quiz__eyebrow">Challenge Complete</span>
+            <h3 id="quiz-result-title">Well Done!</h3>
+            <p id="quiz-result-text"></p>
+
+            <button
+              class="safety-final-quiz__next"
+              id="quiz-restart"
+              type="button">
+              Play Again 
+            </button>
+          </div>
+
+          <p class="safety-final-quiz__saved" id="quiz-saved">
+            Your progress is saved automatically
+          </p>
+
+        </div>
+      </div>
     </section>
 
     </main>

@@ -1,4 +1,4 @@
-// set up the hero carousel sizing based on how many slides are present
+﻿// set up the hero carousel sizing based on how many slides are present
 const track = document.getElementById('storyTrack');
 const viewport = document.querySelector('.story-viewport');
 const slides = [...document.querySelectorAll('.story-slide')];
@@ -375,3 +375,340 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+
+// Safety Page Quiz
+
+const questions = [
+  {
+    category: "Heatwave Safety",
+    question: "When is the hottest part of the day usually?",
+    options: [
+      "Early morning",
+      "Around midday to afternoon",
+      "Late at night",
+      "Just before sunrise"
+    ],
+    answer: 1,
+    explanation:
+      "The hottest period is usually around midday and afternoon. Try to limit outdoor activity during these hours."
+  },
+  {
+    category: "Heatwave Safety",
+    question: "What is one of the best ways to prevent dehydration?",
+    options: [
+      "Drink water regularly",
+      "Avoid drinking fluids",
+      "Wear thick clothing",
+      "Stay in direct sunlight"
+    ],
+    answer: 0,
+    explanation:
+      "Drinking water regularly helps replace fluids lost through sweating."
+  },
+  {
+    category: "Heatwave Myths",
+    question: "Are heatwaves simply normal weather events with no connection to climate change?",
+    options: [
+      "Yes, they are unrelated",
+      "Yes, climate never affects them",
+      "No, climate change can make heatwaves more intense",
+      "No, heatwaves only happen in winter"
+    ],
+    answer: 2,
+    explanation:
+      "Climate change increases the likelihood and intensity of many heatwaves."
+  },
+  {
+    category: "Solar Energy",
+    question: "What happens to solar panel efficiency when temperatures become very high?",
+    options: [
+      "It always doubles",
+      "It can decrease slightly",
+      "It stops producing electricity permanently",
+      "It becomes completely unaffected"
+    ],
+    answer: 1,
+    explanation:
+      "High temperatures can reduce solar panel efficiency, even when sunlight is strong."
+  },
+  {
+    category: "Solar Energy",
+    question: "Why is good airflow around solar panels important?",
+    options: [
+      "It makes panels heavier",
+      "It blocks sunlight",
+      "It helps panels stay cooler",
+      "It stops electricity production"
+    ],
+    answer: 2,
+    explanation:
+      "Good ventilation allows heat to escape and helps prevent excessive panel temperatures."
+  },
+  {
+    category: "Heatwave Safety",
+    question: "Which is a warning sign of potentially life-threatening heatstroke?",
+    options: [
+      "A mild feeling of hunger",
+      "Confusion or altered mental state",
+      "Cold hands in a cool room",
+      "Feeling thirsty after exercise"
+    ],
+    answer: 1,
+    explanation:
+      "Confusion or altered mental state can indicate heatstroke. Call emergency services and begin cooling the person immediately."
+  }
+];
+const questionCount = document.getElementById("quiz-question-count");
+const scoreDisplay = document.getElementById("quiz-score");
+const progressBar = document.getElementById("quiz-progress");
+
+const categoryDisplay = document.getElementById("quiz-category");
+const questionDisplay = document.getElementById("quiz-question");
+const optionsContainer = document.getElementById("quiz-options");
+
+const feedbackDisplay = document.getElementById("quiz-feedback");
+const nextButton = document.getElementById("quiz-next");
+
+const quizContent = document.getElementById("quiz-content");
+const resultScreen = document.getElementById("quiz-result");
+
+const resultTitle = document.getElementById("quiz-result-title");
+const resultText = document.getElementById("quiz-result-text");
+const restartButton = document.getElementById("quiz-restart");
+
+let currentQuestion = 0;
+let score = 0;
+let hasAnswered = false;
+
+const storageKey = "heatwaveQuizProgress";
+
+function saveProgress() {
+
+  const quizData = {
+    currentQuestion: currentQuestion,
+    score: score,
+    hasAnswered: hasAnswered
+  };
+
+  localStorage.setItem(storageKey, JSON.stringify(quizData));
+}
+
+function loadProgress() {
+
+  const savedData = localStorage.getItem(storageKey);
+
+  if (savedData !== null) {
+
+    try {
+
+      const quizData = JSON.parse(savedData);
+
+      if (quizData.completed === true) {
+
+        score = Number(quizData.score);
+
+        if (
+          Number.isInteger(score) &&
+          score >= 0 &&
+          score <= questions.length
+        ) {
+          currentQuestion = questions.length;
+          return true;
+        }
+      }
+
+      if (
+        Number.isInteger(quizData.currentQuestion) &&
+        quizData.currentQuestion >= 0 &&
+        quizData.currentQuestion < questions.length &&
+        Number.isInteger(quizData.score) &&
+        quizData.score >= 0 &&
+        quizData.score <= quizData.currentQuestion + 1 &&
+        typeof quizData.hasAnswered === "boolean"
+      ) {
+
+        currentQuestion = quizData.currentQuestion;
+        score = quizData.score;
+        hasAnswered = quizData.hasAnswered;
+
+        return false;
+      }
+
+    } catch (error) {
+      console.error("Error loading quiz progress:", error);
+    }
+  }
+
+  resetQuiz();
+  return false;
+}
+function showQuestion() {
+
+  const question = questions[currentQuestion];
+
+  questionCount.textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+
+  scoreDisplay.textContent = `Score: ${score}`;
+
+  categoryDisplay.textContent = question.category;
+  questionDisplay.textContent = question.question;
+
+  const progress = (currentQuestion / questions.length) * 100;
+
+  progressBar.style.width = progress + "%";
+  progressBar.setAttribute("aria-valuenow", progress);
+
+  optionsContainer.innerHTML = "";
+
+  feedbackDisplay.textContent = "";
+  feedbackDisplay.className = "safety-final-quiz__feedback";
+
+  nextButton.disabled = true;
+
+  question.options.forEach(function(option, index) {
+
+    const button = document.createElement("button");
+
+    button.textContent = option;
+    button.className = "safety-final-quiz__option";
+    button.type = "button";
+
+    button.addEventListener("click", function() {
+      checkAnswer(index);
+    });
+
+    optionsContainer.appendChild(button);
+  });
+
+  if (hasAnswered) {
+    restoreAnsweredQuestion();
+  }
+}
+
+function checkAnswer(selectedAnswer) {
+
+  if (hasAnswered) {
+    return;
+  }
+
+  hasAnswered = true;
+
+  const question = questions[currentQuestion];
+  const buttons = optionsContainer.children;
+
+  if (selectedAnswer === question.answer) {
+
+    score++;
+
+    feedbackDisplay.textContent =
+      "Correct! " + question.explanation;
+
+    feedbackDisplay.classList.add("correct");
+
+  } else {
+
+    feedbackDisplay.textContent =
+      "Not quite! " + question.explanation;
+
+    feedbackDisplay.classList.add("wrong");
+  }
+
+  for (let i = 0; i < buttons.length; i++) {
+
+    buttons[i].disabled = true;
+
+    if (i === question.answer) {
+      buttons[i].classList.add("correct");
+    }
+
+    if (i === selectedAnswer && selectedAnswer !== question.answer) {
+      buttons[i].classList.add("wrong");
+    }
+  }
+
+  scoreDisplay.textContent = `Score: ${score}`;
+
+  nextButton.disabled = false;
+
+  saveProgress();
+}
+function restoreAnsweredQuestion() {
+
+  const question = questions[currentQuestion];
+  const buttons = optionsContainer.children;
+  for (let i = 0; i < buttons.length; i++) {
+
+    buttons[i].disabled = true;
+
+    if (i === question.answer) {
+      buttons[i].classList.add("correct");
+    }
+  }
+  feedbackDisplay.textContent =
+    "You've already answered this question. " +
+    question.explanation;
+
+  feedbackDisplay.classList.add("correct");
+
+  nextButton.disabled = false;
+}
+nextButton.addEventListener("click", function() {
+
+  currentQuestion++;
+  hasAnswered = false;
+  if (currentQuestion < questions.length) {
+
+    saveProgress();
+    showQuestion();
+
+  } else {
+
+    showResults();
+  }
+});
+function showResults() {
+  quizContent.hidden = true;
+  resultScreen.hidden = false;
+  progressBar.style.width = "100%";
+  progressBar.setAttribute("aria-valuenow", "100");
+
+  questionCount.textContent = "Quiz completed!";
+  scoreDisplay.textContent = `Score: ${score}`;
+  resultTitle.textContent = "You Scored " + score + "/" + questions.length;
+
+  if (score === questions.length) {
+    resultText.textContent =
+      "Perfect score! You've mastered the heatwave challenge.";
+  } else if (score >= 4) {
+    resultText.textContent =
+      "Great job! You have a good understanding of heatwave safety and solar energy.";
+  } else {
+    resultText.textContent =
+      "Good effort! Revisit the information and try the challenge again.";
+  }
+  localStorage.setItem(storageKey, JSON.stringify({
+    completed: true,
+    score: score
+  }));
+}
+function resetQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  hasAnswered = false;
+  localStorage.removeItem(storageKey);
+}
+restartButton.addEventListener("click", function() {
+  resetQuiz();
+  quizContent.hidden = false;
+  resultScreen.hidden = true;
+  saveProgress();
+  showQuestion();
+});
+const quizCompleted = loadProgress();
+
+if (quizCompleted) {
+  showResults();
+} else {
+  showQuestion();
+}
