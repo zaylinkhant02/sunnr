@@ -3986,14 +3986,23 @@ html.has-scroll-reveals [data-reveal].is-revealed {
   background-position: center;
   overflow: hidden;
 }
-
+.safety-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
 .safety-hero-bg-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(16, 43, 42, 0.4) 0%,
-    rgba(16, 43, 42, 0.8) 100%
+    rgba(16, 43, 42, 0.35) 0%,
+    rgba(16, 43, 42, 0.55) 45%,
+    rgba(16, 43, 42, 0.9) 100%
   );
   z-index: 1;
 }
@@ -4011,8 +4020,7 @@ html.has-scroll-reveals [data-reveal].is-revealed {
 }
 
 .safety-hero-main-title {
-  font-family: var(--serif);
-  font-size: clamp(3.5rem, 5vw + 1rem, 7rem);
+  font: 500 clamp(3.5rem, 9vw, 7rem)/.92 var(--serif);
   font-weight: 600;
   line-height: 1.05;
   color: var(--cream-bright);
@@ -4020,8 +4028,10 @@ html.has-scroll-reveals [data-reveal].is-revealed {
 }
 
 .safety-hero-subtitle {
-  font-family: var(--sans);
-  font-size: clamp(1rem, 0.5vw + 0.9rem, 1.25rem);
+  
+  /* font-family: var(--sans);
+  font-size: 500 clamp(3.5rem, 9vw, 7rem)/.92; */
+  font: 400 clamp(1.05rem, 2vw, 1.25rem)/1.6 var(--sans);
   color: var(--cream);
   opacity: 0.9;
   max-width: 550px;
