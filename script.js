@@ -786,8 +786,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // weather dashboard for monitoring weather section
 
-// document.getElementById() finds an html element
-// using its id so javascript can update its content
+// find the html elements so javascript can update them
 
 const countrySelect = document.getElementById("countrySelect");
 const citySelect = document.getElementById("citySelect");
@@ -801,7 +800,6 @@ const dateDisplay = document.getElementById("weatherDate");
 
 const temperatureDisplay = document.getElementById("currentTemperature");
 const temperatureUnitDisplay = document.getElementById("currentUnit");
-
 const descriptionDisplay = document.getElementById("currentWeatherDescription");
 
 const feelsLikeDisplay = document.getElementById("feelsLike");
@@ -832,7 +830,7 @@ const preparationAdvice = document.getElementById("preparationAdvice");
 
 
 // each city has its own latitude and longitude
-// the weather api needs these coordinates to find weather conditions
+// the weather api uses these coordinates to find weather conditions
 
 const locations = {
   Myanmar: {
@@ -840,47 +838,38 @@ const locations = {
       latitude: 16.8409,
       longitude: 96.1735
     },
-
     Mandalay: {
       latitude: 21.9588,
       longitude: 96.0891
     },
-
     Naypyidaw: {
       latitude: 19.7633,
       longitude: 96.0785
     },
-
     Bago: {
       latitude: 17.3360,
       longitude: 96.4797
     },
-
     Mawlamyine: {
       latitude: 16.4905,
       longitude: 97.6283
     },
-
     Pathein: {
       latitude: 16.7792,
       longitude: 94.7321
     },
-
     Taunggyi: {
       latitude: 20.7892,
       longitude: 97.0378
     },
-
     Myitkyina: {
       latitude: 25.3833,
       longitude: 97.4000
     },
-
     Sittwe: {
       latitude: 20.1500,
       longitude: 92.9000
     },
-
     Monywa: {
       latitude: 22.1086,
       longitude: 95.1358
@@ -901,8 +890,7 @@ let temperatureChart = null;
 let rainfallChart = null;
 
 
-// these are example alert thresholds only
-// replace them with researched and verified thresholds before publishing
+// these are example thresholds for automatic weather alerts
 
 const alertThresholds = {
   heatWarning: 35,
@@ -911,8 +899,297 @@ const alertThresholds = {
 };
 
 
-// localStorage saves information in the visitor's browser
-// getItem() retrieves information saved earlier
+// personal heat alert settings
+
+// these are the default settings used when no saved settings exist
+
+const default_personal_heat_settings = {
+  enabled: true,
+  threshold: 35,
+  days: 3,
+  notification: "browser"
+};
+
+
+// load previously saved personal heat settings
+
+function load_personal_heat_settings() {
+  try {
+    const saved_settings = localStorage.getItem(
+      "sunnrPersonalHeatSettings"
+    );
+
+    if (!saved_settings) {
+      return { ...default_personal_heat_settings };
+    }
+
+    const parsed_settings = JSON.parse(saved_settings);
+
+    const settings = {
+      ...default_personal_heat_settings,
+      ...parsed_settings
+    };
+
+    if (
+      typeof settings.enabled !== "boolean" ||
+      typeof settings.threshold !== "number" ||
+      !Number.isFinite(settings.threshold) ||
+      settings.threshold < 30 ||
+      settings.threshold > 50 ||
+      ![1, 3, 7].includes(settings.days) ||
+      settings.notification !== "browser"
+    ) {
+      return { ...default_personal_heat_settings };
+    }
+
+    return settings;
+
+  } catch (error) {
+    console.error("could not load personal heat settings:", error);
+
+    return { ...default_personal_heat_settings };
+  }
+}
+
+
+// load the saved settings before checking the weather
+
+let personal_heat_settings = load_personal_heat_settings();
+
+
+// show the saved settings in the html inputs
+
+function display_personal_heat_settings() {
+  const enabled_input = document.getElementById(
+    "personalHeatAlertsEnabled"
+  );
+
+  const threshold_input = document.getElementById(
+    "personalHeatThreshold"
+  );
+
+  const days_input = document.getElementById(
+    "personalHeatDays"
+  );
+
+  if (!enabled_input || !threshold_input || !days_input) return;
+
+  enabled_input.checked = personal_heat_settings.enabled;
+  threshold_input.value = personal_heat_settings.threshold;
+  days_input.value = String(personal_heat_settings.days);
+}
+
+
+// ask the browser for permission to send notifications
+
+async function request_heat_notification_permission() {
+  if (!("Notification" in window)) {
+    return false;
+  }
+
+  if (Notification.permission === "granted") {
+    return true;
+  }
+
+  if (Notification.permission === "denied") {
+    return false;
+  }
+
+  const permission = await Notification.requestPermission();
+
+  return permission === "granted";
+}
+
+
+// save the personal heat alert settings
+
+async function save_personal_heat_settings() {
+  const enabled_input = document.getElementById(
+    "personalHeatAlertsEnabled"
+  );
+
+  const threshold_input = document.getElementById(
+    "personalHeatThreshold"
+  );
+
+  const days_input = document.getElementById(
+    "personalHeatDays"
+  );
+
+  const status = document.getElementById(
+    "personalHeatSettingsStatus"
+  );
+
+  if (!enabled_input || !threshold_input || !days_input) return;
+
+  const threshold = Number(threshold_input.value);
+  const days = Number(days_input.value);
+
+  // check that the temperature is valid
+
+  if (
+    !Number.isFinite(threshold) ||
+    threshold < 30 ||
+    threshold > 50
+  ) {
+    if (status) {
+      status.textContent =
+        "please enter a temperature between 30°C and 50°C.";
+    }
+
+    return;
+  }
+
+  // check that the forecast period is valid
+
+  if (![1, 3, 7].includes(days)) {
+    if (status) {
+      status.textContent =
+        "please select a valid forecast period.";
+    }
+
+    return;
+  }
+
+  // update the settings with the user's choices
+
+  personal_heat_settings = {
+    enabled: enabled_input.checked,
+    threshold: threshold,
+    days: days,
+    notification: "browser"
+  };
+
+  // save the settings in local storage
+
+  localStorage.setItem(
+    "sunnrPersonalHeatSettings",
+    JSON.stringify(personal_heat_settings)
+  );
+
+  if (!personal_heat_settings.enabled) {
+    if (status) {
+      status.textContent = "personal heat alerts are disabled.";
+    }
+
+    return;
+  }
+
+  // ask for browser permission after the user clicks save
+
+  const permission_granted =
+    await request_heat_notification_permission();
+
+  if (status) {
+    if (permission_granted) {
+      status.textContent =
+        "your settings are saved. browser notifications are enabled.";
+    } else {
+      status.textContent =
+        "your settings are saved, but browser notifications are not allowed. check your browser permissions.";
+    }
+  }
+
+  // check the current forecast again after saving
+
+  if (weatherData) {
+    check_personal_heat_forecast(weatherData, selectedCity);
+  }
+}
+
+
+// check the selected number of forecast days
+// the api temperatures are in celsius, even if the dashboard uses fahrenheit
+
+function check_personal_heat_forecast(data, city) {
+  if (!personal_heat_settings.enabled) return;
+  if (!data || !data.daily) return;
+
+  const daily = data.daily;
+
+  if (
+    !Array.isArray(daily.time) ||
+    !Array.isArray(daily.temperature_2m_max)
+  ) {
+    return;
+  }
+
+  const days_to_check = Math.min(
+    personal_heat_settings.days,
+    daily.time.length,
+    daily.temperature_2m_max.length
+  );
+
+  for (let i = 0; i < days_to_check; i++) {
+    const forecast_date = daily.time[i];
+    const max_temperature = daily.temperature_2m_max[i];
+
+    if (
+      typeof max_temperature !== "number" ||
+      !Number.isFinite(max_temperature)
+    ) {
+      continue;
+    }
+
+    if (max_temperature >= personal_heat_settings.threshold) {
+      send_personal_heat_notification(
+        city,
+        forecast_date,
+        max_temperature
+      );
+    }
+  }
+}
+
+
+// send a browser notification when the personal temperature threshold is reached
+
+function send_personal_heat_notification(city, date, temperature) {
+  if (
+    personal_heat_settings.notification !== "browser" ||
+    !("Notification" in window) ||
+    Notification.permission !== "granted"
+  ) {
+    return;
+  }
+
+  // use a separate key for each city, date and threshold
+  // this prevents the same forecast from sending repeated notifications
+
+  const notification_key =
+    `sunnrHeatNotification_${city}_${date}_${personal_heat_settings.threshold}`;
+
+  if (localStorage.getItem(notification_key)) return;
+
+  new Notification("Sunnr Personal Heat Alert", {
+    body: `${city}: the forecast maximum is ${temperature}°C on ${date}. Your personal threshold is ${personal_heat_settings.threshold}°C.`,
+    tag: notification_key
+  });
+
+  localStorage.setItem(notification_key, "true");
+}
+
+
+// connect the personal heat settings button
+
+const save_personal_heat_button = document.getElementById(
+  "savePersonalHeatSettings"
+);
+
+if (save_personal_heat_button) {
+  save_personal_heat_button.addEventListener(
+    "click",
+    save_personal_heat_settings
+  );
+}
+
+
+// show saved settings when the page loads
+
+display_personal_heat_settings();
+
+
+// load previously saved dashboard preferences
 
 const savedCountry = localStorage.getItem("sunnrCountry");
 const savedCity = localStorage.getItem("sunnrCity");
@@ -934,26 +1211,20 @@ if (savedUnit === "fahrenheit") {
   temperatureUnit = "fahrenheit";
 }
 
-// alerts are enabled by default unless the visitor
-// previously turned them off
-
 if (alertCheckbox) {
   alertCheckbox.checked = savedAlerts !== "false";
 }
 
 
-// add countries and cities to the dropdown menus
+// load the available countries and cities into the dropdowns
 
 function loadLocationOptions() {
-
   if (!countrySelect || !citySelect) return;
 
   countrySelect.innerHTML = "";
   citySelect.innerHTML = "";
 
-  // create an option for every available country
   for (const country in locations) {
-
     const option = document.createElement("option");
 
     option.value = country;
@@ -964,12 +1235,9 @@ function loadLocationOptions() {
 
   countrySelect.value = selectedCountry;
 
-  // get the cities belonging to the selected country
   const cities = locations[selectedCountry];
 
-  // create an option for every available city
   for (const city in cities) {
-
     const option = document.createElement("option");
 
     option.value = city;
@@ -985,7 +1253,6 @@ function loadLocationOptions() {
 // convert celsius into fahrenheit when needed
 
 function convertTemperature(celsius) {
-
   if (temperatureUnit === "fahrenheit") {
     return (celsius * 9 / 5) + 32;
   }
@@ -994,11 +1261,9 @@ function convertTemperature(celsius) {
 }
 
 
-// return the temperature number without the unit
-// the html has separate elements for the number and unit
+// round the temperature for display
 
 function formatTemperature(celsius) {
-
   return Math.round(convertTemperature(celsius));
 }
 
@@ -1006,15 +1271,13 @@ function formatTemperature(celsius) {
 // return the correct temperature unit
 
 function getTemperatureUnit() {
-
   return temperatureUnit === "celsius" ? "°C" : "°F";
 }
 
 
-// change open-meteo weather codes into descriptions and icons
+// match weather codes with a description and icon
 
 function getWeatherDescription(code) {
-
   if (code === 0) {
     return {
       description: "clear sky",
@@ -1083,19 +1346,19 @@ function getWeatherDescription(code) {
 // await waits for the api response before continuing
 
 async function getWeather() {
-
   const city = locations[selectedCountry][selectedCity];
 
   if (statusDisplay) {
-    statusDisplay.textContent = "loading the latest weather information...";
+    statusDisplay.textContent =
+      "loading the latest weather information...";
   }
 
   try {
-
-    const apiUrl = new URL("https://api.open-meteo.com/v1/forecast");
+    const apiUrl = new URL(
+      "https://api.open-meteo.com/v1/forecast"
+    );
 
     apiUrl.search = new URLSearchParams({
-
       latitude: city.latitude,
       longitude: city.longitude,
 
@@ -1119,21 +1382,26 @@ async function getWeather() {
 
       timezone: "auto",
       forecast_days: "7"
-
     });
 
     const response = await fetch(apiUrl);
 
-    // stop if the api returns an error
     if (!response.ok) {
-      throw new Error("weather information could not be retrieved.");
+      throw new Error(
+        "weather information could not be retrieved."
+      );
     }
 
     const data = await response.json();
 
     weatherData = data;
 
-    // update the different dashboard sections
+    // check personal heat alerts after the settings have loaded
+
+    check_personal_heat_forecast(data, selectedCity);
+
+    // update each section of the weather dashboard
+
     displayCurrentWeather(data);
     displayLocalTime(data.timezone);
     displayWeeklyForecast(data.daily);
@@ -1148,7 +1416,6 @@ async function getWeather() {
     }
 
   } catch (error) {
-
     console.error("weather api error:", error);
 
     if (statusDisplay) {
@@ -1162,7 +1429,6 @@ async function getWeather() {
 // display the current weather information
 
 function displayCurrentWeather(data) {
-
   const current = data.current;
   const daily = data.daily;
 
@@ -1208,19 +1474,15 @@ function displayCurrentWeather(data) {
       `${current.wind_speed_10m} km/h`;
   }
 
-  // show the chance of rain instead of the amount of rain
-  // the daily forecast provides the maximum rain probability for today
-
   if (rainDisplay) {
-    const rainProbability = daily.precipitation_probability_max[0];
+    const rainProbability =
+      daily.precipitation_probability_max[0];
 
     rainDisplay.textContent =
-      rainProbability === null
+      rainProbability == null
         ? "n/a"
         : `${rainProbability}%`;
   }
-
-  // show today's maximum temperature
 
   if (todayHighDisplay) {
     todayHighDisplay.textContent =
@@ -1228,17 +1490,12 @@ function displayCurrentWeather(data) {
       getTemperatureUnit();
   }
 
-  // show today's maximum uv index
-
   if (uvDisplay) {
     uvDisplay.textContent =
       daily.uv_index_max[0] ?? "n/a";
   }
 
-  // show when the weather data was last updated
-
   if (updatedDisplay) {
-
     const updateTime = new Date(current.time);
 
     updatedDisplay.textContent =
@@ -1248,8 +1505,6 @@ function displayCurrentWeather(data) {
       })}`;
   }
 
-  // update the forecast location label
-
   if (forecastLocation) {
     forecastLocation.textContent =
       `${selectedCity}, ${selectedCountry}`;
@@ -1257,14 +1512,12 @@ function displayCurrentWeather(data) {
 }
 
 
-// display the selected city's local time
+// display the local time and date for the selected city
 
 function displayLocalTime(timezone) {
-
   if (!localTimeDisplay || !dateDisplay) return;
 
   function updateClock() {
-
     const now = new Date();
 
     localTimeDisplay.textContent =
@@ -1287,31 +1540,25 @@ function displayLocalTime(timezone) {
 
   updateClock();
 
-  // stop the previous clock before starting a new one
-
   if (window.weatherClock) {
     clearInterval(window.weatherClock);
   }
-
-  // update the clock every second
 
   window.weatherClock = setInterval(updateClock, 1000);
 }
 
 
-// display the seven-day forecast
+// display the seven-day weather forecast
 
 function displayWeeklyForecast(daily) {
-
   if (!forecastContainer) return;
 
   forecastContainer.innerHTML = "";
 
-  // loop through all seven forecast days
-
   for (let i = 0; i < daily.time.length; i++) {
-
-    const weather = getWeatherDescription(daily.weather_code[i]);
+    const weather = getWeatherDescription(
+      daily.weather_code[i]
+    );
 
     const date = new Date(`${daily.time[i]}T12:00:00`);
 
@@ -1332,7 +1579,6 @@ function displayWeeklyForecast(daily) {
     forecastCard.className = "forecast-day";
 
     forecastCard.innerHTML = `
-
       <p class="forecast-day-name">${dayName}</p>
 
       <p class="forecast-day-date">${dayDate}</p>
@@ -1345,7 +1591,6 @@ function displayWeeklyForecast(daily) {
       </p>
 
       <div class="forecast-temperatures">
-
         <span>
           ${formatTemperature(daily.temperature_2m_max[i])}${getTemperatureUnit()}
         </span>
@@ -1353,13 +1598,11 @@ function displayWeeklyForecast(daily) {
         <span>
           ${formatTemperature(daily.temperature_2m_min[i])}${getTemperatureUnit()}
         </span>
-
       </div>
 
       <p class="forecast-description">
         rain chance: ${rainProbability ?? "n/a"}%
       </p>
-
     `;
 
     forecastContainer.appendChild(forecastCard);
@@ -1367,73 +1610,71 @@ function displayWeeklyForecast(daily) {
 }
 
 
-// check the current weather and forecast for possible alerts
+// check current weather and forecast conditions for automatic alerts
 
 function displayWeatherAlerts(data) {
-
   if (!alertList || !alertCount) return;
 
   alertList.innerHTML = "";
 
   const alerts = [];
 
-  const currentTemperature = data.current.temperature_2m;
-
-  // check the current temperature
+  const currentTemperature =
+    data.current.temperature_2m;
 
   if (currentTemperature >= alertThresholds.extremeHeat) {
-
     alerts.push({
       type: "danger",
       title: "extreme heat conditions",
-      message: "the current temperature has reached the example extreme-heat threshold. check verified local safety guidance and take precautions."
+      message:
+        "the current temperature has reached the example extreme-heat threshold. check verified local safety guidance and take precautions."
     });
 
-  } else if (currentTemperature >= alertThresholds.heatWarning) {
-
+  } else if (
+    currentTemperature >= alertThresholds.heatWarning
+  ) {
     alerts.push({
       type: "warning",
       title: "high temperature warning",
-      message: "the current temperature has reached the example heat-warning threshold. stay informed and plan outdoor activities carefully."
+      message:
+        "the current temperature has reached the example heat-warning threshold. stay informed and plan outdoor activities carefully."
     });
   }
 
-  // check the forecast for the next seven days
-
   for (let i = 0; i < data.daily.time.length; i++) {
+    const maximumTemperature =
+      data.daily.temperature_2m_max[i];
 
-    const maximumTemperature = data.daily.temperature_2m_max[i];
-    const rainProbability = data.daily.precipitation_probability_max[i];
+    const rainProbability =
+      data.daily.precipitation_probability_max[i];
+
     const date = data.daily.time[i];
 
     if (maximumTemperature >= alertThresholds.heatWarning) {
-
       alerts.push({
         type: "warning",
         title: `heat expected on ${date}`,
-        message: `the forecast maximum temperature is ${formatTemperature(maximumTemperature)}${getTemperatureUnit()}. prepare for potentially hot conditions.`
+        message:
+          `the forecast maximum temperature is ${formatTemperature(maximumTemperature)}${getTemperatureUnit()}. prepare for potentially hot conditions.`
       });
     }
 
     if (
-      rainProbability !== null &&
+      rainProbability != null &&
       rainProbability >= alertThresholds.highRainProbability
     ) {
-
       alerts.push({
         type: "info",
         title: `high rainfall chance on ${date}`,
-        message: `the forecast shows a ${rainProbability}% chance of precipitation. consider preparing for wet weather.`
+        message:
+          `the forecast shows a ${rainProbability}% chance of precipitation. consider preparing for wet weather.`
       });
     }
   }
 
   alertCount.textContent = alerts.length;
 
-  // show a message if no alerts are found
-
   if (alerts.length === 0) {
-
     alertList.innerHTML = `
       <div class="weather-alert-empty">
         <i class="bi bi-check-circle" aria-hidden="true"></i>
@@ -1444,17 +1685,13 @@ function displayWeatherAlerts(data) {
     return;
   }
 
-  // create a card for every alert
-
   for (const alert of alerts) {
-
     const alertCard = document.createElement("article");
 
     alertCard.className =
       `weather-alert-card ${alert.type}`;
 
     alertCard.innerHTML = `
-
       <div class="weather-alert-icon">
         <i class="bi bi-exclamation-triangle"
            aria-hidden="true"></i>
@@ -1468,13 +1705,10 @@ function displayWeatherAlerts(data) {
       <span class="weather-alert-tag">
         ${alert.type}
       </span>
-
     `;
 
     alertList.appendChild(alertCard);
   }
-
-  // only show a browser popup for a new extreme heat warning
 
   if (alertCheckbox && alertCheckbox.checked) {
     showBrowserAlert(alerts);
@@ -1482,10 +1716,9 @@ function displayWeatherAlerts(data) {
 }
 
 
-// show an important browser alert only once per city per day
+// show an important automatic alert once per city per day
 
 function showBrowserAlert(alerts) {
-
   const importantAlert = alerts.find(function(alert) {
     return alert.type === "danger";
   });
@@ -1498,7 +1731,6 @@ function showBrowserAlert(alerts) {
   const alreadyShown = localStorage.getItem(alertKey);
 
   if (!alreadyShown) {
-
     window.alert(
       `sunnr weather warning\n\n${importantAlert.title}\n\n${importantAlert.message}`
     );
@@ -1508,28 +1740,21 @@ function showBrowserAlert(alerts) {
 }
 
 
-// test button lets the visitor check whether browser alerts work
+// test the existing automatic browser alert button
 
 if (testAlertButton) {
-
   testAlertButton.addEventListener("click", function() {
-
     window.alert(
       "sunnr weather alert test\n\nbrowser alerts are working correctly."
     );
-
   });
-
 }
 
 
 // create the temperature and rainfall charts
 
 function displayWeeklyCharts(daily) {
-
   if (!temperatureCanvas || !rainfallCanvas) return;
-
-  // check whether chart.js has loaded before creating charts
 
   if (typeof Chart === "undefined") {
     console.error("chart.js has not loaded.");
@@ -1537,15 +1762,11 @@ function displayWeeklyCharts(daily) {
   }
 
   const labels = daily.time.map(function(date) {
-
     return new Date(`${date}T12:00:00`)
       .toLocaleDateString("en-GB", {
         weekday: "short"
       });
-
   });
-
-  // remove the old charts before creating new ones
 
   if (temperatureChart) {
     temperatureChart.destroy();
@@ -1558,14 +1779,12 @@ function displayWeeklyCharts(daily) {
   // create the temperature chart
 
   temperatureChart = new Chart(temperatureCanvas, {
-
     type: "line",
 
     data: {
       labels: labels,
 
       datasets: [
-
         {
           label: "maximum temperature",
           data: daily.temperature_2m_max.map(convertTemperature),
@@ -1574,7 +1793,6 @@ function displayWeeklyCharts(daily) {
           fill: true,
           tension: 0.4
         },
-
         {
           label: "minimum temperature",
           data: daily.temperature_2m_min.map(convertTemperature),
@@ -1583,7 +1801,6 @@ function displayWeeklyCharts(daily) {
           fill: true,
           tension: 0.4
         }
-
       ]
     },
 
@@ -1600,7 +1817,6 @@ function displayWeeklyCharts(daily) {
       },
 
       scales: {
-
         x: {
           ticks: {
             color: "#f3eddd"
@@ -1613,34 +1829,28 @@ function displayWeeklyCharts(daily) {
         y: {
           ticks: {
             color: "#f3eddd",
-
             callback: function(value) {
               return value + getTemperatureUnit();
             }
           },
-
           grid: {
             color: "rgba(243, 237, 221, 0.08)"
           }
         }
-
       }
     }
-
   });
 
 
   // create the rainfall chart
 
   rainfallChart = new Chart(rainfallCanvas, {
-
     type: "bar",
 
     data: {
       labels: labels,
 
       datasets: [
-
         {
           label: "precipitation (mm)",
           data: daily.precipitation_sum,
@@ -1649,7 +1859,6 @@ function displayWeeklyCharts(daily) {
           borderWidth: 1,
           borderRadius: 5
         }
-
       ]
     },
 
@@ -1666,7 +1875,6 @@ function displayWeeklyCharts(daily) {
       },
 
       scales: {
-
         x: {
           ticks: {
             color: "#f3eddd"
@@ -1678,28 +1886,22 @@ function displayWeeklyCharts(daily) {
 
         y: {
           beginAtZero: true,
-
           ticks: {
             color: "#f3eddd"
           },
-
           grid: {
             color: "rgba(243, 237, 221, 0.08)"
           }
         }
-
       }
     }
-
   });
-
 }
 
 
-// calculate the highest temperature and total rainfall for the week
+// calculate and display the weekly weather summary
 
 function displayWeeklySummary(daily) {
-
   if (!weeklySummary) return;
 
   let highestTemperature = daily.temperature_2m_max[0];
@@ -1708,9 +1910,9 @@ function displayWeeklySummary(daily) {
   let totalRainfall = 0;
 
   for (let i = 0; i < daily.time.length; i++) {
-
-    if (daily.temperature_2m_max[i] > highestTemperature) {
-
+    if (
+      daily.temperature_2m_max[i] > highestTemperature
+    ) {
       highestTemperature = daily.temperature_2m_max[i];
       hottestDay = daily.time[i];
     }
@@ -1718,17 +1920,16 @@ function displayWeeklySummary(daily) {
     totalRainfall += daily.precipitation_sum[i] || 0;
   }
 
-  const hottestDate = new Date(`${hottestDay}T12:00:00`)
-    .toLocaleDateString("en-GB", {
-      weekday: "long",
-      day: "numeric",
-      month: "short"
-    });
+  const hottestDate =
+    new Date(`${hottestDay}T12:00:00`)
+      .toLocaleDateString("en-GB", {
+        weekday: "long",
+        day: "numeric",
+        month: "short"
+      });
 
   weeklySummary.innerHTML = `
-
     <div class="weekly-summary">
-
       <i class="bi bi-thermometer-sun" aria-hidden="true"></i>
 
       <p>
@@ -1738,252 +1939,210 @@ function displayWeeklySummary(daily) {
         the predicted total rainfall is
         <strong>${totalRainfall.toFixed(1)} mm</strong>.
       </p>
-
     </div>
-
   `;
 }
 
 
-// show preparation advice based on the forecast
+// display preparation advice based on the weekly forecast
 
 function displayPreparationAdvice(daily) {
-
   if (!preparationAdvice) return;
 
   preparationAdvice.innerHTML = "";
 
-  const highestTemperature = Math.max(...daily.temperature_2m_max);
+  const highestTemperature = Math.max(
+    ...daily.temperature_2m_max
+  );
 
   const highestRainProbability = Math.max(
-    ...daily.precipitation_probability_max.map(value => value ?? 0)
+    ...daily.precipitation_probability_max.map(
+      value => value ?? 0
+    )
   );
 
   const advice = [];
 
   if (highestTemperature >= alertThresholds.heatWarning) {
-
     advice.push({
       icon: "bi-droplet",
       title: "prepare for hot weather",
-      message: "keep drinking water available, plan outdoor activities carefully and check local heat-safety guidance."
+      message:
+        "keep drinking water available, plan outdoor activities carefully and check local heat-safety guidance."
     });
 
   } else {
-
     advice.push({
       icon: "bi-sun",
       title: "stay weather aware",
-      message: "check the daily forecast before planning outdoor activities and keep up with local weather updates."
+      message:
+        "check the daily forecast before planning outdoor activities and keep up with local weather updates."
     });
-
   }
 
-  if (highestRainProbability >= alertThresholds.highRainProbability) {
-
+  if (
+    highestRainProbability >= alertThresholds.highRainProbability
+  ) {
     advice.push({
       icon: "bi-cloud-rain",
       title: "prepare for rainfall",
-      message: "consider keeping rain protection ready and checking local travel conditions."
+      message:
+        "consider keeping rain protection ready and checking local travel conditions."
     });
-
   }
 
   if (highestTemperature >= alertThresholds.extremeHeat) {
-
     advice.push({
       icon: "bi-heart-pulse",
       title: "check on vulnerable people",
-      message: "pay particular attention to people who may be more affected by extreme heat and follow official local advice."
+      message:
+        "pay particular attention to people who may be more affected by extreme heat and follow official local advice."
     });
-
   }
 
-  // create a card for each preparation suggestion
-
   for (const item of advice) {
-
     const card = document.createElement("article");
 
     card.className = "preparation-card";
 
     card.innerHTML = `
-
       <i class="bi ${item.icon}" aria-hidden="true"></i>
-
       <h3>${item.title}</h3>
-
       <p>${item.message}</p>
-
     `;
 
     preparationAdvice.appendChild(card);
   }
-
 }
 
 
-// save the visitor's settings in localStorage
+// save the selected dashboard preferences
 
 function saveSettings() {
-
   localStorage.setItem("sunnrCountry", selectedCountry);
   localStorage.setItem("sunnrCity", selectedCity);
   localStorage.setItem("sunnrUnit", temperatureUnit);
 
   if (alertCheckbox) {
-
     localStorage.setItem(
       "sunnrAlerts",
       alertCheckbox.checked
     );
-
   }
 }
 
 
-// update the active appearance of the temperature buttons
+// update the active temperature button
 
 function updateUnitButtons() {
-
   if (celsiusBtn) {
-
     celsiusBtn.classList.toggle(
       "active",
       temperatureUnit === "celsius"
     );
-
   }
 
   if (fahrenheitBtn) {
-
     fahrenheitBtn.classList.toggle(
       "active",
       temperatureUnit === "fahrenheit"
     );
-
   }
 }
 
 
-// listen for a country change
+// update the city list when the country changes
 
 if (countrySelect) {
-
   countrySelect.addEventListener("change", function() {
-
     selectedCountry = countrySelect.value;
 
-    // choose the first city available in the selected country
-
-    selectedCity = Object.keys(locations[selectedCountry])[0];
+    selectedCity = Object.keys(
+      locations[selectedCountry]
+    )[0];
 
     loadLocationOptions();
-
     saveSettings();
-
     getWeather();
-
   });
-
 }
 
 
-// listen for a city change
+// get new weather information when the city changes
 
 if (citySelect) {
-
   citySelect.addEventListener("change", function() {
-
     selectedCity = citySelect.value;
 
     saveSettings();
-
     getWeather();
-
   });
-
 }
 
 
-// switch to celsius
+// change the dashboard temperature to celsius
 
 if (celsiusBtn) {
-
   celsiusBtn.addEventListener("click", function() {
-
     temperatureUnit = "celsius";
 
     saveSettings();
     updateUnitButtons();
 
-    // update the dashboard without requesting the api again
-
     if (weatherData) {
-
       displayCurrentWeather(weatherData);
       displayWeeklyForecast(weatherData.daily);
       displayWeeklyCharts(weatherData.daily);
       displayWeeklySummary(weatherData.daily);
-
     }
-
   });
-
 }
 
 
-// switch to fahrenheit
+// change the dashboard temperature to fahrenheit
 
 if (fahrenheitBtn) {
-
   fahrenheitBtn.addEventListener("click", function() {
-
     temperatureUnit = "fahrenheit";
 
     saveSettings();
     updateUnitButtons();
 
     if (weatherData) {
-
       displayCurrentWeather(weatherData);
       displayWeeklyForecast(weatherData.daily);
       displayWeeklyCharts(weatherData.daily);
       displayWeeklySummary(weatherData.daily);
-
     }
-
   });
-
 }
 
 
-// save the browser alert preference when the checkbox changes
+// save changes when the automatic alert checkbox is used
 
 if (alertCheckbox) {
-
   alertCheckbox.addEventListener("change", function() {
-
     saveSettings();
 
     if (alertCheckbox.checked) {
-
-      window.alert("sunnr weather alerts are now enabled.");
-
+      window.alert(
+        "sunnr weather alerts are now enabled."
+      );
     }
-
   });
-
 }
 
 
-// run these functions when the page first loads
+// initialize the weather dashboard
 
 loadLocationOptions();
-
 updateUnitButtons();
 
+// get weather after all personal settings have initialized
+
 getWeather();
+
+// about us animations 
 
 document.addEventListener("DOMContentLoaded", () => {
     const revealElements = document.querySelectorAll(".reveal");
@@ -2016,3 +2175,84 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const revealElements = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: "0px 0px -35px 0px"
+        });
+        revealElements.forEach((element) => revealObserver.observe(element));
+    } else {
+        revealElements.forEach((element) => element.classList.add("is-visible"));
+    }
+    const navbar = document.getElementById("mainNavbar");
+    const navLinks = document.querySelectorAll("#mainNavbar .nav-link");
+
+    if (navbar && window.bootstrap) {
+        navLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+                if (navbar.classList.contains("show")) {
+                    window.bootstrap.Collapse.getOrCreateInstance(navbar).hide();
+                }
+            });
+        });
+    }
+});
+// personal heat alert demo
+const testPersonalHeatAlertButton = document.getElementById("testPersonalHeatAlert");
+
+if (testPersonalHeatAlertButton) {
+    testPersonalHeatAlertButton.addEventListener("click", async function () {
+        const thresholdInput = document.getElementById("personalHeatThreshold");
+        const status = document.getElementById("personalHeatSettingsStatus");
+
+        const threshold = Number(thresholdInput?.value);
+
+        if (!Number.isFinite(threshold) || threshold < 30 || threshold > 50) {
+            if (status) {
+                status.textContent = "Please enter a temperature between 30°C and 50°C.";
+            }
+            return;
+        }
+
+        const demoTemperature = Math.min(threshold + 2, 50);
+
+        if (!("Notification" in window)) {
+            alert(`SUNNR Heat Alert — Demo\n\nSimulated temperature: ${demoTemperature}°C`);
+            return;
+        }
+
+        try {
+            let permission = Notification.permission;
+
+            if (permission === "default") {
+                permission = await Notification.requestPermission();
+            }
+
+            if (permission === "granted") {
+                new Notification("SUNNR Personal Heat Alert — Demo", {
+                    body: `Demo forecast: ${demoTemperature}°C. This is above your ${threshold}°C alert threshold. Stay hydrated and avoid prolonged outdoor activity.`,
+                    icon: "☀️"
+                });
+
+                if (status) {
+                    status.textContent = "Demo heat alert notification sent successfully!";
+                }
+            } else {
+                alert(`SUNNR Heat Alert — Demo\n\nSimulated temperature: ${demoTemperature}°C\n\nPlease allow browser notifications to receive alerts.`);
+            }
+        } catch (error) {
+            console.error("Demo notification error:", error);
+            alert("Unable to show the demo notification. Please check your browser settings.");
+        }
+    });
+}

@@ -32,7 +32,7 @@
               <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
               <li class="nav-item"><a class="nav-link" href="solar-control.html">Solar panel control</a></li>
               <li class="nav-item"><a class="nav-link active" aria-current="page" href="monitoring.html">Heat monitoring</a></li>
-              <li class="nav-item"><a class="nav-link" >Risk map</a></li>
+              <li class="nav-item"><a class="nav-link" href="risk-map.html">Risk map</a></li>
               <li class="nav-item"><a class="nav-link" href="safety.html">Safety tips</a></li>
               <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
             </ul>
@@ -43,12 +43,12 @@
 
     <main class="heat-monitoring-main">
       <section class="heat-monitoring-hero" aria-labelledby="heat-monitoring-title">
-        <video class="heat-monitoring-hero-video" autoplay muted loop playsinline preload="metadata" poster="https://images.pexels.com/videos/10794810/desert-sand-sun-sunrise-10794810.jpeg" aria-hidden="true">
-          <source src="https://videos.pexels.com/video-files/10794810/10794810-hd_2560_1440_30fps.mp4" type="video/mp4" />
+        <video class="heat-monitoring-hero-video" autoplay muted loop playsinline preload="metadata" poster="https://images.pexels.com/videos/40341871/pexels-photo-40341871.jpeg?auto=compress&w=1260&h=750&dpr=2" aria-hidden="true">
+          <source src="https://www.pexels.com/download/video/40341882/" type="video/mp4" />
         </video>
         <div class="heat-monitoring-heading container">
-          <h1 class="heat-monitoring-title" id="heat-monitoring-title">Heat conditions in Myanmar</h1>
-          <p class="heat-monitoring-intro">Explore how temperatures across Myanmar compare with what is usual. The map offers a broad view, while conditions can differ from one place to the next.</p>
+          <h1 class="heat-monitoring-title" id="heat-monitoring-title">Feel the weather in your city</h1>
+          <p class="heat-monitoring-intro">Take a quick look at your weather dashboard today and see what you can prepare!</p>
         </div>
       </section>
 
@@ -177,6 +177,48 @@
               </div>
             </div>
 
+            <div class="personal-heat-settings">
+              <h3>Personal Heat Alerts</h3>
+              <p>Set your own temperature alert preferences.</p>
+
+              <label>
+                <input type="checkbox" id="personalHeatAlertsEnabled" checked>
+                Enable personal heat alerts
+              </label>
+
+              <div>
+                <label for="personalHeatThreshold">
+                  Temperature threshold (°C)
+                </label>
+                <input
+                  type="number"
+                  id="personalHeatThreshold"
+                  min="30"
+                  max="50"
+                  value="35"
+                >
+              </div>
+
+              <div>
+                <label for="personalHeatDays">
+                  Forecast period
+                </label>
+                <select id="personalHeatDays">
+                  <option value="1">Next 1 day</option>
+                  <option value="3" selected>Next 3 days</option>
+                  <option value="7">Next 7 days</option>
+                </select>
+              </div>
+
+              <button type="button" id="savePersonalHeatSettings">
+                Save alert settings
+              </button>
+
+              <p id="personalHeatSettingsStatus" aria-live="polite">
+                Personal heat alerts are enabled.
+              </p>
+            </div>
+
             <div class="alert-settings">
               <label class="alert-toggle">
                 <input type="checkbox" id="enableBrowserAlerts">
@@ -185,8 +227,17 @@
               </label>
 
               <button type="button" class="weather-text-button" id="testAlertButton">
-                Test alert <i class="bi bi-arrow-up-right"></i>
+                Test Browser Alert <i class="bi bi-arrow-up-right"></i>
               </button>
+
+               <button type="button" class="weather-text-button" id="testPersonalHeatAlert">
+                  Test Heat Notification Alert
+                  <i class="bi bi-bell" aria-hidden="true"></i>
+              </button>
+
+              <p class="weather-help-text">
+                  This simulates a hot forecast for demonstration. It does not change live weather data or saved alert settings.
+              </p>
             </div>
           </section>
 
