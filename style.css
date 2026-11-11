@@ -1483,6 +1483,11 @@ body.site-body {
   top: 0;
 }
 
+.about-page .site-header {
+  position: sticky;
+  top: 0;
+}
+
 .site-brand {
   display: inline-flex;
   align-items: center;
