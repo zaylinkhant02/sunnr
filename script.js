@@ -2175,7 +2175,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-
+// about us
 document.addEventListener("DOMContentLoaded", () => {
     const revealElements = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
