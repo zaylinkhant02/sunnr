@@ -376,339 +376,1643 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-// Safety Page Quiz
 
-const questions = [
-  {
-    category: "Heatwave Safety",
-    question: "When is the hottest part of the day usually?",
-    options: [
-      "Early morning",
-      "Around midday to afternoon",
-      "Late at night",
-      "Just before sunrise"
-    ],
-    answer: 1,
-    explanation:
-      "The hottest period is usually around midday and afternoon. Try to limit outdoor activity during these hours."
-  },
-  {
-    category: "Heatwave Safety",
-    question: "What is one of the best ways to prevent dehydration?",
-    options: [
-      "Drink water regularly",
-      "Avoid drinking fluids",
-      "Wear thick clothing",
-      "Stay in direct sunlight"
-    ],
-    answer: 0,
-    explanation:
-      "Drinking water regularly helps replace fluids lost through sweating."
-  },
-  {
-    category: "Heatwave Myths",
-    question: "Are heatwaves simply normal weather events with no connection to climate change?",
-    options: [
-      "Yes, they are unrelated",
-      "Yes, climate never affects them",
-      "No, climate change can make heatwaves more intense",
-      "No, heatwaves only happen in winter"
-    ],
-    answer: 2,
-    explanation:
-      "Climate change increases the likelihood and intensity of many heatwaves."
-  },
-  {
-    category: "Solar Energy",
-    question: "What happens to solar panel efficiency when temperatures become very high?",
-    options: [
-      "It always doubles",
-      "It can decrease slightly",
-      "It stops producing electricity permanently",
-      "It becomes completely unaffected"
-    ],
-    answer: 1,
-    explanation:
-      "High temperatures can reduce solar panel efficiency, even when sunlight is strong."
-  },
-  {
-    category: "Solar Energy",
-    question: "Why is good airflow around solar panels important?",
-    options: [
-      "It makes panels heavier",
-      "It blocks sunlight",
-      "It helps panels stay cooler",
-      "It stops electricity production"
-    ],
-    answer: 2,
-    explanation:
-      "Good ventilation allows heat to escape and helps prevent excessive panel temperatures."
-  },
-  {
-    category: "Heatwave Safety",
-    question: "Which is a warning sign of potentially life-threatening heatstroke?",
-    options: [
-      "A mild feeling of hunger",
-      "Confusion or altered mental state",
-      "Cold hands in a cool room",
-      "Feeling thirsty after exercise"
-    ],
-    answer: 1,
-    explanation:
-      "Confusion or altered mental state can indicate heatstroke. Call emergency services and begin cooling the person immediately."
-  }
-];
-const questionCount = document.getElementById("quiz-question-count");
-const scoreDisplay = document.getElementById("quiz-score");
-const progressBar = document.getElementById("quiz-progress");
+// safety page quiz
 
-const categoryDisplay = document.getElementById("quiz-category");
-const questionDisplay = document.getElementById("quiz-question");
-const optionsContainer = document.getElementById("quiz-options");
+(function () {
 
-const feedbackDisplay = document.getElementById("quiz-feedback");
-const nextButton = document.getElementById("quiz-next");
+  // check whether the quiz exists on this page
+  const nextButton = document.getElementById("quiz-next");
 
-const quizContent = document.getElementById("quiz-content");
-const resultScreen = document.getElementById("quiz-result");
-
-const resultTitle = document.getElementById("quiz-result-title");
-const resultText = document.getElementById("quiz-result-text");
-const restartButton = document.getElementById("quiz-restart");
-
-let currentQuestion = 0;
-let score = 0;
-let hasAnswered = false;
-
-const storageKey = "heatwaveQuizProgress";
-
-function saveProgress() {
-
-  const quizData = {
-    currentQuestion: currentQuestion,
-    score: score,
-    hasAnswered: hasAnswered
-  };
-
-  localStorage.setItem(storageKey, JSON.stringify(quizData));
-}
-
-function loadProgress() {
-
-  const savedData = localStorage.getItem(storageKey);
-
-  if (savedData !== null) {
-
-    try {
-
-      const quizData = JSON.parse(savedData);
-
-      if (quizData.completed === true) {
-
-        score = Number(quizData.score);
-
-        if (
-          Number.isInteger(score) &&
-          score >= 0 &&
-          score <= questions.length
-        ) {
-          currentQuestion = questions.length;
-          return true;
-        }
-      }
-
-      if (
-        Number.isInteger(quizData.currentQuestion) &&
-        quizData.currentQuestion >= 0 &&
-        quizData.currentQuestion < questions.length &&
-        Number.isInteger(quizData.score) &&
-        quizData.score >= 0 &&
-        quizData.score <= quizData.currentQuestion + 1 &&
-        typeof quizData.hasAnswered === "boolean"
-      ) {
-
-        currentQuestion = quizData.currentQuestion;
-        score = quizData.score;
-        hasAnswered = quizData.hasAnswered;
-
-        return false;
-      }
-
-    } catch (error) {
-      console.error("Error loading quiz progress:", error);
-    }
-  }
-
-  resetQuiz();
-  return false;
-}
-function showQuestion() {
-
-  const question = questions[currentQuestion];
-
-  questionCount.textContent =
-    `Question ${currentQuestion + 1} of ${questions.length}`;
-
-  scoreDisplay.textContent = `Score: ${score}`;
-
-  categoryDisplay.textContent = question.category;
-  questionDisplay.textContent = question.question;
-
-  const progress = (currentQuestion / questions.length) * 100;
-
-  progressBar.style.width = progress + "%";
-  progressBar.setAttribute("aria-valuenow", progress);
-
-  optionsContainer.innerHTML = "";
-
-  feedbackDisplay.textContent = "";
-  feedbackDisplay.className = "safety-final-quiz__feedback";
-
-  nextButton.disabled = true;
-
-  question.options.forEach(function(option, index) {
-
-    const button = document.createElement("button");
-
-    button.textContent = option;
-    button.className = "safety-final-quiz__option";
-    button.type = "button";
-
-    button.addEventListener("click", function() {
-      checkAnswer(index);
-    });
-
-    optionsContainer.appendChild(button);
-  });
-
-  if (hasAnswered) {
-    restoreAnsweredQuestion();
-  }
-}
-
-function checkAnswer(selectedAnswer) {
-
-  if (hasAnswered) {
+  if (!nextButton) {
     return;
   }
 
-  hasAnswered = true;
+  const questions = [
+    {
+      category: "Heatwave Safety",
+      question: "When is the hottest part of the day usually?",
+      options: [
+        "Early morning",
+        "Around midday to afternoon",
+        "Late at night",
+        "Just before sunrise"
+      ],
+      answer: 1,
+      explanation:
+        "The hottest period is usually around midday and afternoon. Try to limit outdoor activity during these hours."
+    },
+    {
+      category: "Heatwave Safety",
+      question: "What is one of the best ways to prevent dehydration?",
+      options: [
+        "Drink water regularly",
+        "Avoid drinking fluids",
+        "Wear thick clothing",
+        "Stay in direct sunlight"
+      ],
+      answer: 0,
+      explanation:
+        "Drinking water regularly helps replace fluids lost through sweating."
+    },
+    {
+      category: "Heatwave Myths",
+      question: "Are heatwaves simply normal weather events with no connection to climate change?",
+      options: [
+        "Yes, they are unrelated",
+        "Yes, climate never affects them",
+        "No, climate change can make heatwaves more intense",
+        "No, heatwaves only happen in winter"
+      ],
+      answer: 2,
+      explanation:
+        "Climate change increases the likelihood and intensity of many heatwaves."
+    },
+    {
+      category: "Solar Energy",
+      question: "What happens to solar panel efficiency when temperatures become very high?",
+      options: [
+        "It always doubles",
+        "It can decrease slightly",
+        "It stops producing electricity permanently",
+        "It becomes completely unaffected"
+      ],
+      answer: 1,
+      explanation:
+        "High temperatures can reduce solar panel efficiency, even when sunlight is strong."
+    },
+    {
+      category: "Solar Energy",
+      question: "Why is good airflow around solar panels important?",
+      options: [
+        "It makes panels heavier",
+        "It blocks sunlight",
+        "It helps panels stay cooler",
+        "It stops electricity production"
+      ],
+      answer: 2,
+      explanation:
+        "Good ventilation allows heat to escape and helps prevent excessive panel temperatures."
+    },
+    {
+      category: "Heatwave Safety",
+      question: "Which is a warning sign of potentially life-threatening heatstroke?",
+      options: [
+        "A mild feeling of hunger",
+        "Confusion or altered mental state",
+        "Cold hands in a cool room",
+        "Feeling thirsty after exercise"
+      ],
+      answer: 1,
+      explanation:
+        "Confusion or altered mental state can indicate heatstroke. Call emergency services and begin cooling the person immediately."
+    }
+  ];
 
-  const question = questions[currentQuestion];
-  const buttons = optionsContainer.children;
+  // get quiz elements
+  const questionCount = document.getElementById("quiz-question-count");
+  const scoreDisplay = document.getElementById("quiz-score");
+  const progressBar = document.getElementById("quiz-progress");
 
-  if (selectedAnswer === question.answer) {
+  const categoryDisplay = document.getElementById("quiz-category");
+  const questionDisplay = document.getElementById("quiz-question");
+  const optionsContainer = document.getElementById("quiz-options");
 
-    score++;
+  const feedbackDisplay = document.getElementById("quiz-feedback");
+
+  const quizContent = document.getElementById("quiz-content");
+  const resultScreen = document.getElementById("quiz-result");
+
+  const resultTitle = document.getElementById("quiz-result-title");
+  const resultText = document.getElementById("quiz-result-text");
+  const restartButton = document.getElementById("quiz-restart");
+
+  // check that the quiz html is complete
+  const requiredElements = [
+    questionCount,
+    scoreDisplay,
+    progressBar,
+    categoryDisplay,
+    questionDisplay,
+    optionsContainer,
+    feedbackDisplay,
+    quizContent,
+    resultScreen,
+    resultTitle,
+    resultText,
+    restartButton
+  ];
+
+  if (requiredElements.some(element => !element)) {
+    console.error("Some quiz HTML elements are missing.");
+    return;
+  }
+
+  // quiz variables
+  let currentQuestion = 0;
+  let score = 0;
+  let hasAnswered = false;
+
+  const storageKey = "heatwaveQuizProgress";
+
+  // save quiz progress
+  function saveProgress() {
+
+    const quizData = {
+      currentQuestion: currentQuestion,
+      score: score,
+      hasAnswered: hasAnswered
+    };
+
+    localStorage.setItem(storageKey, JSON.stringify(quizData));
+  }
+
+  // load saved quiz progress
+  function loadProgress() {
+
+    const savedData = localStorage.getItem(storageKey);
+
+    if (savedData !== null) {
+
+      try {
+
+        const quizData = JSON.parse(savedData);
+
+        if (quizData.completed === true) {
+
+          score = Number(quizData.score);
+
+          if (
+            Number.isInteger(score) &&
+            score >= 0 &&
+            score <= questions.length
+          ) {
+            currentQuestion = questions.length;
+            return true;
+          }
+        }
+
+        if (
+          Number.isInteger(quizData.currentQuestion) &&
+          quizData.currentQuestion >= 0 &&
+          quizData.currentQuestion < questions.length &&
+          Number.isInteger(quizData.score) &&
+          quizData.score >= 0 &&
+          quizData.score <= quizData.currentQuestion + 1 &&
+          typeof quizData.hasAnswered === "boolean"
+        ) {
+
+          currentQuestion = quizData.currentQuestion;
+          score = quizData.score;
+          hasAnswered = quizData.hasAnswered;
+
+          return false;
+        }
+
+      } catch (error) {
+        console.error("Error loading quiz progress:", error);
+      }
+    }
+
+    resetQuiz();
+    return false;
+  }
+
+  // display the current question
+  function showQuestion() {
+
+    const question = questions[currentQuestion];
+
+    questionCount.textContent =
+      `Question ${currentQuestion + 1} of ${questions.length}`;
+
+    scoreDisplay.textContent = `Score: ${score}`;
+
+    categoryDisplay.textContent = question.category;
+    questionDisplay.textContent = question.question;
+
+    const progress = (currentQuestion / questions.length) * 100;
+
+    progressBar.style.width = progress + "%";
+    progressBar.setAttribute("aria-valuenow", progress);
+
+    optionsContainer.innerHTML = "";
+
+    feedbackDisplay.textContent = "";
+    feedbackDisplay.className = "safety-final-quiz__feedback";
+
+    nextButton.disabled = true;
+
+    question.options.forEach(function(option, index) {
+
+      const button = document.createElement("button");
+
+      button.textContent = option;
+      button.className = "safety-final-quiz__option";
+      button.type = "button";
+
+      button.addEventListener("click", function() {
+        checkAnswer(index);
+      });
+
+      optionsContainer.appendChild(button);
+    });
+
+    if (hasAnswered) {
+      restoreAnsweredQuestion();
+    }
+  }
+
+  // check the selected answer
+  function checkAnswer(selectedAnswer) {
+
+    if (hasAnswered) {
+      return;
+    }
+
+    hasAnswered = true;
+
+    const question = questions[currentQuestion];
+    const buttons = optionsContainer.children;
+
+    if (selectedAnswer === question.answer) {
+
+      score++;
+
+      feedbackDisplay.textContent =
+        "Correct! " + question.explanation;
+
+      feedbackDisplay.classList.add("correct");
+
+    } else {
+
+      feedbackDisplay.textContent =
+        "Not quite! " + question.explanation;
+
+      feedbackDisplay.classList.add("wrong");
+    }
+
+    for (let i = 0; i < buttons.length; i++) {
+
+      buttons[i].disabled = true;
+
+      if (i === question.answer) {
+        buttons[i].classList.add("correct");
+      }
+
+      if (i === selectedAnswer && selectedAnswer !== question.answer) {
+        buttons[i].classList.add("wrong");
+      }
+    }
+
+    scoreDisplay.textContent = `Score: ${score}`;
+
+    nextButton.disabled = false;
+
+    saveProgress();
+  }
+
+  // restore an already answered question
+  function restoreAnsweredQuestion() {
+
+    const question = questions[currentQuestion];
+    const buttons = optionsContainer.children;
+
+    for (let i = 0; i < buttons.length; i++) {
+
+      buttons[i].disabled = true;
+
+      if (i === question.answer) {
+        buttons[i].classList.add("correct");
+      }
+    }
 
     feedbackDisplay.textContent =
-      "Correct! " + question.explanation;
+      "You've already answered this question. " +
+      question.explanation;
 
     feedbackDisplay.classList.add("correct");
 
-  } else {
-
-    feedbackDisplay.textContent =
-      "Not quite! " + question.explanation;
-
-    feedbackDisplay.classList.add("wrong");
+    nextButton.disabled = false;
   }
 
-  for (let i = 0; i < buttons.length; i++) {
+  // move to the next question
+  nextButton.addEventListener("click", function() {
 
-    buttons[i].disabled = true;
+    currentQuestion++;
+    hasAnswered = false;
 
-    if (i === question.answer) {
-      buttons[i].classList.add("correct");
+    if (currentQuestion < questions.length) {
+
+      saveProgress();
+      showQuestion();
+
+    } else {
+
+      showResults();
+
+    }
+  });
+
+  // display quiz results
+  function showResults() {
+
+    quizContent.hidden = true;
+    resultScreen.hidden = false;
+
+    progressBar.style.width = "100%";
+    progressBar.setAttribute("aria-valuenow", "100");
+
+    questionCount.textContent = "Quiz completed!";
+    scoreDisplay.textContent = `Score: ${score}`;
+
+    resultTitle.textContent =
+      "You Scored " + score + "/" + questions.length;
+
+    if (score === questions.length) {
+
+      resultText.textContent =
+        "Perfect score! You've mastered the heatwave challenge.";
+
+    } else if (score >= 4) {
+
+      resultText.textContent =
+        "Great job! You have a good understanding of heatwave safety and solar energy.";
+
+    } else {
+
+      resultText.textContent =
+        "Good effort! Revisit the information and try the challenge again.";
     }
 
-    if (i === selectedAnswer && selectedAnswer !== question.answer) {
-      buttons[i].classList.add("wrong");
-    }
+    localStorage.setItem(storageKey, JSON.stringify({
+      completed: true,
+      score: score
+    }));
   }
 
-  scoreDisplay.textContent = `Score: ${score}`;
+  // reset the quiz
+  function resetQuiz() {
 
-  nextButton.disabled = false;
+    currentQuestion = 0;
+    score = 0;
+    hasAnswered = false;
 
-  saveProgress();
-}
-function restoreAnsweredQuestion() {
-
-  const question = questions[currentQuestion];
-  const buttons = optionsContainer.children;
-  for (let i = 0; i < buttons.length; i++) {
-
-    buttons[i].disabled = true;
-
-    if (i === question.answer) {
-      buttons[i].classList.add("correct");
-    }
+    localStorage.removeItem(storageKey);
   }
-  feedbackDisplay.textContent =
-    "You've already answered this question. " +
-    question.explanation;
 
-  feedbackDisplay.classList.add("correct");
+  // restart the quiz
+  restartButton.addEventListener("click", function() {
 
-  nextButton.disabled = false;
-}
-nextButton.addEventListener("click", function() {
+    resetQuiz();
 
-  currentQuestion++;
-  hasAnswered = false;
-  if (currentQuestion < questions.length) {
+    quizContent.hidden = false;
+    resultScreen.hidden = true;
 
     saveProgress();
     showQuestion();
+  });
 
-  } else {
+  // initialize the quiz
+  const quizCompleted = loadProgress();
 
+  if (quizCompleted) {
     showResults();
-  }
-});
-function showResults() {
-  quizContent.hidden = true;
-  resultScreen.hidden = false;
-  progressBar.style.width = "100%";
-  progressBar.setAttribute("aria-valuenow", "100");
-
-  questionCount.textContent = "Quiz completed!";
-  scoreDisplay.textContent = `Score: ${score}`;
-  resultTitle.textContent = "You Scored " + score + "/" + questions.length;
-
-  if (score === questions.length) {
-    resultText.textContent =
-      "Perfect score! You've mastered the heatwave challenge.";
-  } else if (score >= 4) {
-    resultText.textContent =
-      "Great job! You have a good understanding of heatwave safety and solar energy.";
   } else {
-    resultText.textContent =
-      "Good effort! Revisit the information and try the challenge again.";
+    showQuestion();
   }
-  localStorage.setItem(storageKey, JSON.stringify({
-    completed: true,
-    score: score
-  }));
-}
-function resetQuiz() {
-  currentQuestion = 0;
-  score = 0;
-  hasAnswered = false;
-  localStorage.removeItem(storageKey);
-}
-restartButton.addEventListener("click", function() {
-  resetQuiz();
-  quizContent.hidden = false;
-  resultScreen.hidden = true;
-  saveProgress();
-  showQuestion();
-});
-const quizCompleted = loadProgress();
 
-if (quizCompleted) {
-  showResults();
-} else {
-  showQuestion();
+})();
+
+// weather dashboard for monitoring weather section
+
+// document.getElementById() finds an html element
+// using its id so javascript can update its content
+
+const countrySelect = document.getElementById("countrySelect");
+const citySelect = document.getElementById("citySelect");
+
+const celsiusBtn = document.getElementById("celsiusButton");
+const fahrenheitBtn = document.getElementById("fahrenheitButton");
+
+const locationDisplay = document.getElementById("weatherLocation");
+const localTimeDisplay = document.getElementById("localTime");
+const dateDisplay = document.getElementById("weatherDate");
+
+const temperatureDisplay = document.getElementById("currentTemperature");
+const temperatureUnitDisplay = document.getElementById("currentUnit");
+
+const descriptionDisplay = document.getElementById("currentWeatherDescription");
+
+const feelsLikeDisplay = document.getElementById("feelsLike");
+const feelsLikeUnitDisplay = document.getElementById("feelsLikeUnit");
+
+const humidityDisplay = document.getElementById("humidityValue");
+const windDisplay = document.getElementById("windValue");
+const rainDisplay = document.getElementById("rainValue");
+const uvDisplay = document.getElementById("uvValue");
+const todayHighDisplay = document.getElementById("todayHigh");
+
+const updatedDisplay = document.getElementById("weatherUpdated");
+const statusDisplay = document.getElementById("weatherStatus");
+
+const alertList = document.getElementById("weatherAlerts");
+const alertCount = document.getElementById("alertCount");
+const alertCheckbox = document.getElementById("enableBrowserAlerts");
+const testAlertButton = document.getElementById("testAlertButton");
+
+const forecastLocation = document.getElementById("forecastLocation");
+const forecastContainer = document.getElementById("weeklyForecast");
+
+const temperatureCanvas = document.getElementById("temperatureChart");
+const rainfallCanvas = document.getElementById("rainChart");
+
+const weeklySummary = document.getElementById("weeklySummary");
+const preparationAdvice = document.getElementById("preparationAdvice");
+
+
+// each city has its own latitude and longitude
+// the weather api needs these coordinates to find weather conditions
+
+const locations = {
+  Myanmar: {
+    Yangon: {
+      latitude: 16.8409,
+      longitude: 96.1735
+    },
+
+    Mandalay: {
+      latitude: 21.9588,
+      longitude: 96.0891
+    },
+
+    Naypyidaw: {
+      latitude: 19.7633,
+      longitude: 96.0785
+    },
+
+    Bago: {
+      latitude: 17.3360,
+      longitude: 96.4797
+    },
+
+    Mawlamyine: {
+      latitude: 16.4905,
+      longitude: 97.6283
+    },
+
+    Pathein: {
+      latitude: 16.7792,
+      longitude: 94.7321
+    },
+
+    Taunggyi: {
+      latitude: 20.7892,
+      longitude: 97.0378
+    },
+
+    Myitkyina: {
+      latitude: 25.3833,
+      longitude: 97.4000
+    },
+
+    Sittwe: {
+      latitude: 20.1500,
+      longitude: 92.9000
+    },
+
+    Monywa: {
+      latitude: 22.1086,
+      longitude: 95.1358
+    }
+  }
+};
+
+
+// these values can change when the user selects
+// a different city or temperature unit
+
+let selectedCountry = "Myanmar";
+let selectedCity = "Yangon";
+let temperatureUnit = "celsius";
+
+let weatherData = null;
+let temperatureChart = null;
+let rainfallChart = null;
+
+
+// these are example alert thresholds only
+// replace them with researched and verified thresholds before publishing
+
+const alertThresholds = {
+  heatWarning: 35,
+  extremeHeat: 40,
+  highRainProbability: 70
+};
+
+
+// localStorage saves information in the visitor's browser
+// getItem() retrieves information saved earlier
+
+const savedCountry = localStorage.getItem("sunnrCountry");
+const savedCity = localStorage.getItem("sunnrCity");
+const savedUnit = localStorage.getItem("sunnrUnit");
+const savedAlerts = localStorage.getItem("sunnrAlerts");
+
+if (savedCountry && locations[savedCountry]) {
+  selectedCountry = savedCountry;
 }
+
+if (
+  savedCity &&
+  locations[selectedCountry][savedCity]
+) {
+  selectedCity = savedCity;
+}
+
+if (savedUnit === "fahrenheit") {
+  temperatureUnit = "fahrenheit";
+}
+
+// alerts are enabled by default unless the visitor
+// previously turned them off
+
+if (alertCheckbox) {
+  alertCheckbox.checked = savedAlerts !== "false";
+}
+
+
+// add countries and cities to the dropdown menus
+
+function loadLocationOptions() {
+
+  if (!countrySelect || !citySelect) return;
+
+  countrySelect.innerHTML = "";
+  citySelect.innerHTML = "";
+
+  // create an option for every available country
+  for (const country in locations) {
+
+    const option = document.createElement("option");
+
+    option.value = country;
+    option.textContent = country;
+
+    countrySelect.appendChild(option);
+  }
+
+  countrySelect.value = selectedCountry;
+
+  // get the cities belonging to the selected country
+  const cities = locations[selectedCountry];
+
+  // create an option for every available city
+  for (const city in cities) {
+
+    const option = document.createElement("option");
+
+    option.value = city;
+    option.textContent = city;
+
+    citySelect.appendChild(option);
+  }
+
+  citySelect.value = selectedCity;
+}
+
+
+// convert celsius into fahrenheit when needed
+
+function convertTemperature(celsius) {
+
+  if (temperatureUnit === "fahrenheit") {
+    return (celsius * 9 / 5) + 32;
+  }
+
+  return celsius;
+}
+
+
+// return the temperature number without the unit
+// the html has separate elements for the number and unit
+
+function formatTemperature(celsius) {
+
+  return Math.round(convertTemperature(celsius));
+}
+
+
+// return the correct temperature unit
+
+function getTemperatureUnit() {
+
+  return temperatureUnit === "celsius" ? "°C" : "°F";
+}
+
+
+// change open-meteo weather codes into descriptions and icons
+
+function getWeatherDescription(code) {
+
+  if (code === 0) {
+    return {
+      description: "clear sky",
+      icon: "bi-sun"
+    };
+
+  } else if (code === 1) {
+    return {
+      description: "mainly clear",
+      icon: "bi-sun"
+    };
+
+  } else if (code === 2) {
+    return {
+      description: "partly cloudy",
+      icon: "bi-cloud-sun"
+    };
+
+  } else if (code === 3) {
+    return {
+      description: "overcast",
+      icon: "bi-clouds"
+    };
+
+  } else if (code >= 45 && code <= 48) {
+    return {
+      description: "foggy",
+      icon: "bi-cloud-fog"
+    };
+
+  } else if (code >= 51 && code <= 67) {
+    return {
+      description: "rain",
+      icon: "bi-cloud-rain"
+    };
+
+  } else if (code >= 71 && code <= 77) {
+    return {
+      description: "snow",
+      icon: "bi-cloud-snow"
+    };
+
+  } else if (code >= 80 && code <= 82) {
+    return {
+      description: "rain showers",
+      icon: "bi-cloud-rain-heavy"
+    };
+
+  } else if (code >= 95) {
+    return {
+      description: "thunderstorm",
+      icon: "bi-cloud-lightning-rain"
+    };
+
+  } else {
+    return {
+      description: "changing conditions",
+      icon: "bi-cloud"
+    };
+  }
+}
+
+
+// retrieve weather information from open-meteo
+// async allows javascript to wait for the api without freezing the page
+// await waits for the api response before continuing
+
+async function getWeather() {
+
+  const city = locations[selectedCountry][selectedCity];
+
+  if (statusDisplay) {
+    statusDisplay.textContent = "loading the latest weather information...";
+  }
+
+  try {
+
+    const apiUrl = new URL("https://api.open-meteo.com/v1/forecast");
+
+    apiUrl.search = new URLSearchParams({
+
+      latitude: city.latitude,
+      longitude: city.longitude,
+
+      current: [
+        "temperature_2m",
+        "relative_humidity_2m",
+        "apparent_temperature",
+        "precipitation",
+        "weather_code",
+        "wind_speed_10m"
+      ].join(","),
+
+      daily: [
+        "weather_code",
+        "temperature_2m_max",
+        "temperature_2m_min",
+        "precipitation_sum",
+        "precipitation_probability_max",
+        "uv_index_max"
+      ].join(","),
+
+      timezone: "auto",
+      forecast_days: "7"
+
+    });
+
+    const response = await fetch(apiUrl);
+
+    // stop if the api returns an error
+    if (!response.ok) {
+      throw new Error("weather information could not be retrieved.");
+    }
+
+    const data = await response.json();
+
+    weatherData = data;
+
+    // update the different dashboard sections
+    displayCurrentWeather(data);
+    displayLocalTime(data.timezone);
+    displayWeeklyForecast(data.daily);
+    displayWeatherAlerts(data);
+    displayWeeklyCharts(data.daily);
+    displayWeeklySummary(data.daily);
+    displayPreparationAdvice(data.daily);
+
+    if (statusDisplay) {
+      statusDisplay.textContent =
+        `latest forecast for ${selectedCity}, ${selectedCountry}`;
+    }
+
+  } catch (error) {
+
+    console.error("weather api error:", error);
+
+    if (statusDisplay) {
+      statusDisplay.textContent =
+        "weather information is temporarily unavailable. please try again later.";
+    }
+  }
+}
+
+
+// display the current weather information
+
+function displayCurrentWeather(data) {
+
+  const current = data.current;
+  const daily = data.daily;
+
+  const weather = getWeatherDescription(current.weather_code);
+
+  if (locationDisplay) {
+    locationDisplay.textContent =
+      `${selectedCity}, ${selectedCountry}`;
+  }
+
+  if (temperatureDisplay) {
+    temperatureDisplay.textContent =
+      formatTemperature(current.temperature_2m);
+  }
+
+  if (temperatureUnitDisplay) {
+    temperatureUnitDisplay.textContent =
+      getTemperatureUnit();
+  }
+
+  if (descriptionDisplay) {
+    descriptionDisplay.textContent =
+      weather.description;
+  }
+
+  if (feelsLikeDisplay) {
+    feelsLikeDisplay.textContent =
+      formatTemperature(current.apparent_temperature);
+  }
+
+  if (feelsLikeUnitDisplay) {
+    feelsLikeUnitDisplay.textContent =
+      getTemperatureUnit();
+  }
+
+  if (humidityDisplay) {
+    humidityDisplay.textContent =
+      `${current.relative_humidity_2m}%`;
+  }
+
+  if (windDisplay) {
+    windDisplay.textContent =
+      `${current.wind_speed_10m} km/h`;
+  }
+
+  // show the chance of rain instead of the amount of rain
+  // the daily forecast provides the maximum rain probability for today
+
+  if (rainDisplay) {
+    const rainProbability = daily.precipitation_probability_max[0];
+
+    rainDisplay.textContent =
+      rainProbability === null
+        ? "n/a"
+        : `${rainProbability}%`;
+  }
+
+  // show today's maximum temperature
+
+  if (todayHighDisplay) {
+    todayHighDisplay.textContent =
+      formatTemperature(daily.temperature_2m_max[0]) +
+      getTemperatureUnit();
+  }
+
+  // show today's maximum uv index
+
+  if (uvDisplay) {
+    uvDisplay.textContent =
+      daily.uv_index_max[0] ?? "n/a";
+  }
+
+  // show when the weather data was last updated
+
+  if (updatedDisplay) {
+
+    const updateTime = new Date(current.time);
+
+    updatedDisplay.textContent =
+      `updated at ${updateTime.toLocaleTimeString("en-GB", {
+        hour: "2-digit",
+        minute: "2-digit"
+      })}`;
+  }
+
+  // update the forecast location label
+
+  if (forecastLocation) {
+    forecastLocation.textContent =
+      `${selectedCity}, ${selectedCountry}`;
+  }
+}
+
+
+// display the selected city's local time
+
+function displayLocalTime(timezone) {
+
+  if (!localTimeDisplay || !dateDisplay) return;
+
+  function updateClock() {
+
+    const now = new Date();
+
+    localTimeDisplay.textContent =
+      new Intl.DateTimeFormat("en-GB", {
+        timeZone: timezone,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      }).format(now);
+
+    dateDisplay.textContent =
+      new Intl.DateTimeFormat("en-GB", {
+        timeZone: timezone,
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      }).format(now);
+  }
+
+  updateClock();
+
+  // stop the previous clock before starting a new one
+
+  if (window.weatherClock) {
+    clearInterval(window.weatherClock);
+  }
+
+  // update the clock every second
+
+  window.weatherClock = setInterval(updateClock, 1000);
+}
+
+
+// display the seven-day forecast
+
+function displayWeeklyForecast(daily) {
+
+  if (!forecastContainer) return;
+
+  forecastContainer.innerHTML = "";
+
+  // loop through all seven forecast days
+
+  for (let i = 0; i < daily.time.length; i++) {
+
+    const weather = getWeatherDescription(daily.weather_code[i]);
+
+    const date = new Date(`${daily.time[i]}T12:00:00`);
+
+    const dayName = date.toLocaleDateString("en-GB", {
+      weekday: "long"
+    });
+
+    const dayDate = date.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short"
+    });
+
+    const rainProbability =
+      daily.precipitation_probability_max[i];
+
+    const forecastCard = document.createElement("article");
+
+    forecastCard.className = "forecast-day";
+
+    forecastCard.innerHTML = `
+
+      <p class="forecast-day-name">${dayName}</p>
+
+      <p class="forecast-day-date">${dayDate}</p>
+
+      <i class="bi ${weather.icon} forecast-weather-icon"
+         aria-hidden="true"></i>
+
+      <p class="forecast-description">
+        ${weather.description}
+      </p>
+
+      <div class="forecast-temperatures">
+
+        <span>
+          ${formatTemperature(daily.temperature_2m_max[i])}${getTemperatureUnit()}
+        </span>
+
+        <span>
+          ${formatTemperature(daily.temperature_2m_min[i])}${getTemperatureUnit()}
+        </span>
+
+      </div>
+
+      <p class="forecast-description">
+        rain chance: ${rainProbability ?? "n/a"}%
+      </p>
+
+    `;
+
+    forecastContainer.appendChild(forecastCard);
+  }
+}
+
+
+// check the current weather and forecast for possible alerts
+
+function displayWeatherAlerts(data) {
+
+  if (!alertList || !alertCount) return;
+
+  alertList.innerHTML = "";
+
+  const alerts = [];
+
+  const currentTemperature = data.current.temperature_2m;
+
+  // check the current temperature
+
+  if (currentTemperature >= alertThresholds.extremeHeat) {
+
+    alerts.push({
+      type: "danger",
+      title: "extreme heat conditions",
+      message: "the current temperature has reached the example extreme-heat threshold. check verified local safety guidance and take precautions."
+    });
+
+  } else if (currentTemperature >= alertThresholds.heatWarning) {
+
+    alerts.push({
+      type: "warning",
+      title: "high temperature warning",
+      message: "the current temperature has reached the example heat-warning threshold. stay informed and plan outdoor activities carefully."
+    });
+  }
+
+  // check the forecast for the next seven days
+
+  for (let i = 0; i < data.daily.time.length; i++) {
+
+    const maximumTemperature = data.daily.temperature_2m_max[i];
+    const rainProbability = data.daily.precipitation_probability_max[i];
+    const date = data.daily.time[i];
+
+    if (maximumTemperature >= alertThresholds.heatWarning) {
+
+      alerts.push({
+        type: "warning",
+        title: `heat expected on ${date}`,
+        message: `the forecast maximum temperature is ${formatTemperature(maximumTemperature)}${getTemperatureUnit()}. prepare for potentially hot conditions.`
+      });
+    }
+
+    if (
+      rainProbability !== null &&
+      rainProbability >= alertThresholds.highRainProbability
+    ) {
+
+      alerts.push({
+        type: "info",
+        title: `high rainfall chance on ${date}`,
+        message: `the forecast shows a ${rainProbability}% chance of precipitation. consider preparing for wet weather.`
+      });
+    }
+  }
+
+  alertCount.textContent = alerts.length;
+
+  // show a message if no alerts are found
+
+  if (alerts.length === 0) {
+
+    alertList.innerHTML = `
+      <div class="weather-alert-empty">
+        <i class="bi bi-check-circle" aria-hidden="true"></i>
+        <p>no conditions have reached the example alert thresholds in this forecast.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  // create a card for every alert
+
+  for (const alert of alerts) {
+
+    const alertCard = document.createElement("article");
+
+    alertCard.className =
+      `weather-alert-card ${alert.type}`;
+
+    alertCard.innerHTML = `
+
+      <div class="weather-alert-icon">
+        <i class="bi bi-exclamation-triangle"
+           aria-hidden="true"></i>
+      </div>
+
+      <div>
+        <h3>${alert.title}</h3>
+        <p>${alert.message}</p>
+      </div>
+
+      <span class="weather-alert-tag">
+        ${alert.type}
+      </span>
+
+    `;
+
+    alertList.appendChild(alertCard);
+  }
+
+  // only show a browser popup for a new extreme heat warning
+
+  if (alertCheckbox && alertCheckbox.checked) {
+    showBrowserAlert(alerts);
+  }
+}
+
+
+// show an important browser alert only once per city per day
+
+function showBrowserAlert(alerts) {
+
+  const importantAlert = alerts.find(function(alert) {
+    return alert.type === "danger";
+  });
+
+  if (!importantAlert) return;
+
+  const alertKey =
+    `sunnrLastPopup_${selectedCity}_${new Date().toDateString()}`;
+
+  const alreadyShown = localStorage.getItem(alertKey);
+
+  if (!alreadyShown) {
+
+    window.alert(
+      `sunnr weather warning\n\n${importantAlert.title}\n\n${importantAlert.message}`
+    );
+
+    localStorage.setItem(alertKey, "true");
+  }
+}
+
+
+// test button lets the visitor check whether browser alerts work
+
+if (testAlertButton) {
+
+  testAlertButton.addEventListener("click", function() {
+
+    window.alert(
+      "sunnr weather alert test\n\nbrowser alerts are working correctly."
+    );
+
+  });
+
+}
+
+
+// create the temperature and rainfall charts
+
+function displayWeeklyCharts(daily) {
+
+  if (!temperatureCanvas || !rainfallCanvas) return;
+
+  // check whether chart.js has loaded before creating charts
+
+  if (typeof Chart === "undefined") {
+    console.error("chart.js has not loaded.");
+    return;
+  }
+
+  const labels = daily.time.map(function(date) {
+
+    return new Date(`${date}T12:00:00`)
+      .toLocaleDateString("en-GB", {
+        weekday: "short"
+      });
+
+  });
+
+  // remove the old charts before creating new ones
+
+  if (temperatureChart) {
+    temperatureChart.destroy();
+  }
+
+  if (rainfallChart) {
+    rainfallChart.destroy();
+  }
+
+  // create the temperature chart
+
+  temperatureChart = new Chart(temperatureCanvas, {
+
+    type: "line",
+
+    data: {
+      labels: labels,
+
+      datasets: [
+
+        {
+          label: "maximum temperature",
+          data: daily.temperature_2m_max.map(convertTemperature),
+          borderColor: "#ffd700",
+          backgroundColor: "rgba(255, 215, 0, 0.10)",
+          fill: true,
+          tension: 0.4
+        },
+
+        {
+          label: "minimum temperature",
+          data: daily.temperature_2m_min.map(convertTemperature),
+          borderColor: "#83bfff",
+          backgroundColor: "rgba(131, 191, 255, 0.08)",
+          fill: true,
+          tension: 0.4
+        }
+
+      ]
+    },
+
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+
+      plugins: {
+        legend: {
+          labels: {
+            color: "#f3eddd"
+          }
+        }
+      },
+
+      scales: {
+
+        x: {
+          ticks: {
+            color: "#f3eddd"
+          },
+          grid: {
+            color: "rgba(243, 237, 221, 0.08)"
+          }
+        },
+
+        y: {
+          ticks: {
+            color: "#f3eddd",
+
+            callback: function(value) {
+              return value + getTemperatureUnit();
+            }
+          },
+
+          grid: {
+            color: "rgba(243, 237, 221, 0.08)"
+          }
+        }
+
+      }
+    }
+
+  });
+
+
+  // create the rainfall chart
+
+  rainfallChart = new Chart(rainfallCanvas, {
+
+    type: "bar",
+
+    data: {
+      labels: labels,
+
+      datasets: [
+
+        {
+          label: "precipitation (mm)",
+          data: daily.precipitation_sum,
+          backgroundColor: "rgba(131, 191, 255, 0.65)",
+          borderColor: "#83bfff",
+          borderWidth: 1,
+          borderRadius: 5
+        }
+
+      ]
+    },
+
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+
+      plugins: {
+        legend: {
+          labels: {
+            color: "#f3eddd"
+          }
+        }
+      },
+
+      scales: {
+
+        x: {
+          ticks: {
+            color: "#f3eddd"
+          },
+          grid: {
+            display: false
+          }
+        },
+
+        y: {
+          beginAtZero: true,
+
+          ticks: {
+            color: "#f3eddd"
+          },
+
+          grid: {
+            color: "rgba(243, 237, 221, 0.08)"
+          }
+        }
+
+      }
+    }
+
+  });
+
+}
+
+
+// calculate the highest temperature and total rainfall for the week
+
+function displayWeeklySummary(daily) {
+
+  if (!weeklySummary) return;
+
+  let highestTemperature = daily.temperature_2m_max[0];
+  let hottestDay = daily.time[0];
+
+  let totalRainfall = 0;
+
+  for (let i = 0; i < daily.time.length; i++) {
+
+    if (daily.temperature_2m_max[i] > highestTemperature) {
+
+      highestTemperature = daily.temperature_2m_max[i];
+      hottestDay = daily.time[i];
+    }
+
+    totalRainfall += daily.precipitation_sum[i] || 0;
+  }
+
+  const hottestDate = new Date(`${hottestDay}T12:00:00`)
+    .toLocaleDateString("en-GB", {
+      weekday: "long",
+      day: "numeric",
+      month: "short"
+    });
+
+  weeklySummary.innerHTML = `
+
+    <div class="weekly-summary">
+
+      <i class="bi bi-thermometer-sun" aria-hidden="true"></i>
+
+      <p>
+        the highest forecast temperature this week is
+        <strong>${formatTemperature(highestTemperature)}${getTemperatureUnit()}</strong>,
+        expected on <strong>${hottestDate}</strong>.
+        the predicted total rainfall is
+        <strong>${totalRainfall.toFixed(1)} mm</strong>.
+      </p>
+
+    </div>
+
+  `;
+}
+
+
+// show preparation advice based on the forecast
+
+function displayPreparationAdvice(daily) {
+
+  if (!preparationAdvice) return;
+
+  preparationAdvice.innerHTML = "";
+
+  const highestTemperature = Math.max(...daily.temperature_2m_max);
+
+  const highestRainProbability = Math.max(
+    ...daily.precipitation_probability_max.map(value => value ?? 0)
+  );
+
+  const advice = [];
+
+  if (highestTemperature >= alertThresholds.heatWarning) {
+
+    advice.push({
+      icon: "bi-droplet",
+      title: "prepare for hot weather",
+      message: "keep drinking water available, plan outdoor activities carefully and check local heat-safety guidance."
+    });
+
+  } else {
+
+    advice.push({
+      icon: "bi-sun",
+      title: "stay weather aware",
+      message: "check the daily forecast before planning outdoor activities and keep up with local weather updates."
+    });
+
+  }
+
+  if (highestRainProbability >= alertThresholds.highRainProbability) {
+
+    advice.push({
+      icon: "bi-cloud-rain",
+      title: "prepare for rainfall",
+      message: "consider keeping rain protection ready and checking local travel conditions."
+    });
+
+  }
+
+  if (highestTemperature >= alertThresholds.extremeHeat) {
+
+    advice.push({
+      icon: "bi-heart-pulse",
+      title: "check on vulnerable people",
+      message: "pay particular attention to people who may be more affected by extreme heat and follow official local advice."
+    });
+
+  }
+
+  // create a card for each preparation suggestion
+
+  for (const item of advice) {
+
+    const card = document.createElement("article");
+
+    card.className = "preparation-card";
+
+    card.innerHTML = `
+
+      <i class="bi ${item.icon}" aria-hidden="true"></i>
+
+      <h3>${item.title}</h3>
+
+      <p>${item.message}</p>
+
+    `;
+
+    preparationAdvice.appendChild(card);
+  }
+
+}
+
+
+// save the visitor's settings in localStorage
+
+function saveSettings() {
+
+  localStorage.setItem("sunnrCountry", selectedCountry);
+  localStorage.setItem("sunnrCity", selectedCity);
+  localStorage.setItem("sunnrUnit", temperatureUnit);
+
+  if (alertCheckbox) {
+
+    localStorage.setItem(
+      "sunnrAlerts",
+      alertCheckbox.checked
+    );
+
+  }
+}
+
+
+// update the active appearance of the temperature buttons
+
+function updateUnitButtons() {
+
+  if (celsiusBtn) {
+
+    celsiusBtn.classList.toggle(
+      "active",
+      temperatureUnit === "celsius"
+    );
+
+  }
+
+  if (fahrenheitBtn) {
+
+    fahrenheitBtn.classList.toggle(
+      "active",
+      temperatureUnit === "fahrenheit"
+    );
+
+  }
+}
+
+
+// listen for a country change
+
+if (countrySelect) {
+
+  countrySelect.addEventListener("change", function() {
+
+    selectedCountry = countrySelect.value;
+
+    // choose the first city available in the selected country
+
+    selectedCity = Object.keys(locations[selectedCountry])[0];
+
+    loadLocationOptions();
+
+    saveSettings();
+
+    getWeather();
+
+  });
+
+}
+
+
+// listen for a city change
+
+if (citySelect) {
+
+  citySelect.addEventListener("change", function() {
+
+    selectedCity = citySelect.value;
+
+    saveSettings();
+
+    getWeather();
+
+  });
+
+}
+
+
+// switch to celsius
+
+if (celsiusBtn) {
+
+  celsiusBtn.addEventListener("click", function() {
+
+    temperatureUnit = "celsius";
+
+    saveSettings();
+    updateUnitButtons();
+
+    // update the dashboard without requesting the api again
+
+    if (weatherData) {
+
+      displayCurrentWeather(weatherData);
+      displayWeeklyForecast(weatherData.daily);
+      displayWeeklyCharts(weatherData.daily);
+      displayWeeklySummary(weatherData.daily);
+
+    }
+
+  });
+
+}
+
+
+// switch to fahrenheit
+
+if (fahrenheitBtn) {
+
+  fahrenheitBtn.addEventListener("click", function() {
+
+    temperatureUnit = "fahrenheit";
+
+    saveSettings();
+    updateUnitButtons();
+
+    if (weatherData) {
+
+      displayCurrentWeather(weatherData);
+      displayWeeklyForecast(weatherData.daily);
+      displayWeeklyCharts(weatherData.daily);
+      displayWeeklySummary(weatherData.daily);
+
+    }
+
+  });
+
+}
+
+
+// save the browser alert preference when the checkbox changes
+
+if (alertCheckbox) {
+
+  alertCheckbox.addEventListener("change", function() {
+
+    saveSettings();
+
+    if (alertCheckbox.checked) {
+
+      window.alert("sunnr weather alerts are now enabled.");
+
+    }
+
+  });
+
+}
+
+
+// run these functions when the page first loads
+
+loadLocationOptions();
+
+updateUnitButtons();
+
+getWeather();
+
+document.addEventListener("DOMContentLoaded", () => {
+    const revealElements = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: "0px 0px -35px 0px"
+        });
+        revealElements.forEach((element) => revealObserver.observe(element));
+    } else {
+        revealElements.forEach((element) => element.classList.add("is-visible"));
+    }
+    const navbar = document.getElementById("mainNavbar");
+    const navLinks = document.querySelectorAll("#mainNavbar .nav-link");
+
+    if (navbar && window.bootstrap) {
+        navLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+                if (navbar.classList.contains("show")) {
+                    window.bootstrap.Collapse.getOrCreateInstance(navbar).hide();
+                }
+            });
+        });
+    }
+});

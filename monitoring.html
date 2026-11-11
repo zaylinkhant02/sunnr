@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Explore heat conditions across Myanmar, then learn how the hot season and prolonged heat affect communities." />
+    <meta name="theme-color" content="#102b2a" />
+    <title>Sunnr | Myanmar Heat Information Map</title>
+    <link rel="icon" type="image/png" href="assets/images/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://videos.pexels.com" />
+    <link rel="preconnect" href="https://images.pexels.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" defer></script>
+
+  </head>
+  <body class="site-body monitoring-page">
+    <header class="site-header">
+      <nav class="navbar navbar-expand-xl site-navbar" aria-label="Main navigation">
+        <div class="container">
+          <a class="navbar-brand site-brand" href="index.html"><img src="assets/images/logo-white.png" alt="" /><span class="brand-word">Sunnr</span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="menu-icon"></span></button>
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto align-items-xl-center">
+              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
+              <li class="nav-item"><a class="nav-link" href="solar-control.html">Solar panel control</a></li>
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="monitoring.html">Heat monitoring</a></li>
+              <li class="nav-item"><a class="nav-link" >Risk map</a></li>
+              <li class="nav-item"><a class="nav-link" href="safety.html">Safety tips</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="heat-monitoring-main">
+      <section class="heat-monitoring-hero" aria-labelledby="heat-monitoring-title">
+        <video class="heat-monitoring-hero-video" autoplay muted loop playsinline preload="metadata" poster="https://images.pexels.com/videos/10794810/desert-sand-sun-sunrise-10794810.jpeg" aria-hidden="true">
+          <source src="https://videos.pexels.com/video-files/10794810/10794810-hd_2560_1440_30fps.mp4" type="video/mp4" />
+        </video>
+        <div class="heat-monitoring-heading container">
+          <h1 class="heat-monitoring-title" id="heat-monitoring-title">Heat conditions in Myanmar</h1>
+          <p class="heat-monitoring-intro">Explore how temperatures across Myanmar compare with what is usual. The map offers a broad view, while conditions can differ from one place to the next.</p>
+        </div>
+      </section>
+
+  
+      <section class="weather-dashboard" id="weather-dashboard">
+        <div class="container">
+
+          <div class="weather-dashboard-heading">
+            <div>
+              <span class="weather-eyebrow">Live Weather Monitoring</span>
+              <h2>Weather at a glance<span>.</span></h2>
+              <p>Explore current conditions and the forecast for the week ahead.</p>
+            </div>
+
+            <div class="weather-controls">
+              <div class="weather-control">
+                <label for="countrySelect">Country</label>
+                <select id="countrySelect">
+                  <option value="Myanmar">Myanmar</option>
+                </select>
+              </div>
+
+              <div class="weather-control">
+                <label for="citySelect">Select city</label>
+                <select id="citySelect">
+                  <option value="Yangon">Yangon</option>
+                  <option value="Mandalay">Mandalay</option>
+                  <option value="Naypyidaw">Naypyidaw</option>
+                  <option value="Bago">Bago</option>
+                  <option value="Mawlamyine">Mawlamyine</option>
+                  <option value="Pathein">Pathein</option>
+                  <option value="Taunggyi">Taunggyi</option>
+                  <option value="Myitkyina">Myitkyina</option>
+                  <option value="Sittwe">Sittwe</option>
+                  <option value="Monywa">Monywa</option>
+                </select>
+              </div>
+
+              <div class="weather-unit-control">
+                <button class="unit-button active" id="celsiusButton" type="button">°C</button>
+                <span>/</span>
+                <button class="unit-button" id="fahrenheitButton" type="button">°F</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="current-weather-panel">
+            <div class="current-weather-main">
+              <div class="weather-location-line">
+                <span class="weather-dot"></span>
+                <span id="weatherLocation">Yangon, Myanmar</span>
+              </div>
+
+              <p class="weather-date" id="weatherDate">Loading local date...</p>
+
+              <div class="temperature-display">
+                <span id="currentTemperature">--</span>
+                <span class="temperature-unit" id="currentUnit">°C</span>
+              </div>
+
+              <h3 id="currentWeatherDescription">Getting weather conditions...</h3>
+              <p class="feels-like">
+                Feels like <strong id="feelsLike">--</strong>
+                <span id="feelsLikeUnit">°C</span>
+              </p>
+              <p class="weather-updated" id="weatherUpdated">Waiting for weather data</p>
+            </div>
+
+            <div class="current-weather-details">
+              <div class="weather-detail">
+                <i class="bi bi-droplet"></i>
+                <span>Humidity</span>
+                <strong id="humidityValue">--%</strong>
+              </div>
+
+              <div class="weather-detail">
+                <i class="bi bi-wind"></i>
+                <span>Wind speed</span>
+                <strong id="windValue">-- km/h</strong>
+              </div>
+
+              <div class="weather-detail">
+                <i class="bi bi-cloud-rain"></i>
+                <span>Rain probability</span>
+                <strong id="rainValue">--%</strong>
+              </div>
+
+              <div class="weather-detail">
+                <i class="bi bi-sun"></i>
+                <span>UV index</span>
+                <strong id="uvValue">--</strong>
+              </div>
+
+              <div class="weather-detail">
+                <i class="bi bi-clock"></i>
+                <span>Local time</span>
+                <strong id="localTime">--:--</strong>
+              </div>
+
+              <div class="weather-detail">
+                <i class="bi bi-thermometer-half"></i>
+                <span>Today's high</span>
+                <strong id="todayHigh">--</strong>
+              </div>
+            </div>
+          </div>
+
+          <p class="weather-status" id="weatherStatus" role="status">
+            Connecting to weather service...
+          </p>
+
+          <section class="weather-alert-section" aria-labelledby="weather-alert-title">
+            <div class="section-heading-row">
+              <div>
+                <span class="weather-eyebrow">Stay Informed</span>
+                <h2 id="weather-alert-title">Weather alerts<span>.</span></h2>
+                <p>Forecast-based alerts for your selected location.</p>
+              </div>
+              <span class="alert-count" id="alertCount">0 alerts</span>
+            </div>
+
+            <div class="weather-alert-list" id="weatherAlerts">
+              <div class="weather-alert-empty">
+                <i class="bi bi-hourglass-split"></i>
+                <p>Checking the forecast for possible weather risks...</p>
+              </div>
+            </div>
+
+            <div class="alert-settings">
+              <label class="alert-toggle">
+                <input type="checkbox" id="enableBrowserAlerts">
+                <span class="alert-toggle-slider"></span>
+                <span>Enable browser pop-up alerts</span>
+              </label>
+
+              <button type="button" class="weather-text-button" id="testAlertButton">
+                Test alert <i class="bi bi-arrow-up-right"></i>
+              </button>
+            </div>
+          </section>
+
+          <section class="weekly-forecast-section" aria-labelledby="weekly-forecast-title">
+            <div class="section-heading-row">
+              <div>
+                <span class="weather-eyebrow">The Next Seven Days</span>
+                <h2 id="weekly-forecast-title">The week ahead<span>.</span></h2>
+                <p>Daily conditions and expected temperature ranges.</p>
+              </div>
+              <span class="forecast-location-label" id="forecastLocation">Yangon</span>
+            </div>
+
+            <div class="weekly-forecast-grid" id="weeklyForecast">
+              <p class="forecast-loading">Loading the seven-day forecast...</p>
+            </div>
+          </section>
+
+          <section class="weekly-metrics-section" aria-labelledby="weekly-metrics-title">
+            <div class="section-heading-row">
+              <div>
+                <span class="weather-eyebrow">Weather Data</span>
+                <h2 id="weekly-metrics-title">This week's metrics<span>.</span></h2>
+                <p>Understand how conditions may change throughout the week.</p>
+              </div>
+            </div>
+
+            <div class="weather-chart-grid">
+              <div class="weather-chart-card">
+                <div class="chart-card-heading">
+                  <div>
+                    <h3>Temperature trend</h3>
+                    <p>Daily maximum and minimum temperatures</p>
+                  </div>
+                  <i class="bi bi-thermometer-sun"></i>
+                </div>
+                <div class="weather-chart-wrap">
+                  <canvas id="temperatureChart" aria-label="Seven-day maximum and minimum temperature chart"></canvas>
+                </div>
+              </div>
+
+              <div class="weather-chart-card">
+                <div class="chart-card-heading">
+                  <div>
+                    <h3>Rainfall forecast</h3>
+                    <p>Expected daily precipitation in millimetres</p>
+                  </div>
+                  <i class="bi bi-cloud-rain"></i>
+                </div>
+                <div class="weather-chart-wrap">
+                  <canvas id="rainChart" aria-label="Seven-day rainfall chart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="weekly-summary" id="weeklySummary">
+              <i class="bi bi-graph-up-arrow"></i>
+              <p>Your weekly weather summary will appear here once the forecast loads.</p>
+            </div>
+          </section>
+
+          <section class="weather-preparation-section">
+            <div class="preparation-heading">
+              <span class="weather-eyebrow">Plan Ahead</span>
+              <h2>Prepare for what's coming<span>.</span></h2>
+              <p>Practical suggestions based on the forecast for your selected city.</p>
+            </div>
+
+            <div class="preparation-grid" id="preparationAdvice">
+              <p>Preparation suggestions will appear when the forecast is available.</p>
+            </div>
+          </section>
+
+          <p class="weather-attribution">
+            Weather forecast data: Open-Meteo.
+            Forecasts are estimates and may change. Follow official local guidance
+            during emergencies.
+          </p>
+
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-copy">
+          <a class="footer-brand" href="index.html"><img src="assets/images/logo-white.png" alt="" /><span>Sunnr</span></a>
+          <p>Sunnr provides supplementary heatwave monitoring and preparedness information for residents of Myanmar.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="risk-map.html" aria-current="page">Risk Map</a>
+          <a href="safety.html">Safety Tips</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="footer-meta">
+          <p class="footer-copyright">© Sunnr 2026. All rights reserved.</p>
+          <a class="footer-citations-link" href="citations.html">View citations</a>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>
