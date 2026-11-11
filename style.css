@@ -1470,6 +1470,19 @@ body.site-body {
   padding: 10px 0;
 }
 
+.about-page .site-header,
+.contact-page .site-header {
+  position: relative;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(243,237,221,.13);
+  background: rgba(16,43,42,.98);
+}
+
+.contact-page .site-header {
+  position: sticky;
+  top: 0;
+}
+
 .site-brand {
   display: inline-flex;
   align-items: center;
