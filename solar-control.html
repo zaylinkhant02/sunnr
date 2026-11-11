@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Learn how heat affects solar panels, compare your own generation readings and prepare your solar system for hot weather in Myanmar." />
+    <meta name="theme-color" content="#102b2a" />
+    <title>Sunnr | Solar Panel Control</title>
+    <link rel="icon" type="image/png" href="assets/images/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="solar-control.css" />
+    <script src="solar-control.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+  </head>
+  <body class="site-body solar-control-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-xl site-navbar" aria-label="Main navigation">
+        <div class="container">
+          <a class="navbar-brand site-brand" href="index.html"><img src="assets/images/logo-white.png" alt="" /><span class="brand-word">Sunnr</span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="menu-icon"></span></button>
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto align-items-xl-center">
+              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="solar-control.html">Solar panel control</a></li>
+              <li class="nav-item"><a class="nav-link" href="monitoring.html">Heat monitoring</a></li>
+              <li class="nav-item"><a class="nav-link" href="risk-map.html">Risk map</a></li>
+              <li class="nav-item"><a class="nav-link" href="safety.html">Safety tips</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="solar-hero" aria-labelledby="solar-page-title">
+        <div class="solar-hero-image" role="img" aria-label="Solar panels and wind turbines across a mountain valley at sunrise"></div>
+        <div class="container solar-hero-content">
+          <div class="solar-hero-copy">
+            <h1 id="solar-page-title">Solar Panel<br /><em>Control</em></h1>
+            <p class="solar-hero-intro">Heatwaves can increase household electricity use, especially for cooling, while high panel temperatures can reduce solar output. Use this page to understand those changes and prepare for heatwaves and power interruptions.</p>
+            <a class="solar-hero-link" href="#solar-check">Check your solar system <i class="bi bi-arrow-down-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="solar-story-section solar-heat-section" aria-labelledby="heat-effects-title">
+        <div class="container solar-story-grid">
+          <header class="solar-section-heading">
+            <h2 id="heat-effects-title">How Heat Affects<br />Solar Panels</h2>
+            <p class="solar-section-lead">Sunlight gives a panel energy to make electricity and warms its cells. During a heatwave, hot cells may generate less just as household cooling needs rise.</p>
+            <figure class="solar-diagram">
+              <img src="assets/images/solar-panel-detail.jpg" alt="Close-up of solar panels receiving daylight" loading="lazy" />
+              <figcaption>Light provides energy for generation</figcaption>
+            </figure>
+          </header>
+          <div class="solar-story-copy">
+            <p>Strong sunlight can provide more energy for a panel to generate electricity. As the panel absorbs sunlight, its cells heat up. On a hot day, strong sun may help generation while high cell temperatures reduce the panel's voltage and efficiency. A very hot day therefore does not automatically mean more electricity.</p>
+            <p>Sunlight intensity and panel temperature are different things. A panel's temperature depends on how much sun it receives, wind around it and how it is mounted. A panel in direct sun can be hotter than the surrounding air. The U.S. Department of Energy explains how sunlight, temperature and other conditions affect <a class="solar-inline-citation" href="https://www.energy.gov/cmei/systems/solar-photovoltaic-performance-and-efficiency-basics" target="_blank" rel="noopener noreferrer">photovoltaic performance</a>.</p>
+            <p>Clouds, shade from nearby objects, dust and the condition of the inverter and other equipment can also change the electricity produced. For useful comparisons, note the conditions as well as the reading.</p>
+            <div class="solar-fact-note">
+              <span class="solar-note-label">Two kinds of change</span>
+              <p>Heat can temporarily lower output while a panel is operating. When the panel cools, that temperature effect can ease. Equipment degradation is a longer-term decline as panels or other parts age or become damaged. Persistent changes deserve a closer check, but readings alone cannot identify the cause.</p>
+              <a href="https://www.energy.gov/cmei/femp/optimizing-solar-photovoltaic-performance-longevity" target="_blank" rel="noopener noreferrer">U.S. Department of Energy / performance and longevity <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="solar-tool-section solar-output-section" aria-labelledby="output-comparison-title">
+        <div class="container solar-tool-grid">
+          <div class="solar-tool-intro">
+            <h2 id="output-comparison-title">Compare solar output on hot days</h2>
+            <p>During a heatwave, household electricity use for cooling can rise while high panel temperatures can lower solar output. Compare your system's generation on a typical sunny day and a hot, sunny day. Readings are usually available on an inverter display or in a solar monitoring app.</p>
+            <p>Cloud cover, shading, dust and equipment condition can also affect generation. Compare days with similar sunlight and similar system conditions. The result is an observed difference in generation. It cannot show whether heat caused the change or whether generation met your household's electricity needs.</p>
+          </div>
+          <form class="solar-form solar-output-form" id="solarComparisonForm" novalidate>
+            <div class="solar-field">
+              <label for="typicalGeneration">Typical sunny day generation <span>(kWh)</span></label>
+              <div class="solar-number-control">
+                <input id="typicalGeneration" name="typicalGeneration" type="number" min="0" step="any" inputmode="decimal" required aria-describedby="typicalGenerationHint" />
+              </div>
+              <small id="typicalGenerationHint">Enter the day's total from your system</small>
+            </div>
+            <div class="solar-field">
+              <label for="hotGeneration">Hot, sunny day generation <span>(kWh)</span></label>
+              <div class="solar-number-control">
+                <input id="hotGeneration" name="hotGeneration" type="number" min="0" step="any" inputmode="decimal" required aria-describedby="hotGenerationHint" />
+              </div>
+              <small id="hotGenerationHint">Use a reading from a different day</small>
+            </div>
+            <div class="solar-form-actions">
+              <button class="solar-button" type="submit">Compare readings <i class="bi bi-arrow-left-right" aria-hidden="true"></i></button>
+              <button class="solar-reset-button" type="reset">Reset</button>
+            </div>
+            <p class="solar-form-status" id="comparisonStatus" role="status" aria-live="polite"></p>
+            <output class="solar-result" id="comparisonResult" aria-live="polite" hidden></output>
+          </form>
+        </div>
+      </section>
+
+      <section class="solar-story-section solar-check-section" id="solar-check" aria-labelledby="system-check-title">
+        <div class="container">
+          <div class="solar-wide-heading">
+            <h2 id="system-check-title">Solar System Check</h2>
+            <p class="solar-section-lead">Before hot weather raises household electricity use for cooling, record what you know about your solar setup. This checklist is generated from your answers.</p>
+          </div>
+
+          <form class="solar-assessment-form" id="systemCheckForm" novalidate>
+            <div class="solar-question-grid">
+              <fieldset class="solar-question">
+                <legend>Panel installation</legend>
+                <label><input type="radio" name="installation" value="roof" required /><span>Roof-mounted</span></label>
+                <label><input type="radio" name="installation" value="ground" /><span>Ground-mounted</span></label>
+                <label><input type="radio" name="installation" value="unsure" /><span>Not sure</span></label>
+              </fieldset>
+              <fieldset class="solar-question">
+                <legend>Battery</legend>
+                <label><input type="radio" name="battery" value="yes" required /><span>Yes</span></label>
+                <label><input type="radio" name="battery" value="no" /><span>No</span></label>
+                <label><input type="radio" name="battery" value="unsure" /><span>Not sure</span></label>
+              </fieldset>
+              <fieldset class="solar-question">
+                <legend>Inverter or monitoring display</legend>
+                <label><input type="radio" name="inverter" value="yes" required /><span>Yes, I can check it</span></label>
+                <label><input type="radio" name="inverter" value="no" /><span>No</span></label>
+                <label><input type="radio" name="inverter" value="unsure" /><span>Not sure</span></label>
+              </fieldset>
+              <fieldset class="solar-question solar-issues-question">
+                <legend>Issues noticed <span>(select any that apply)</span></legend>
+                <label><input type="checkbox" name="issues" value="shading" /><span>Shading from trees or nearby structures</span></label>
+                <label><input type="checkbox" name="issues" value="dirt" /><span>Dust or accumulated dirt</span></label>
+                <label><input type="checkbox" name="issues" value="damage" /><span>Visible panel or frame damage</span></label>
+                <label><input type="checkbox" name="issues" value="fault" /><span>Inverter warning or fault</span></label>
+                <label><input type="checkbox" name="issues" value="none" /><span>No noticeable issues</span></label>
+                <label><input type="checkbox" name="issues" value="unsure" /><span>Not sure</span></label>
+              </fieldset>
+            </div>
+            <div class="solar-form-actions">
+              <button class="solar-button" type="submit">Build my checklist <i class="bi bi-list-check" aria-hidden="true"></i></button>
+              <button class="solar-reset-button" id="systemCheckReset" type="reset">Clear answers</button>
+            </div>
+            <p class="solar-form-status" id="systemCheckStatus" role="status" aria-live="polite"></p>
+          </form>
+
+          <section class="solar-generated-checks" id="systemCheckResults" aria-labelledby="system-check-results-title" hidden>
+            <div class="solar-generated-heading">
+              <div>
+                <h3 id="system-check-results-title">A checklist for your system</h3>
+              </div>
+              <output id="systemCheckProgress">0 checks complete</output>
+            </div>
+            <p class="solar-checklist-note">These suggestions follow the details you selected. Change your answers above and build the checklist again if your information changes.</p>
+            <div class="solar-task-list" id="systemCheckTaskList"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="solar-tool-section solar-maintenance-section" aria-labelledby="maintenance-title">
+        <div class="container solar-tool-grid">
+          <div class="solar-tool-intro">
+            <h2 id="maintenance-title">Solar Maintenance Task List</h2>
+            <p>Use this list to check conditions that can affect panel output, especially during hot weather when household electricity use for cooling may rise. Stay on the ground when looking at roof-mounted panels. Do not open electrical equipment or handle exposed wires.</p>
+            <p>For cleaning, repairs or electrical work, follow the equipment maker's instructions and use a qualified solar technician. See the <a class="solar-inline-citation" href="https://www.energy.gov.au/solar/use-your-solar-system/look-after-your-solar-system" target="_blank" rel="noopener noreferrer">Australian Government's solar maintenance guidance</a> and the <a class="solar-inline-citation" href="https://www.electricalsafety.qld.gov.au/electrical-safety-home/solar-pv-systems" target="_blank" rel="noopener noreferrer">Queensland Electrical Safety Office's solar safety advice</a>.</p>
+          </div>
+          <div class="solar-saved-checklist" data-storage-group="maintenance">
+            <div class="solar-checklist-heading">
+              <span>Routine checks</span>
+              <output id="maintenanceProgress">0 of 5 complete</output>
+            </div>
+            <div class="solar-task-list">
+              <label class="solar-task"><input type="checkbox" data-task-id="visual-condition" /><span>From a safe position, look for visible dirt, debris or damage on panels and frames.</span></label>
+              <label class="solar-task"><input type="checkbox" data-task-id="new-shading" /><span>Look for new shading from trees or nearby structures.</span></label>
+              <label class="solar-task"><input type="checkbox" data-task-id="inverter-readings" /><span>Review inverter readings and check the display for warning or fault indicators.</span></label>
+              <label class="solar-task"><input type="checkbox" data-task-id="ventilation" /><span>Check from a safe position that ventilation openings around equipment are unobstructed.</span></label>
+              <label class="solar-task"><input type="checkbox" data-task-id="battery-guidance" /><span>If you have a battery, review its condition information and the manufacturer's temperature and ventilation guidance.</span></label>
+            </div>
+            <p class="solar-storage-status" id="maintenanceStorageStatus" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="solar-story-section solar-planner-section" aria-labelledby="backup-planner-title">
+        <div class="container">
+          <div class="solar-wide-heading">
+            <h2 id="backup-planner-title">Heatwave and Backup Power Planner</h2>
+            <p class="solar-section-lead">Heatwaves can raise household electricity use for cooling while high panel temperatures can lower solar output. Estimate appliance use and compare it with your battery's usable capacity, if your household has one.</p>
+          </div>
+          <div class="solar-planner-grid">
+            <div class="solar-appliance-planner">
+              <h3>Estimate appliance use in hot weather</h3>
+              <p>Add appliances your household may rely on during hot weather, especially cooling devices. Enter each appliance's rated power from its label or manual and estimated hours of use in one day. The tool does not assume a system size or battery.</p>
+              <form class="solar-form" id="applianceForm" novalidate>
+                <div id="applianceRows">
+                  <div class="appliance-row" data-appliance-row>
+                    <div class="solar-field">
+                      <label for="applianceName1">Appliance name</label>
+                      <input id="applianceName1" name="applianceName" type="text" maxlength="60" required />
+                    </div>
+                    <div class="solar-field">
+                      <label for="applianceWatts1">Rated power <span>(W)</span></label>
+                      <div class="solar-number-control">
+                        <input id="applianceWatts1" name="applianceWatts" type="number" min="0" step="any" inputmode="decimal" required />
+                      </div>
+                    </div>
+                    <div class="solar-field">
+                      <label for="applianceHours1">Daily operating hours</label>
+                      <div class="solar-number-control">
+                        <input id="applianceHours1" name="applianceHours" type="number" min="0" max="24" step="any" inputmode="decimal" required />
+                      </div>
+                    </div>
+                    <button class="remove-appliance-button" type="button" aria-label="Remove appliance" hidden>Remove</button>
+                  </div>
+                </div>
+                <button class="solar-add-button" id="addApplianceButton" type="button"><i class="bi bi-plus-lg" aria-hidden="true"></i> Add an appliance</button>
+                <div class="solar-field solar-battery-capacity">
+                  <label for="batteryCapacity">Usable battery capacity <span>(kWh, optional)</span></label>
+                  <div class="solar-number-control">
+                    <input id="batteryCapacity" name="batteryCapacity" type="number" min="0" step="any" inputmode="decimal" aria-describedby="batteryCapacityHint" />
+                  </div>
+                  <small id="batteryCapacityHint">Use the value in your battery documentation or monitoring display. Leave blank if you do not have a battery or do not know its usable capacity.</small>
+                </div>
+                <div class="solar-form-actions">
+                  <button class="solar-button" type="submit">Estimate daily energy <i class="bi bi-calculator" aria-hidden="true"></i></button>
+                  <button class="solar-reset-button" type="reset">Reset planner</button>
+                </div>
+                <p class="solar-form-status" id="applianceStatus" role="status" aria-live="polite"></p>
+                <output class="solar-result" id="applianceResult" aria-live="polite" hidden></output>
+              </form>
+              <p class="solar-planner-caveat">This comparison helps estimate whether your available battery capacity can meet your selected appliances’ energy needs. It does not guarantee how long your backup system will run</p>
+            </div>
+            <aside class="solar-planner-note">
+              <span class="solar-note-label">Read before planning</span>
+              <p>A watt (W) describes an appliance's rated power. Multiplying watts by hours gives estimated energy in watt-hours (Wh). Divide Wh by 1,000 to express the same energy in kilowatt-hours (kWh).</p>
+              <p>Some households have solar panels without battery storage. For electrical safety and backup arrangements, follow your equipment manufacturer's instructions and ask a qualified technician if you are unsure.</p>
+            </aside>
+          </div>
+
+          <div class="solar-heatwave-checklist" data-storage-group="heatwave">
+            <div class="solar-generated-heading">
+              <div>
+                <h3>Plan for a heatwave or power interruption</h3>
+              </div>
+              <output id="heatwaveProgress">0 of 9 complete</output>
+            </div>
+            <div class="heatwave-task-groups">
+              <section class="heatwave-task-group" aria-labelledby="before-heat-title">
+                <h4 id="before-heat-title">Before prolonged hot weather</h4>
+                <div class="solar-task-list">
+                  <label class="solar-task"><input type="checkbox" data-task-id="backup-arrangements" /><span>Review your household's backup arrangements.</span></label>
+                  <label class="solar-task"><input type="checkbox" data-task-id="essential-appliances" /><span>Identify essential appliances, including cooling devices your household relies on.</span></label>
+                  <label class="solar-task"><input type="checkbox" data-task-id="battery-information" /><span>If you have a battery, check its usable-capacity information and operating guidance.</span></label>
+                  <label class="solar-task"><input type="checkbox" data-task-id="equipment-warnings" /><span>Review any solar equipment warnings before hot weather begins.</span></label>
+                </div>
+              </section>
+              <section class="heatwave-task-group" aria-labelledby="during-outage-title">
+                <h4 id="during-outage-title">During a power interruption</h4>
+                <div class="solar-task-list">
+                  <label class="solar-task"><input type="checkbox" data-task-id="prioritise-use" /><span>Prioritise electricity for essential household needs.</span></label>
+                  <label class="solar-task"><input type="checkbox" data-task-id="manufacturer-instructions" /><span>Follow the equipment manufacturer's operating instructions.</span></label>
+                  <label class="solar-task"><input type="checkbox" data-task-id="avoid-electrical-work" /><span>Avoid unsafe electrical work or handling exposed connections.</span></label>
+                </div>
+              </section>
+              <section class="heatwave-task-group" aria-labelledby="after-event-title">
+                <h4 id="after-event-title">After the event</h4>
+                <div class="solar-task-list">
+                  <label class="solar-task"><input type="checkbox" data-task-id="review-warnings" /><span>Review inverter warnings or fault indicators.</span></label>
+                  <label class="solar-task"><input type="checkbox" data-task-id="check-damage" /><span>Look for visible damage from a safe position on the ground.</span></label>
+                  <label class="solar-task"><input type="checkbox" data-task-id="professional-help" /><span>Seek help from a qualified technician if equipment shows a fault.</span></label>
+                </div>
+              </section>
+            </div>
+            <p class="solar-storage-status" id="heatwaveStorageStatus" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="solar-context-section" aria-labelledby="solar-risk-link-title">
+        <div class="container solar-context-inner">
+          <div>
+            <h2 id="solar-risk-link-title">Plan with your local conditions in mind</h2>
+          </div>
+          <div>
+            <p>Consult the <a href="risk-map.html">Risk Map</a> to explore heat information across Myanmar before preparing for a heatwave. Cooling needs can rise while high panel temperatures lower solar output. Use local context alongside your own system readings and equipment instructions when planning.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-copy">
+          <a class="footer-brand" href="index.html"><img src="assets/images/logo-white.png" alt="" /><span>Sunnr</span></a>
+          <p>Sunnr provides supplementary heatwave monitoring and preparedness information for residents of Myanmar.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="risk-map.html">Risk Map</a>
+          <a href="safety.html">Safety Tips</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="footer-meta">
+          <p class="footer-copyright">© Sunnr 2026. All rights reserved.</p>
+          <a class="footer-citations-link" href="citations.html">View citations</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
