@@ -31,6 +31,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body.site-body.about-page {
+  color: var(--dark-green);
+  background: var(--cream);
+}
+
 .site-header {
   position: relative;
   z-index: 1000;
@@ -234,6 +239,7 @@ body {
   color: var(--yellow);
 }
 .about-content {
+  background: var(--cream);
   padding: 80px 8%;
 }
 
